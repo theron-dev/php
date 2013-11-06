@@ -33,7 +33,7 @@ function config(){
 					"DBContextTask"
 				),
 				"config" => array(
-					"entitys"=>array("DBAccount","DBAccountBind","DBUserViewState","DBLog","DBMessageUser","DBAsyncTask","DBStatisticsUniversal","DBCache","DBUserRelation"
+					"entitys"=>array("DBAccount","DBAccountBind","DBUserViewState","DBLog","DBAsyncTask","DBStatisticsUniversal","DBCache","DBUserRelation"
 					,"DBApp","DBAppAuth","DBAppDevice","DBAppVersion")
 				),
 				"createInstance" =>true,
@@ -85,12 +85,6 @@ function config(){
 			),
 			array(
 				"class" => "AccountBindService",
-				"tasks" => array(
-					"AccountBindTask"
-				),
-			),
-			array(
-				"class" => "MessageService",
 				"tasks" => array(
 					"AccountBindTask"
 				),
