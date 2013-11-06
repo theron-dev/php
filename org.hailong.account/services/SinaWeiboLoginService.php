@@ -154,6 +154,16 @@ class SinaWeiboLoginService extends Service{
 				$dbContext = $dbTask->dbContext;
 			}
 		
+			$cfg = $this->getConfig();
+			
+			if(!$task->appKey && isset($cfg["appKey"])){
+				$task->appKey = $cfg["appKey"];
+			}
+				
+			if(!$task->appSecret && isset($cfg["appSecret"])){
+				$task->appSecret = $cfg["appSecret"];
+			}
+			
 			$c = new SaeTClientV2( $task->appKey , $task->appSecret , $task->etoken );
 				
 			$rs = $c->get_uid();

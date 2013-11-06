@@ -131,6 +131,16 @@ class QQLoginService extends Service{
 				$dbContext = $dbTask->dbContext;
 			}
 		
+			$cfg = $this->getConfig();
+			
+			if(!$task->appKey && isset($cfg["appKey"])){
+				$task->appKey = $cfg["appKey"];
+			}
+				
+			if(!$task->appSecret && isset($cfg["appSecret"])){
+				$task->appSecret = $cfg["appSecret"];
+			}
+			
 			$openid = $this->get_openid($task->etoken);
 				
 			$uid = $task->uid;
