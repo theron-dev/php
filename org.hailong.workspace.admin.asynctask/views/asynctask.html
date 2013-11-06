@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hailong Studio</title>
+<link rel="stylesheet" href="css/asynctask.css" />
+
+<script type='text/javascript' src='js.php' ></script>
+
+</head>
+<body>
+<div class='screen'>
+
+	<table class='user-table' id='search_table' view='UI.TableView'>
+		<thead>
+			<tr>
+				<th field='key'>atid</th>
+				<th field='config'>config</th>
+				<th field='taskType'>taskType</th>
+				<th field='taskClass'>taskClass</th>
+				<th field='state'>state</th>
+				<th field='rank'>rank</th>
+				<th field='results'>results</th>
+				<th field='createTime' >创建时间</th>
+				<th field='command' ></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>加载中...</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan='9' class='page'>
+					<input action="cleanup" type='button' value="清理" />
+					<select id='search_page' view="UI.Select">
+						<option value="1">1</option>
+					</select>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	
+</div>
+</body>
+</html>

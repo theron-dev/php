@@ -1,0 +1,178 @@
+@CHARSET "UTF-8";
+
+body{
+	padding: 0px;
+	margin: 0px;
+	font-size:9pt;
+	width:100%;
+	height:100%;
+	overflow: hidden;
+	background-color: white;
+}
+
+.error{
+	border: solid 1px red;
+}
+
+.screen{
+	position: absolute;
+	padding: 0px;
+	margin: 0px;
+	width:100%;
+	height:100%;
+	overflow: auto;
+}
+
+
+table{
+	border-width: 0px;
+	border-collapse: 0px;
+	border-spacing: 1px;
+	width: 100%;
+	table-layout: auto;
+}
+
+table tbody tr.hover{
+	background-color: whiteSmoke;
+}
+
+
+table thead th{
+	padding: 10px 6px 10px 6px;
+	font-size:10pt;
+	background-color: whiteSmoke;
+	color: #000000;
+	text-align: center;
+}
+
+table tbody{
+	background-color: white;
+}
+
+table tbody td{
+	padding:4px;
+	text-align: left;
+}
+
+
+table tfoot td{
+	background-color: whiteSmoke;
+	padding:2px;
+}
+
+table .page{
+	text-align: right;
+	padding-right:10px;
+}
+
+table .page input{
+	float:left;
+}
+
+table .page select{
+	float:right;
+}
+
+#auth_content .entity{
+	width:220px;
+	border-right: solid 1px #333333;
+	padding: 0px;
+}
+
+#auth_content table tbody{
+	background-color: inherit;
+}
+
+#auth_content .entity .search{
+	margin: 6px;
+	width: 200px;
+}
+
+#auth_content .entity .list{
+	list-style: none;
+	list-style-type: none;
+	padding: 0px;
+	margin: 6px 6px 0px 6px;
+	background-color: #dddddd;
+}
+
+#auth_content .entity .list li{
+	float:left;
+	margin: 0px 0px 2px 0px;
+	cursor: pointer;
+	color:#000000;
+	padding:4px;
+	cursor: pointer;
+	font-size:10pt;
+	width:200px;
+	background-color: inherit;
+}
+
+#auth_content .entity .list li.selected{
+	color: #ffffff;
+	background-color: #333333;
+}
+
+#auth_content .entity .list li.hover{
+	color: #ffffff;
+	background-color: #666666;
+}
+
+#auth_content .entity .list li.checked{
+	
+}
+
+#auth_content  label{
+	font-size:12pt;
+	padding:4px;
+}
+
+.overflow{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	display: none;
+}
+
+.overflow .background{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: #333333;
+	-moz-opacity:0.7;  
+    opacity:0.7; 
+    filter:alpha(opacity=70);
+}
+
+.overflow .content{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+.overflow .dialog{
+	width: 600px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 80px;
+	background-color:#ffffff;
+	padding: 6px;
+}
+
+.overflow .dialog label{
+	font-style:bold;
+	font-size:12pt;
+}
+
+.overflow .dialog table{
+	table-layout: auto;
+}

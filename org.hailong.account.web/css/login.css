@@ -1,0 +1,178 @@
+@CHARSET "UTF-8";
+
+.error{
+	border: solid 1px red;
+}
+
+.top{
+	height: 72px;
+	background-color: whiteSmoke;
+	border-bottom: 1px solid #E5E5E5;
+	overflow: hidden;
+}
+
+.center{
+	padding-top: 23px;
+	padding-bottom: 125px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.bottom{
+	width: 100%;
+	height: 35px;
+	border-top: 1px solid #EBEBEB;
+	overflow: hidden;
+}
+
+.header{
+	margin-left: auto;
+	margin-right: auto;
+	width: 780px;
+}
+
+.main{
+	margin-left: auto;
+	margin-right: auto;
+	width: 780px;
+}
+
+.foot{
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 780px;
+}
+
+.reg{
+	float: right;
+	margin-right: 20px;
+	margin-top: 30px;
+}
+
+.logo{
+	float:left;
+	margin-left: 0px;
+	margin-top: 20px;
+	border-width: 0px;
+}
+
+.logo img{
+	width: 160px;
+	border-width: 0px;
+}
+
+.login-box{
+	width: 283px;
+	height: auto;
+	background-color: whiteSmoke;
+	float: right;
+	padding: 20px 25px 15px 20px;
+	border: solid 1px #E5E5E5;
+	margin-top: 40px;
+}
+
+.login-box .title-bar{
+	
+}
+
+.login-box .title-bar .title{
+	font-size: 16px;
+	color: #222;
+}
+
+.login-box a{
+	padding: 2px;
+	display: block;
+}
+
+.login-box strong{
+	display: block;
+	font-size: 13px;
+	margin-bottom: 8px;
+	margin-top: 20px;
+}
+
+.login-box input{
+	display: block;
+}
+
+.login-box ul{
+	list-style-type: none;
+	padding: 0px 0px 0px 5px;
+}
+
+.login-box ul a{
+	font-size: 12px;
+}
+
+.login-box .login-button{
+	margin-top: 20px;
+	width: 54px;
+}
+
+.login-box .text{
+	border: solid 1px #B9B9B9;
+	border-top: solid 1px #A0A0A0;
+	padding: 0px 0px 0px 8px;
+	height: 28px;
+	width: 283px;
+	font-size: 15px;
+	vertical-align: middle;
+}
+
+.login-box .error-label{
+	margin-top: 20px;
+	color: red;
+	display: none;
+}
+
+.login-box form{
+	padding: 0px;
+	margin: 0px;
+}
+
+.info{
+	width: 400px;
+	float: left;
+	padding: 0px;
+}
+
+.info h1{
+	font-size: 25px;
+	color: #DD4B39;
+	display: block;
+}
+
+.info ul{
+	list-style-type: none;
+	padding: 0px;
+	margin-top: 25px;
+}
+
+.info li{
+	display: list-item;
+	margin-bottom: 30px;
+}
+
+.info li img{
+	margin-top: 0px;
+	width: 42px;
+	height: 42px;
+	float: left;
+}
+.info li p{
+	margin: 0px 0px 10px 60px;
+}
+
+.info li p.title{
+	font-size: 16px;
+}
+
+.verifyCode{
+	width: 60px;
+	height: 20px;
+	float: left;
+	margin-left: 20px;
+	margin-top: 4px;
+}

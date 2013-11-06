@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>久违工作室- 激活帐号</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/active.css" />
+<script type="text/javascript" src="js.php"></script>
+</head>
+<body>
+<div class='screen' layout="border">
+	<div class='logo'></div>
+
+	<form action="?" id="active_form" view="UI.Form" >
+		<table>
+			<thead></thead>
+			<tbody>
+				<tr>
+					<th colspan="2" >验证码</th>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" class="text" id="active_verify" view="UI.TextView" regexp="-" />
+					</td>
+					<td>
+						<label class='error-text' id='active_verify_message' view="UI.Label"></label>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="submit" class="submit-button" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<a href="index.php">跳过</a>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot></tfoot>
+		</table>
+	</form>
+</div>
+</body>
+</html>

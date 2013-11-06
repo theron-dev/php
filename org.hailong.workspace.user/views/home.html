@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hailong Studio</title>
+<link rel="stylesheet" href="css/home.css" />
+
+<script type='text/javascript' src='js.php' ></script>
+
+</head>
+<body>
+<div class='screen'>
+
+	<div class="userinfo">
+		<form action="?" id="user_form" view="UI.Form" >
+			<h1>基本信息</h1>
+			<hr />
+			<table class="baseinfo">
+				<tbody>
+					<tr>
+						<td colspan="2">
+							<label class='error-label' id="user_message" view="UI.Label"></label>
+						</td>
+					</tr>
+					<tr>
+						<th>登陆账号</th>
+						<td><input type="text" id="user_account" disabled="disabled" view="UI.TextView"></input></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td class='rtitle'>你的登陆账号</td>
+					</tr>
+					<tr>
+						<th>真实姓名</th>
+						<td><input type="text" id="user_title" regexp="-" message="请输入真实姓名" view="UI.TextView"></input></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td class='rtitle'>你的真实姓名</td>
+					</tr>
+					<tr>
+						<th>手机号</th>
+						<td><input type="text" id="user_tel" view="UI.TextView"></input></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td class='rtitle'><a href="#">绑定手机号</a></td>
+					</tr>
+					<tr>
+						<th>邮箱</th>
+						<td><input type="text" id="user_email"  regexp="-" message="请输入邮箱" view="UI.TextView"></input></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td class='rtitle'><a href="#">绑定邮箱</a></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td class="command"><input type="submit" class="submit" value="提交"></input></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+	
+	<div class="userinfo">
+		<form action="?" id="user_psform" view="UI.Form" >
+			<h1>修改密码</h1>
+			<hr />
+			<table class="baseinfo">
+				<tbody>
+					<tr>
+						<td colspan="2">
+							<label class='error-label' id="user_psmessage" view="UI.Label"></label>
+						</td>
+					</tr>
+					<tr>
+						<th>原密码</th>
+						<td><input type="password" id="user_password" regexp="-" message="请输入原密码"  view="UI.TextView"></input></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td class='rtitle'>输入你的原始密码</td>
+					</tr>
+					<tr>
+						<th>新密码</th>
+						<td><input type="password" id="user_newpassword" regexp="-" message="请输入新密码" view="UI.TextView"></input></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td class='rtitle'>输入你的新密码</td>
+					</tr>
+					<tr>
+						<th>验证新密码</th>
+						<td><input type="password" id="user_renewpassword" regexp="-" message="请输入新密码" view="UI.TextView"></input></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td class='rtitle'>再次输入你的新密码</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td class="command"><input type="submit" class="submit" value="提交"></input></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+
+</div>
+</body>
+</html>

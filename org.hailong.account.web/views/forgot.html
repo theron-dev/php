@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>久违工作室 - 忘记密码</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/forgot.css" />
+<script type="text/javascript" src="js.php"></script>
+</head>
+<body>
+<div class='screen' layout="border">
+	<a class='logo' href="index.php"><img src='images/9wei.gif' /></a>
+
+	<form action="?" id="reg_form" view="UI.Form" >
+		<table>
+			<thead></thead>
+			<tbody>
+				<tr>
+					<th colspan="2" >电子邮件</th>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" class="text" id="reg_email" view="UI.TextView" regexp="-" />
+					</td>
+					<td>
+						<label class='error-text' id='reg_email_message' view="UI.Label"></label>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="submit" class="submit-button" />
+					</td>
+				</tr>
+			</tbody>
+			<tfoot></tfoot>
+		</table>
+	</form>
+</div>
+</body>
+</html>

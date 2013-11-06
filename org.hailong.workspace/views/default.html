@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=1024" />
+<title>久违工作室</title>
+<link rel="stylesheet" href="css/studio.css" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="shortcut" href="favicon.ico" />
+<script type='text/javascript' src='js.php' ></script>
+</head>
+<body>
+<div class='screen' layout="border">
+	<div class='toolbar' top="top">
+		<label class='logo'>久违工作室</label>
+		<span id="loading">加载中...</span>
+		<a href='javascript:;' class='logout'  id='logout_button' view='UI.LinkButton' >注销</a>
+	</div>
+	<div class='workspace' center="center" layout="border">
+		<ul class='selector-view' id='studio_selector_view' view='Studio.SelectorView' left="left">
+		</ul>
+		<div class='window' center="center">
+			<iframe id='studio_webview' view='UI.WebView'  frameborder="0" marginheight="0" marginwidth="0" scrolling="auto">
+			</iframe>
+		</div>
+
+	</div>
+
+</div>
+</body>
+</html>

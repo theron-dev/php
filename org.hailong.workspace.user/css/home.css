@@ -1,0 +1,130 @@
+@CHARSET "UTF-8";
+
+body{
+	padding: 0px;
+	margin: 0px;
+	font-size:9pt;
+	width:100%;
+	height:100%;
+	overflow: hidden;
+	background-color: white;
+}
+
+.error{
+	border: solid 1px red;
+}
+
+.error-label{
+	color: red;
+	font-size: 12px;
+	padding-left: 6px;
+	padding-bottom: 6px;
+	display: inline;
+}
+
+.screen{
+	position: absolute;
+	padding: 0px;
+	margin: 0px;
+	width:100%;
+	height:100%;
+	overflow: auto;
+}
+
+.userinfo{
+	padding: 10px 10px 10px 10px;
+}
+
+.userinfo .baseinfo{
+	width: 400px;
+}
+
+h1{
+	font-size: 14pt;
+}
+
+table{
+	border-width: 0px;
+	border-collapse: 0px;
+	border-spacing: 1px;
+	width: auto;
+	table-layout: auto;
+	font-size: 14px;
+}
+
+table th{
+	text-align: left;
+	padding: 6px 6px 6px 6px;
+}
+
+table .rtitle{
+	color: #817777;
+	font-size: 12px;
+	padding-bottom: 16px;
+}
+
+table tr{
+	
+}
+
+table input{
+	width: 260px;
+}
+
+table .command{
+	text-align: right;
+}
+
+table .command .submit{
+	width: auto;
+}
+
+.overflow{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	display: none;
+}
+
+.overflow .background{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: #333333;
+	-moz-opacity:0.7;  
+    opacity:0.7; 
+    filter:alpha(opacity=70);
+}
+
+.overflow .content{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+.overflow .dialog{
+	width: 600px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 80px;
+	background-color:#ffffff;
+	padding: 6px;
+}
+
+.overflow .dialog label{
+	font-style:bold;
+	font-size:12pt;
+}
+
+.overflow .dialog table{
+	table-layout: auto;
+}

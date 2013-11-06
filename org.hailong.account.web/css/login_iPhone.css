@@ -1,0 +1,130 @@
+@CHARSET "UTF-8";
+
+.error{
+	border: solid 1px red;
+}
+
+.logo{
+	
+}
+
+.logo img{
+	margin-left: 10px;
+	margin-top: 10px;
+	width: 160px;
+}
+
+.login-box{
+	width: 283px;
+	height: auto;
+	background-color: whiteSmoke;
+	padding: 20px 10px 15px 10px;
+	border: solid 1px #E5E5E5;
+	margin-top: 10px;
+	margin-left: 10px;
+
+}
+
+.login-box .title-bar{
+	
+}
+
+.login-box .title-bar .title{
+	font-size: 16px;
+	color: #222;
+}
+
+.login-box strong{
+	display: block;
+	font-size: 13px;
+	margin-bottom: 8px;
+	margin-top: 20px;
+}
+
+.login-box input{
+	display: block;
+}
+
+.login-box ul{
+	list-style-type: none;
+	padding: 0px 0px 0px 5px;
+}
+
+.login-box ul a{
+	font-size: 12px;
+}
+
+.login-box .login-button{
+	margin-top: 20px;
+	width: 54px;
+}
+
+.login-box .text{
+	border: solid 1px #B9B9B9;
+	border-top: solid 1px #A0A0A0;
+	padding: 0px 0px 0px 8px;
+	height: 28px;
+	width: 270px;
+	font-size: 15px;
+}
+
+.login-box .error-label{
+	margin-top: 20px;
+	color: red;
+	display: none;
+}
+
+.login-box form{
+	padding: 0px;
+	margin: 0px;
+}
+
+.login-box a{
+	padding: 2px;
+	display: block;
+}
+
+.info{
+	width: 400px;
+	float: left;
+	padding: 0px;
+}
+
+.info h1{
+	font-size: 25px;
+	color: #DD4B39;
+	display: block;
+}
+
+.info ul{
+	list-style-type: none;
+	padding: 0px;
+	margin-top: 25px;
+}
+
+.info li{
+	display: list-item;
+	margin-bottom: 30px;
+}
+
+.info li img{
+	margin-top: 0px;
+	width: 42px;
+	height: 42px;
+	float: left;
+}
+.info li p{
+	margin: 0px 0px 10px 60px;
+}
+
+.info li p.title{
+	font-size: 16px;
+}
+
+.verifyCode{
+	width: 60px;
+	height: 20px;
+	float: left;
+	margin-left: 20px;
+	margin-top: 4px;
+}

@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+.error-text{
+	color: red;
+	display: none;
+}
+
+.logo{
+	margin: 20px;
+}
+
+table{
+	margin: 20px;
+}
+
+table td{
+	padding: 6px;
+}
+
+table th{
+	text-align: left;
+	font-size: 15px;
+	padding: 6px;
+}
+
+.text{
+	border: solid 1px #B9B9B9;
+	border-top: solid 1px #A0A0A0;
+	padding: 0px 0px 0px 8px;
+	height: 28px;
+	width: 283px;
+	font-size: 15px;
+}
+
+.error{
+	border-color: red;
+}
+
+.submit-button{
+	width: 54px;
+}

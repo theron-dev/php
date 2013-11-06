@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hailong Studio</title>
+<link rel="stylesheet" href="css/user.css" />
+
+<script type='text/javascript' src='js.php' ></script>
+
+</head>
+<body>
+<div class='screen'>
+
+	<ul class='toolbar' id='toolbar' view='User.Toolbar'>
+		<li v='user'>用户</li><li v='role'>角色</li><li v='entity'>实体</li>
+	</ul>
+	
+	<div class='workspace'>
+		<div class='content' id='user_content' view='UI.View'>
+			<table class='user-table' id='user_table' view='UI.TableView'>
+				<thead>
+					<tr>
+						<th field='key'>uid</th>
+						<th field='account'>帐号</th>
+						<th field='title' editable='editable'>名称</th>
+						<th field='tel' editable='editable'>手机号</th>
+						<th field='email' editable='editable'>邮箱</th>
+						<th field='loginTime' width='140px'>最后登陆时间</th>
+						<th field='createTime' width='140px'>创建时间</th>
+						<th field='command' width='120px'></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>加载中...</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan='8' class='page'>
+							<label id='user_count' view="UI.Label">总用户数: </label>
+							<select id='user_page' view="UI.Select">
+								<option value="1">1</option>
+							</select>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<div class='content' id='role_content' view='UI.View'>
+			<table class='role-table' id='role_table' view='UI.TableView'>
+				<thead>
+					<tr>
+						<th field='name' editable='editable' regexp=''>角色名</th>
+						<th field='title' editable='editable'>名称</th>
+						<th field='description' editable='editable'>说明</th>
+						<th field='createTime' width='140px'>创建时间</th>
+						<th field='command' width='220px'></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>加载中...</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan='5' class='page'>
+							<input class='add' type='button' value='添加'></input>
+							<select id='role_page' view="UI.Select">
+								<option value="1">1</option>
+							</select>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<div class='content' id='entity_content' view='UI.View'>
+			<table class='entity-table' id='entity_table' view='UI.TableView'>
+				<thead>
+					<tr>
+						<th field='alias' editable='editable' regexp=''>alias</th>
+						<th field='title' editable='editable'>标题</th>
+						<th field='createTime' width='140px'>创建时间</th>
+						<th field='command' width='220px'></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>加载中...</td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan='4' class='page'>
+							<input class='add' type='button' value='添加'></input>
+							<select id='entity_page' view="UI.Select">
+								<option value="1">1</option>
+							</select>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+	<div class='overflow' id="dialog" view="User.Dialog">
+		<div class='background'></div>
+		<div class='content'>
+			<div class='dialog' user='user'>
+				<label>用户</label>
+				<br/>
+				<table class='user-table' id='dialog_user_table' view='UI.TableView'>
+					<thead>
+						<tr>
+							<th field='check' width="60px"></th>
+							<th field='account'>帐号</th>
+							<th field='title' editable='editable'>名称</th>
+							<th field='tel' editable='editable'>手机号</th>
+							<th field='email' editable='editable'>邮箱</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td>加载中...</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan='5' class='page'>
+								<input action='ok' type='button' value='确定'></input>
+								<select id='dialog_user_page' view="UI.Select">
+									<option value="1">1</option>
+								</select>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			<div class='dialog' role='role'>
+				<label>角色</label>
+				<br/>
+				<table class='role-table' id='dialog_role_table' view='UI.TableView'>
+					<thead>
+						<tr>
+							<th field='check' width="16px"></th>
+							<th field='name' editable='editable' regexp=''>角色名</th>
+							<th field='title' editable='editable'>名称</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td>加载中...</td>
+							<td></td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan='3' class='page'>
+								<input action='ok' type='button' value='确定'></input>
+								<select id='dialog_role_page' view="UI.Select">
+									<option value="1">1</option>
+								</select>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			<div class='dialog' entity='entity'>
+				<label>实体</label>
+				<br/>
+				<table class='entity-table' id='dialog_entity_table' view='UI.TableView'>
+					<thead>
+						<tr>
+							<th field='check' width="60px"></th>
+							<th field='alias' editable='editable' regexp=''>alias</th>
+							<th field='title' editable='editable'>标题</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td>加载中...</td>
+							<td></td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan='3' class='page'>
+								<input action='ok' type='button' value='确定'></input>
+								<select id='dialog_entity_page' view="UI.Select">
+									<option value="1">1</option>
+								</select>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

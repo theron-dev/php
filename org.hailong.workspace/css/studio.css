@@ -1,0 +1,150 @@
+@CHARSET "UTF-8";
+
+body{
+	padding: 0px;
+	margin: 0px;
+	font-size:9pt;
+	width:100%;
+	height:100%;
+	overflow: hidden;
+}
+
+
+
+.screen{
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	width:100%;
+	height:100%;
+}
+
+a{
+	font-size:9pt;
+}
+
+.toolbar{
+	padding: 6px;
+	border-bottom: solid 1px #dddddd;
+	text-align: right;
+	background-color: whiteSmoke;
+}
+
+.toolbar .logo{
+	float:left;
+	margin-left: 10px;
+	font-style: italic;
+	font-weight: bold;
+	font-size:12pt;
+}
+
+.toolbar .logout{
+
+}
+
+#loading{
+	width:120px;
+	height:20px;
+	background-color:#ffffcc;
+	margin-right: 60px;
+	padding: 2px 6px 2px 6px;
+	display:none;
+}
+
+.toolbar a{
+	margin-right: 10px;
+}
+
+.workspace{
+	padding: 0px;
+	width:100%;
+	height:100%;
+	overflow: hidden;
+	background-color:#333333;
+	border-top: solid 1px #333333;
+}
+
+.workspace .selector-view{
+	list-style-type: none;
+	list-style: none;
+	padding: 0px;
+	width:160px;
+	height:100%;
+	overflow: auto;
+	float:left;
+}
+
+.workspace .selector-view li{
+	margin: 0px;
+	margin-top: 6px;
+	width:100%;
+	height:24px;
+	cursor: pointer;
+	vertical-align: middle;
+	border-bottom: solid 1px #333333;
+	padding: 0px;
+	color: white;
+}
+
+.workspace .selector-view li.group{
+	background-color: #666666;
+	color: #ffffff;
+	padding-top: 6px;
+}
+
+.workspace .selector-view li td{
+	vertical-align: middle;;
+}
+
+.workspace .selector-view li.selected{
+	background-color: white;
+	color:#000000;
+}
+
+.workspace .selector-view li.hover{
+	border-bottom: solid 1px #ffffff;
+}
+
+.workspace .selector-view li img{
+	width:12px;
+	height:12px;
+	display: inline;
+	border: solid 0px #ffffff;
+	cursor: pointer;
+}
+
+
+.workspace .selector-view li span{
+	width:100%;
+	height:100%;
+	text-align:center;
+	display: inline;
+	overflow: hidden;
+	font-size:12pt;
+	cursor: pointer;
+	margin-left:5px;
+	margin-bottom:2px;
+}
+
+.workspace .window{
+	background-color: white;
+	height: 100%;
+	width: auto;
+	display: block;
+	margin: 0px;
+	position: relative;
+	float:left;
+}
+
+.workspace .window iframe{
+	background-color: white;
+	height:100%;
+	width:100%;
+	display: block;
+	margin: 0px;
+}
+
+.workspace .split{
+	width:4px;
+	background-color:#cccccc;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>久违工作室 － 登录</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/login.css" />
+<script type="text/javascript" src="js.php"></script>
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="shortcut" href="favicon.ico" />
+</head>
+<body>
+<div class='screen' layout="border">
+	<div class='top' top="top">
+		<div class="header">
+			<a class='reg' href='register.php'>注册新帐号</a>
+			<a class='logo' href="index.php"><img src='images/9wei.gif' /></a>
+		</div>
+	</div>
+	<div class='center' center="center">
+		<div class="main">
+			<div class="info">
+				<h1>帐号</h1>
+				<p>登录  帐户后，即可享受  提供的更多服务。</p>
+				<p>在右侧登录，或 <a href="register.php">免费创建帐户。</a></p>
+				<ul>
+					<li>
+						<img src='images/vermin.png' />
+						<p class='title'><a href='http://vermin.9wei.org'>vermin</a></p>
+						<p>跨平台面向对象开发语言。</p>
+						<p>PC,Mac,Linux,iOS,Android,Symbin ...</p>
+					</li>
+					<li>
+						<img />
+						<p class='title'>应用商店</p>
+						<p>跨平台应用商店， 同一个应用不同的体验。</p>
+					</li>
+					<li>
+						<img />
+						<p class='title'>项目定制平台</p>
+						<p>只要你能想到， 我们就能做到。。。</p>
+					</li>
+					<li>
+						<img />
+						<p class='title'>工作室</p>
+						<p>创造是一种享受。</p>
+					</li>
+				</ul>
+			</div>
+			
+			<div class='login-box'>
+
+				<div class='title-bar'>
+					<label class="title">登录</label>
+				</div>
+				<form action="?" id="login_form" view="UI.Form" >
+					<div class="error-label" id="login_message" view="UI.Label">账号或密码错误！</div>
+					<strong>电子邮件</strong>
+					<input type="hidden" id="login_ret" view="UI.TextView" />
+					<input type="text" class="text" id="login_email" view="UI.TextView" regexp="-" message="请输入电子邮件"  />
+					<strong>密码</strong>
+					<input type="password"  class="text"  id="login_password" view="UI.TextView"  regexp="-" message="请输入密码"  />
+					<div id="login_verify" view="UI.View" style="display:none">
+						<strong>验证码</strong>
+						<div>
+							<input type="text"  class="text"  id="login_verify_text" view="UI.TextView" style="width:60px;float:left;" />
+							<img class='verifyCode' id="login_verify_img" view="UI.View" />
+						</div>
+						<br />
+						<br />
+					</div>
+					<input type="submit" class="login-button" value="登陆"/>
+					<br />
+					<a href="sina/weibo" id="login_weibo" view="UI.Link" >新浪微博登录</a>
+					<br />
+					<a href="qq" id="login_qq" view="UI.Link" >QQ号登录</a>
+					<br />
+					<a href="renren" id="login_renren" view="UI.Link" >人人网帐号登陆</a>
+					<br />
+					<a href="taobao" id="login_renren" view="UI.Link" >淘宝帐号登陆</a>
+					<br />
+				</form>
+				<ul>
+					<li><a href="#">忘记密码?</a></li>
+				</ul>
+				
+			</div>
+		</div>
+	</div>
+	<div class='bottom' bottom="bottom">
+		<div class="foot">
+			© 9wei.org 	<a href="http://www.9wei.org" target="top">久违工作室</a>     京ICP备09092349号-1
+		</div>
+	</div>
+</div>
+</body>
+</html>
