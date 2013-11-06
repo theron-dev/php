@@ -8,7 +8,6 @@ if($library){
     require_once "$library/org.hailong.account/account.php";
     require_once "$library/org.hailong.log/log.php";
     require_once "$library/org.hailong.app/app.php";
-    require_once "$library/org.hailong.message/message.php";
     require_once "$library/org.hailong.email/email.php";
     require_once "$library/org.hailong.service.async/async.php";
     require_once "$library/org.hailong.statistics/statistics.php";
