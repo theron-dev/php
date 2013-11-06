@@ -23,6 +23,16 @@ class TaobaoLoginService extends Service{
 				$dbContext = $dbTask->dbContext;
 			}
 		
+			$cfg = $this->getConfig();
+			
+			if(!$task->appKey && isset($cfg["appKey"])){
+				$task->appKey = $cfg["appKey"];
+			}
+				
+			if(!$task->appSecret && isset($cfg["appSecret"])){
+				$task->appSecret = $cfg["appSecret"];
+			}
+			
 			$taobao_uid = $task->taobao_uid;
 			
 			$user = $dbContext->querySingleEntity("DBAccount","taobao_uid='{$taobao_uid}' and account='#TB_{$taobao_uid}'");
