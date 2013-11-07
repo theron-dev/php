@@ -55,8 +55,8 @@ interface IServiceContext{
 	
 	public function outputTask($task,$key=null);
 	
-	public function dbContext();
-
+	public function dbContext($key=null,$partKey=null);
+	
 }
 
 ?>

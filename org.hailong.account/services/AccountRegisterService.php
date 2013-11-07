@@ -204,6 +204,7 @@ class AccountRegisterService extends Service{
 				$user->email = $task->email;
 				$user->tel = $task->tel;
 				$user->password = DBAccount::encodePassword($task->password);
+				$user->title = $task->title;
 				
 				if($user->email !== null){
 					$user->email_verify = DBAccount::generatedVerify();
@@ -218,6 +219,25 @@ class AccountRegisterService extends Service{
 				
 				$task->uid = $user->uid;
 			
+				if($task->infos){
+					
+					foreach ($task->infos as $key=>$value){
+						
+						$info = new DBAccountInfo();
+						$info->uid = $task->uid;
+						$info->key = $key;
+						if(len($value) > 255){
+							$info->text = $value;
+						}
+						else{
+							$info->value = $value;
+						}
+						
+						$dbContext->insert($info);
+					}
+					
+				}
+				
 			}
 			else{
 				throw new AccountException("account is exists", ERROR_USER_ACCOUNT_EXISTS);

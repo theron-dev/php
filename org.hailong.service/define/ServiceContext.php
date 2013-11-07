@@ -243,7 +243,16 @@ class ServiceContext implements IServiceContext{
 		}
 	}
 	
-	public function dbContext(){
+	public function dbContext($key=null,$partKey=null){
+		if($key){
+			$task = new DBContextTask();
+			$task->key = $key;
+			$task->partKey = $partKey;
+			$this->handle("DBContextTask", $task);
+			if($task->dbContext){
+				return $task->dbContext;
+			}
+		}
 		return $this->dbContext;
 	}
 	

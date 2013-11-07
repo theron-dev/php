@@ -32,6 +32,16 @@ class AccountRegisterTask implements ITask{
 	 * @var String
 	 */
 	public $password;
+	/**
+	 * 名称
+	 * @var String
+	 */
+	public $title;
+	/**
+	 * 其他信息
+	 * @var key,value
+	 */
+	public $infos;
 
 	public function prefix(){
 		return "acc";
