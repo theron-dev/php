@@ -38,6 +38,11 @@ class DBLBSSearch extends DBEntity{
 	 */
 	public $distance;
 	/**
+	 * 最后修改时间
+	 * @var int
+	 */
+	public $updateTime;
+	/**
 	 * 创建时间
 	 * @var int
 	 */
@@ -77,6 +82,9 @@ class DBLBSSearch extends DBEntity{
 		}
 		if($field == "distance"){
 			return "DOUBLE NULL";
+		}
+		if($field == "updateTime"){
+			return "INT NULL";
 		}
 		if($field == "createTime"){
 			return "INT NULL";

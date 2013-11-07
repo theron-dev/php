@@ -94,6 +94,7 @@ class LBSService extends Service{
 							
 							$r = new DBLBSSearch();
 							$r->sid = $sid;
+							$r->updateTime = $row->updateTime;
 							$r->createTime = time();
 							$r->near_sid = $row->sid;
 							$r->near_latitude = $row->latitude;
