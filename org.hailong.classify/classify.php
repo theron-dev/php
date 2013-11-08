@@ -11,7 +11,6 @@ if($library){
 	
 	require_once "$library/org.hailong.configs/error_code.php";
 	require_once "$library/org.hailong.tag/tag.php";
-	require_once "$library/org.hailong.dataspace/dataspace.php";
 	
 	require_once "$library/org.hailong.classify/ClassifyException.php";
 	require_once "$library/org.hailong.classify/db/DBClassify.php";
