@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hailong Studio</title>
+<link rel="stylesheet" href="css/index.css" />
+
+<script type='text/javascript' src='js.php' ></script>
+
+</head>
+<body>
+<div class='screen'>
+	<div class='toolbar'>
+		目标: <select id='targetSelect' view='UI.Select'></select>
+		<label id='actionView' view='UI.ActionView'></label>
+	</div>
+	<table class='user-table' id='search_table' view='UI.TableView'>
+		<thead>
+			<tr>
+				<th field='key'>ID</th>
+				<th field='title' editable='editable'>标题</th>
+				<th field='keyword' editable='editable'>关键词</th>
+				<th field='command' ></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>加载中...</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan='4' class='page'>
+					<input type='button' class='add' value='添加' />
+					<select id='search_page' view="UI.Select">
+						<option value="1">1</option>
+					</select>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+
+</div>
+</body>
+</html>
