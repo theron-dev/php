@@ -2,6 +2,7 @@
 
 define("DBClassifyTargetGoods",0);
 define("DBClassifyTargetLattice",1);
+define("DBClassifyTargetQDD",2);
 
 /**
  * 分类表
@@ -99,12 +100,14 @@ class DBClassify extends DBEntity{
 				return "物品";
 			case DBClassifyTargetLattice:
 				return "格子";
+			case DBClassifyTargetQDD:
+				return "格子";
 		}
 		return false;
 	}
 	
 	public static function targets(){
-		return array(array("text"=>"物品","value"=>DBClassifyTargetGoods),array("text"=>"格子","value"=>DBClassifyTargetLattice));
+		return array(array("text"=>"QDD","value"=>DBClassifyTargetQDD));
 	}
 }
 
