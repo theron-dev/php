@@ -225,7 +225,7 @@ class ClassifyService extends Service{
 					
 					$cid = $classify->cid;
 					
-					$sql = "SELECT c.tid as tid,t.tag as tag FROM ".DBClassifyKeyword::tableName()."as c JOIN LEFT ".DBTag::tableName()." as t ON c.tid=t.tid WHERE c.cid={$cid} ORDER BY c.weight DESC LIMIT {$top}";
+					$sql = "SELECT c.tid as tid,t.tag as tag FROM ".DBClassifyKeyword::tableName()." as c LEFT JOIN ".DBTag::tableName()." as t ON c.tid=t.tid WHERE c.cid={$cid} ORDER BY c.weight DESC LIMIT {$top}";
 					
 					$rrs = $dbContext->query($sql);
 					
