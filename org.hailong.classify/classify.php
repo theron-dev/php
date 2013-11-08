@@ -27,7 +27,5 @@ if($library){
 	
 	require_once "$library/org.hailong.classify/services/ClassifyService.php";
 	
-	require_once "$library/org.hailong.classify/faces/ClassifySyncFace.php";
-	
 }
 ?>
