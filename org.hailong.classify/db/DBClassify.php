@@ -1,8 +1,6 @@
 <?php
 
-define("DBClassifyTargetGoods",0);
-define("DBClassifyTargetLattice",1);
-define("DBClassifyTargetQDD",2);
+define("DBClassifyTargetQDD",0);
 
 /**
  * 分类表
@@ -96,12 +94,8 @@ class DBClassify extends DBEntity{
 	
 	public static function targetTitle($target){
 		switch($target){
-			case DBClassifyTargetGoods:
-				return "物品";
-			case DBClassifyTargetLattice:
-				return "格子";
 			case DBClassifyTargetQDD:
-				return "格子";
+				return "QDD";
 		}
 		return false;
 	}
