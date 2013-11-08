@@ -25,6 +25,7 @@ if($library){
 	require_once "$library/org.hailong.classify/tasks/ClassifyMatchTask.php";
 	require_once "$library/org.hailong.classify/tasks/ClassifyChildTask.php";
 	require_once "$library/org.hailong.classify/tasks/ClassifyKeywordAssignTask.php";
+	require_once "$library/org.hailong.classify/tasks/ClassifyQueryTopTask.php";
 	
 	require_once "$library/org.hailong.classify/services/ClassifyService.php";
 	

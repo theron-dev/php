@@ -191,6 +191,63 @@ class ClassifyService extends Service{
 			return false;
 		}
 		
+		if($taskType == "ClassifyQueryTopTask"){
+		
+			$context = $this->getContext();
+			$dbContext = $context->dbContext();
+		
+			$dbContextTask = new DBContextTask(DB_CLASSIFY);
+		
+			$context->handle("DBContextTask",$dbContextTask);
+		
+			if($dbContextTask->dbContext){
+				$dbContext = $dbContextTask->dbContext;
+			}
+			
+			$pcid = intval($task->pcid);
+			$target = $dbContext->parseValue($task->target);
+			$top = intval($task->top);
+				
+			$rs = $dbContext->queryEntitys("DBClassify","pcid={$pcid} AND target={$target} ORDER BY c.cid ASC");
+				
+			if($rs){
+				$task->results = array();
+		
+				while($classify = $dbContext->nextObject($rs,"DBClassify")){
+					
+					$item = array();
+					
+					foreach($classify as $key =>$value){
+						if($value !== null){
+							$item[$key] = $value;
+						}
+					}
+					
+					$sql = "SELECT c.tid as tid,t.tag as tag FROM ".DBClassifyKeyword::tableName()."as c JOIN LEFT ".DBTag::tableName()." as t ON c.tid=t.tid WHERE c.cid={$cid} ORDER BY c.weight DESC LIMIT {$top}";
+					
+					$rrs = $dbContext->query($sql);
+					if($rrs){
+						
+						$tags = array();
+						
+						while($tag = $dbContext->next($rrs)){
+							$tags[] = array("tid"=>$tag["tid"],"tag"=>$tag["tag"]);
+						}
+						
+						$item["tags"] = $tags;
+						
+						$dbContext->free($rrs);
+					}
+					$task->results[] = $item;
+				}
+		
+				$dbContext->free($rs);
+			}
+				
+		
+			return false;
+		}
+		
 		if($task instanceof ClassifyMatchTask){
 			
 			$context = $this->getContext();
