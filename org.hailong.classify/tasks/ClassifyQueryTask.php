@@ -25,7 +25,7 @@ class ClassifyQueryTask extends ClassifyTask{
 	
 	public function __construct(){
 		$this->pcid = 0;
-		$this->target = DBClassifyTargetGoods;
+		$this->target = DBClassifyTargetDefault;
 	}
 
 }

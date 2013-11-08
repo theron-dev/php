@@ -31,7 +31,7 @@ class ClassifyQueryTopTask extends ClassifyTask{
 	
 	public function __construct(){
 		$this->pcid = 0;
-		$this->target = DBClassifyTargetQDD;
+		$this->target = DBClassifyTargetDefault;
 		$this->top = 10;
 	}
 

@@ -1,6 +1,6 @@
 <?php
 
-define("DBClassifyTargetQDD",0);
+define("DBClassifyTargetDefault",0);
 
 /**
  * 分类表
@@ -94,14 +94,14 @@ class DBClassify extends DBEntity{
 	
 	public static function targetTitle($target){
 		switch($target){
-			case DBClassifyTargetQDD:
-				return "QDD";
+			case DBClassifyTargetDefault:
+				return "默认";
 		}
 		return false;
 	}
 	
 	public static function targets(){
-		return array(array("text"=>"QDD","value"=>DBClassifyTargetQDD));
+		return array(array("text"=>"默认","value"=>DBClassifyTargetDefault));
 	}
 }
 
