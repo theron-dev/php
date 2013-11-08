@@ -208,10 +208,8 @@ class ClassifyService extends Service{
 			$target = $dbContext->parseValue($task->target);
 			$top = intval($task->top);
 				
-			$rs = $dbContext->queryEntitys("DBClassify","pcid={$pcid} AND target={$target} ORDER BY c.cid ASC");
+			$rs = $dbContext->queryEntitys("DBClassify","pcid={$pcid} AND target={$target} ORDER BY cid ASC");
 			
-			$context->setOutputDataValue("sql", $dbContext->getLastSql());
-	
 			if($rs){
 				$task->results = array();
 		
