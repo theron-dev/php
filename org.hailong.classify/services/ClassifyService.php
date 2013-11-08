@@ -228,6 +228,9 @@ class ClassifyService extends Service{
 					$sql = "SELECT c.tid as tid,t.tag as tag FROM ".DBClassifyKeyword::tableName()."as c JOIN LEFT ".DBTag::tableName()." as t ON c.tid=t.tid WHERE c.cid={$cid} ORDER BY c.weight DESC LIMIT {$top}";
 					
 					$rrs = $dbContext->query($sql);
+					
+					$context->setOutputDataValue("sql", $sql);
+					
 					if($rrs){
 						
 						$tags = array();
