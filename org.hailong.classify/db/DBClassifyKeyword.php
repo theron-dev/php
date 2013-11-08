@@ -21,6 +21,11 @@ class DBClassifyKeyword extends DBEntity{
 	 */
 	public $tid;
 	/**
+	 * 权重
+	 * @var int
+	 */
+	public $weight;
+	/**
 	 * 创建时间
 	 * @var int
 	 */

@@ -140,6 +140,7 @@ class ClassifyService extends Service{
 							$kItem = new DBClassifyKeyword();
 							$kItem->cid = $item->cid;
 							$kItem->tid = $tagTask->tid;
+							$kItem->weight = 0;
 							$kItem->createTime = time();
 							$dbContext->insert($kItem);
 						}
@@ -266,6 +267,32 @@ class ClassifyService extends Service{
 
 			ClassifyService::queryChild($context, $dbContext, $item, $task);
 				
+		}
+		
+		if($taskType == "ClassifyKeywordAssignTask"){
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_CLASSIFY);
+			
+			$cid = intval($task->cid);
+			$tid = intval($task->tid);
+			
+			$item = $dbContext->querySingleEntity("DBClassifyKeyword","cid=$cid AND tid=$tid");
+			
+			if($item){
+				$item->weight += $task->inc;
+				$dbContext->update($item);
+			}
+			else{
+				$item = new DBClassifyKeyword();
+				$item->cid = $cid;
+				$item->tid = $tid;
+				$item->weight = $task->inc;
+				$item->createTime = time();
+				$dbContext->insert($item);
+			}
+			
+			return false;
 		}
 		
 		return true;
