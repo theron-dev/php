@@ -519,6 +519,38 @@ class DBContext{
 	public function getDBAdapter(){
 		return $this->dbAdapter;
 	}
+	
+	public function lockWrite($entityClass){
+		
+		$names = "";
+		
+		if(is_array($entityClass)){
+			foreach ($entityClass as $clazz){
+				$entity = new $clazz();
+				if($names == ""){
+					$names = "`".$entity->tableName()."`";
+				}
+				else{
+					$names .= ",`".$entity->tableName()."`";
+				}
+			}
+		}
+		else{
+			$entity = new $entityClass();
+			$names = "`".$entity->tableName()."`";
+		}
+		$this->dbAdapter->query("LOCK TABLES {$names} WRITE;");
+	}
+	
+	public function lockRead($entityClass){
+		$entity = new $entityClass();
+		$name = $entity->tableName();
+		$this->dbAdapter->query("LOCK TABLES `{$name}` READ;");
+	}
+	
+	public function unlock(){
+		$this->dbAdapter->query("UNLOCK TABLES;");
+	}
 }
 
 function defaultDBContext($dbContext){

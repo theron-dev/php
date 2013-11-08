@@ -38,10 +38,10 @@ class AccountRegisterTask implements ITask{
 	 */
 	public $title;
 	/**
-	 * 其他信息
-	 * @var key,value
+	 * 昵称 检测唯一
+	 * @var String
 	 */
-	public $infos;
+	public $nick;
 
 	public function prefix(){
 		return "acc";

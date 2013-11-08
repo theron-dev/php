@@ -195,9 +195,21 @@ class AccountRegisterService extends Service{
 				throw new AccountException("not found account", ERROR_USER_NOT_FOUND_ACCOUNT);
 			}
 			
+			$dbContext->lockWrite(array("DBAccount","DBAccountInfo"));
+	
 			$user = $dbContext->querySingleEntity("DBAccount","account='{$task->account}'");
 			
 			if(!$user){
+				
+				if($task->nick){
+					
+					$nick = $dbContext->parseValue($task->nick);
+					$user = $dbContext->querySingleEntity("DBAccountInfo","`key`='".AccountInfoKeyNick."' and `value`=$nick");
+					if($user){
+						$dbContext->unlock();
+						throw new AccountException("nick is exists", ERROR_USER_NICK_EXISTS);
+					}
+				}
 				
 				$user = new DBAccount();
 				$user->account = $account;
@@ -212,34 +224,33 @@ class AccountRegisterService extends Service{
 				if($user->tel !== null){
 					$user->tel_verify = DBAccount::generatedVerify();
 				}
+				
 				$user->updateTime = time();
 				$user->createTime = time();
 				$user->state = AccountStateNone;
+				
 				$dbContext->insert($user);
 				
 				$task->uid = $user->uid;
-			
-				if($task->infos){
-					
-					foreach ($task->infos as $key=>$value){
+				
+				if($task->nick){
 						
-						$info = new DBAccountInfo();
-						$info->uid = $task->uid;
-						$info->key = $key;
-						if(len($value) > 255){
-							$info->text = $value;
-						}
-						else{
-							$info->value = $value;
-						}
-						
-						$dbContext->insert($info);
-					}
+					$info = new DBAccountInfo();
+					$info->uid = $user->uid;
+					$info->key = AccountInfoKeyNick;
+					$info->value = $task->nick;
+					$info->updateTime = time();
+					$info->createTime = time();
 					
+					$dbContext->insert($info);
+		
 				}
+				
+				$dbContext->unlock();
 				
 			}
 			else{
+				$dbContext->unlock();
 				throw new AccountException("account is exists", ERROR_USER_ACCOUNT_EXISTS);
 			}
 			
