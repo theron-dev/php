@@ -210,8 +210,7 @@ class ClassifyService extends Service{
 				
 			$rs = $dbContext->queryEntitys("DBClassify","pcid={$pcid} AND target={$target} ORDER BY c.cid ASC");
 
-			$context->setOutputDataValue("sql", $dbContext->getLastSql());
-			
+	
 			if($rs){
 				$task->results = array();
 		
@@ -244,6 +243,9 @@ class ClassifyService extends Service{
 				}
 		
 				$dbContext->free($rs);
+				
+				$context->setOutputDataValue("task", $task);
+					
 			}
 				
 		
