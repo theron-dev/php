@@ -32,7 +32,7 @@ if($_FILES){
 			
 			move_uploaded_file($file["tmp_name"], $dir.$value);
 			
-			$rs[$name] = $dir.$value;
+			$rs[$name] = "res:///".$dir.$value;
 			
 			if($isImage){
 				buildThumbs($dir.$value);
