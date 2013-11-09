@@ -84,8 +84,6 @@ class DBContext{
 			$sql .= ") AUTO_INCREMENT = 1;";
 		
 			$this->dbAdapter->query($sql);
-			
-			echo $sql;
 
 			return true;
 		}
