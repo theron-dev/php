@@ -96,6 +96,13 @@ class DBConcern extends DBEntity{
 		return "VARCHAR(45) NULL";
 	}
 
+	/**
+	 * @return array("index_name"=>array(array("field"=>"field1","order"="desc"),array("field"=>"field2","order"="asc")))
+	 */
+	public static function indexs(){
+		return array("uid"=>array(array("field"=>"uid","order"=>"asc")),"tuid"=>array(array("field"=>"tuid","order"=>"asc")));
+	}
+	
 }
 
 ?>
