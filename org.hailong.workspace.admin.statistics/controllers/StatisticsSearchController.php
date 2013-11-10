@@ -5,13 +5,18 @@ class StatisticsSearchController extends ViewController{
 	private $searchTable;
 	private $searchPageListView;
 	private $pageSize = 50;
+	private $targetText;
+	private $searchButton;
 	
 	public function __construct($context,$isPostback=false){
 		parent::__construct($context,$isPostback);
 		
 		$this->searchTable = new TableView("search_table");
 		$this->searchPageListView = new ListView("search_page");
-	
+		$this->targetText = new TextView("targetText");
+		$this->searchButton = new Button("searchButton");
+		
+		
 		$task = new AuthorityEntityValidateTask("workspace/admin/statistics");
 		
 		try{
@@ -23,6 +28,7 @@ class StatisticsSearchController extends ViewController{
 		}
 		
 		if(!$isPostback){
+			$this->searchButton->setClickAction(new Action($this,"SearchAction"));
 			$this->searchPageListView->setSelectedChangeAction(new Action($this,"SearchPageAction"));
 			$this->searchTable->setClickAction(new Action($this,"TableAction"));
 			$this->loadContent();
@@ -38,7 +44,15 @@ class StatisticsSearchController extends ViewController{
 		$context = $this->getContext();
 		$dbContext = $context->dbContext();
 	
-		$sql = "SELECT target, sum(pv) as pv,count(pv) as uv,count(source) as ipv,classifyTime FROM ".DBStatisticsUniversal::tableName()." GROUP BY classifyTime,target ORDER BY classifyTime DESC ";
+		$target = trim($this->targetText->getText());
+		
+		$sql = "SELECT target, sum(pv) as pv,count(pv) as uv,count(source) as ipv,classifyTime FROM ".DBStatisticsUniversal::tableName();
+		
+		if($target){
+			$sql .=" WHERE target=".$dbContext->parseValue($target);
+		}
+		
+		$sql .= " GROUP BY classifyTime,target ORDER BY classifyTime DESC ";
 		
 		$rowCount = $dbContext->countBySql($sql);
 	
@@ -81,6 +95,10 @@ class StatisticsSearchController extends ViewController{
 		}
 	
 		$this->searchTable->setItems($items);
+	}
+	
+	public function onSearchAction(){
+		$this->loadContent();
 	}
 	
 	public function onTableAction(){
