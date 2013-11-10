@@ -543,8 +543,25 @@ class DBContext{
 	}
 	
 	public function lockRead($entityClass){
-		$entity = new $entityClass();
-		$name = $entity->tableName();
+	
+		$names = "";
+		
+		if(is_array($entityClass)){
+			foreach ($entityClass as $clazz){
+				$entity = new $clazz();
+				if($names == ""){
+					$names = "`".$entity->tableName()."`";
+				}
+				else{
+					$names .= ",`".$entity->tableName()."`";
+				}
+			}
+		}
+		else{
+			$entity = new $entityClass();
+			$names = "`".$entity->tableName()."`";
+		}
+		
 		$this->dbAdapter->query("LOCK TABLES `{$name}` READ;");
 	}
 	
