@@ -191,6 +191,8 @@ class AccountRegisterService extends Service{
 		if($task instanceof AccountRegisterTask){
 			
 			$account = trim($task->account);
+			$nick = trim($task->nick);
+			
 			if(!$account){
 				throw new AccountException("not found account", ERROR_USER_NOT_FOUND_ACCOUNT);
 			}
@@ -201,10 +203,9 @@ class AccountRegisterService extends Service{
 			
 			if(!$user){
 				
-				if($task->nick){
+				if($nick){
 					
-					$nick = $dbContext->parseValue($task->nick);
-					$user = $dbContext->querySingleEntity("DBAccountInfo","`key`='".AccountInfoKeyNick."' and `value`=$nick");
+					$user = $dbContext->querySingleEntity("DBAccountInfo","`key`='".AccountInfoKeyNick."' and `value`=".$dbContext->parseValue($nick));
 					if($user){
 						$dbContext->unlock();
 						throw new AccountException("nick is exists", ERROR_USER_NICK_EXISTS);
@@ -233,12 +234,12 @@ class AccountRegisterService extends Service{
 				
 				$task->uid = $user->uid;
 				
-				if($task->nick){
+				if($nick){
 						
 					$info = new DBAccountInfo();
 					$info->uid = $user->uid;
 					$info->key = AccountInfoKeyNick;
-					$info->value = $task->nick;
+					$info->value = $nick;
 					$info->updateTime = time();
 					$info->createTime = time();
 					
