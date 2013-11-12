@@ -71,10 +71,10 @@ class DBTop extends DBEntity{
 			return "INT NULL";
 		}
 		if($field == "eid"){
-			return "BITINT NULL";
+			return "BIGINT NULL";
 		}
 		if($field == "topCount"){
-			return "BITINT NULL";
+			return "BIGINT NULL";
 		}
 		if($field == "updateTime"){
 			return "INT NULL";

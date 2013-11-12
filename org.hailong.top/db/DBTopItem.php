@@ -65,10 +65,10 @@ class DBTopItem extends DBEntity{
 			return "INT NULL";
 		}
 		if($field == "eid"){
-			return "BITINT NULL";
+			return "BIGINT NULL";
 		}
 		if($field == "topCount"){
-			return "BITINT NULL";
+			return "BIGINT NULL";
 		}
 		if($field == "createTime"){
 			return "INT NULL";
