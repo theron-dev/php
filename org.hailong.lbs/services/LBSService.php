@@ -38,6 +38,8 @@ class LBSService extends Service{
 				$dbContext->insert($item);
 			}
 		
+			$dbContext->commit();
+			
 		}
 		
 		if($task instanceof LBSSourceRemoveTask){
@@ -85,6 +87,8 @@ class LBSService extends Service{
 							." AND latitude<=".($latitude + $dr)
 							." AND longitude>=".($longitude - $dr)
 							." AND longitude<=".($longitude + $dr);
+					
+					$context->setOutputDataValue("sql", $sql);
 					
 					$rs = $dbContext->query($sql);
 					
