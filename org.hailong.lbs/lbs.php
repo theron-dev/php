@@ -16,6 +16,7 @@ if($library){
 	require_once "$library/org.hailong.lbs/tasks/LBSSourceUpdateTask.php";
 	require_once "$library/org.hailong.lbs/tasks/LBSSourceRemoveTask.php";
 	require_once "$library/org.hailong.lbs/tasks/LBSSearchTask.php";
+	require_once "$library/org.hailong.lbs/tasks/LBSDistanceTask.php";
 	
 	require_once "$library/org.hailong.lbs/services/LBSService.php";
 	

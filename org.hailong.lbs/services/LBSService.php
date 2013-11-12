@@ -9,6 +9,22 @@ class LBSService extends Service{
 	
 	public function handle($taskType,$task){
 		
+		if($task instanceof LBSDistanceTask){
+			
+			$radLat1 = $task->latitude1 * pi() / 180.0;
+			$radLat2 = $task->latitude2 * pi() / 180.0;
+			$a = $task->latitude1 - $task->latitude2;
+			$b = ($task->longitude1 * pi() / 180.0) - ($task->longitude2 * pi() / 180.0);
+			$s = 2.0 * asin(sqrt(pow(sin($a/2.0),2.0) +
+				cos(radLat1) * cos(radLat2) * pow(sin($b/2.0),2.0)));
+			
+			$s = $s * 6378.137;
+			
+			$task->distance = $s * 1000;
+			
+			return false;
+		}
+		
 		if($task instanceof LBSSourceUpdateTask){
 			
 			$context = $this->getContext();
@@ -92,6 +108,8 @@ class LBSService extends Service{
 					
 					if($rs){
 						
+						$t = new LBSDistanceTask();
+						
 						while($row = $dbContext->nextObject($rs,"DBLBSSource")){
 							
 							$r = new DBLBSSearch();
@@ -102,10 +120,15 @@ class LBSService extends Service{
 							$r->near_latitude = $row->latitude;
 							$r->near_longitude = $row->longitude;
 							
-							$latd = $row->latitude - $latitude;
-							$lond = $row->longitude - $longitude;
 							
-							$r->distance = intval(sqrt($latd * $latd + $lond * $lond) * $lc * 1000);
+							$t->latitude1 = $latitude;
+							$t->longitude1 = $longitude;
+							$t->latitude2 = $row->latitude;
+							$t->longitude2 = $row->longitude;
+							
+							$context->handle("LBSDistanceTask",$t);
+							
+							$r->distance = $t->distance;
 							
 							$dbContext->insert($r);
 						}
@@ -149,6 +172,7 @@ class LBSService extends Service{
 			}
 			
 		}
+		
 		
 		return true;
 	}
