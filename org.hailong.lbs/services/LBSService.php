@@ -16,7 +16,7 @@ class LBSService extends Service{
 			$a = $task->latitude1 - $task->latitude2;
 			$b = ($task->longitude1 * pi() / 180.0) - ($task->longitude2 * pi() / 180.0);
 			$s = 2.0 * asin(sqrt(pow(sin($a/2.0),2.0) +
-				cos(radLat1) * cos(radLat2) * pow(sin($b/2.0),2.0)));
+				cos($radLat1) * cos($radLat2) * pow(sin($b/2.0),2.0)));
 			
 			$s = $s * 6378.137;
 			
