@@ -31,9 +31,10 @@ class LBSService extends Service{
 			$dbContext = $context->dbContext(DB_LBS);
 			
 			$sid = intval($task->sid);
+			$stype = intval($task->stype);
 			$latitude = doubleval($task->latitude);
 			$longitude = doubleval($task->longitude);
-			$item = $dbContext->querySingleEntity("DBLBSSource","sid=$sid");
+			$item = $dbContext->querySingleEntity("DBLBSSource","sid=$sid AND stype=$stype");
 			
 			if($item){
 				if(doubleval($item->latitude) != $latitude
@@ -46,6 +47,7 @@ class LBSService extends Service{
 			}
 			else{
 				$item = new DBLBSSource();
+				$item->stype = $stype;
 				$item->sid = intval($task->sid);
 				$item->latitude = doubleval($task->latitude);
 				$item->longitude = doubleval($task->longitude);
@@ -64,9 +66,10 @@ class LBSService extends Service{
 			$dbContext = $context->dbContext(DB_LBS);
 				
 			$sid = intval($task->sid);
+			$stype = intval($task->stype);
 			
-			$dbContext->delete("DBLBSSource","sid=$sid");
-			$dbContext->delete("DBLBSSearch","sid=$sid");
+			$dbContext->delete("DBLBSSource","sid=$sid AND stype=$stype");
+			$dbContext->delete("DBLBSSearch","sid=$sid AND stype=$stype");
 			$dbContext->commit();
 			
 		}
@@ -77,6 +80,7 @@ class LBSService extends Service{
 			$dbContext = $context->dbContext(DB_LBS);
 			
 			$sid = intval($task->sid);
+			$stype = intval($task->stype);
 			$latitude = doubleval($task->latitude);
 			$longitude = doubleval($task->longitude);
 			$distance = intval($task->distance);
@@ -85,13 +89,13 @@ class LBSService extends Service{
 				$distance = 1000;
 			}
 			
-			$item = $dbContext->querySingleEntity("DBLBSSource","sid=$sid");
+			$item = $dbContext->querySingleEntity("DBLBSSource","sid=$sid AND stype=$stype");
 			
 			if($item){
 				
 				if($item->updateTime != $item->searchTime){
 				
-					$dbContext->delete("DBLBSSearch","sid=$sid");
+					$dbContext->delete("DBLBSSearch","sid=$sid AND stype=$stype");
 					$dbContext->commit();
 					
 					$task->onUpateSource($context, $dbContext);
@@ -114,7 +118,7 @@ class LBSService extends Service{
 				
 				$offset = ($pageIndex - 1) * $pageSize;
 				
-				$sql = "SELECT * FROM ".DBLBSSearch::tableName()." WHERE sid=$sid ORDER BY distance DESC LIMIT $offset,$pageSize";
+				$sql = "SELECT * FROM ".DBLBSSearch::tableName()." WHERE sid=$sid AND stype=$stype ORDER BY distance DESC LIMIT $offset,$pageSize";
 				
 				$rs = $dbContext->query($sql);
 				

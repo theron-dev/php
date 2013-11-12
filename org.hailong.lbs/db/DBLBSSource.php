@@ -2,7 +2,7 @@
 
 define("DBLBSSourceTypeNone",0);
 define("DBLBSSourceTypeUser",1);
-define("DBLBSSourceTypePublish",1);
+define("DBLBSSourceTypePublish",2);
 
 /**
  * 本地服务源
