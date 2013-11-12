@@ -33,7 +33,7 @@ class TopItemTask extends TopTask{
 	 * @var int
 	 */
 	public $limitTime;
-	
+
 }
 
 ?>

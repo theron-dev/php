@@ -29,15 +29,37 @@ class QDDTopService extends Service{
 			
 			$dbContext->insert($item);
 			
+			$item = $dbContext->querySingleEntity("DBTop","`key`='{$key}' AND etype={$etype} AND eid={$eid}");
+			
+			if(!$item){
+				
+				$item = new DBTop();
+				
+				$item->key = $key;
+				$item->etype = $etype;
+				$item->eid = $eid;
+				$item->topCount = 0;
+				$item->createTime = time();
+				$item->updateTime = time();
+				
+				$dbContext->insert($item);
+				
+				$dbContext->commit();
+			}
+			
 			$topCounts = array();
 			
 			$topCounts[$eid] = $topCount;
+			
+			if(!$task->limitTime){
+				$task->limitTime = time();
+			}
 			
 			$timestamp = time() - intval($task->limitTime);
 			
 			$where = "`key`='{$key}' AND etype={etype} WHERE createTime<{$timestamp}";
 			
-			$sql = "SELECT eid,SUB(topCount) as topCount FROM `".DBTopItem::tableName()."` WHERE {$where} GROUP BY eid";
+			$sql = "SELECT eid,SUM(topCount) as topCount FROM `".DBTopItem::tableName()."` WHERE {$where} GROUP BY eid";
 			
 			$rs = $dbContext->query($sql);
 			
@@ -65,6 +87,47 @@ class QDDTopService extends Service{
 			foreach ($topCounts as $eid => $topCount){
 				$dbContext->query("UPDATE `".DBTop::tableName()."` SET topCount=topCount+{$topCount} WHERE `key`='{$key}' AND etype={$etype} AND eid={$eid}");
 			}
+			
+			return false;
+		}
+		else if($task instanceof TopRemoveTask){
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_TOP);
+			
+			$eid = intval($task->eid);
+			$etype = intval($task->etype);
+
+			$dbContext->query("DELETE FROM `".DBTopItem::tableName()."` WHERE etype={$etype} AND eid={$eid}");
+			$dbContext->query("DELETE FROM `".DBTop::tableName()."` WHERE etype={$etype} AND eid={$eid}");
+			
+			return false;
+		}
+		else if($task instanceof TopSearchTask){
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_TOP);
+				
+			$key = trim($task->key);
+			$etype = intval($task->etype);
+				
+			$pageIndex = intval($task->pageIndex);
+			
+			if($pageIndex < 1){
+				$pageIndex = 1;
+			}
+			
+			$pageSize = intval($task->pageSize);
+			
+			if($pageSize < 1){
+				$pageSize = 20;
+			}
+			
+			$offset = ($pageIndex - 1) * $pageSize;
+			
+			$rs = $dbContext->queryEntitys("DBTop","`key`='{$key}' AND etype={$etype} ORDER BY topCount DESC LIMIT {$offset},{$pageSize}");
+			
+			
 			
 			return false;
 		}

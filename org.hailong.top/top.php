@@ -17,6 +17,7 @@ if($library){
 	
 	require_once "$library/org.hailong.top/tasks/TopTask.php";
 	require_once "$library/org.hailong.top/tasks/TopItemTask.php";
+	require_once "$library/org.hailong.top/tasks/TopRemoveTask.php";
 	require_once "$library/org.hailong.top/tasks/TopSearchTask.php";
 	
 }
