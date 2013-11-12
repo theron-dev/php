@@ -93,6 +93,7 @@ class DBTop extends DBEntity{
 				"key"=>array(array("field"=>"key","order"=>"asc")),
 				"etype"=>array(array("field"=>"etype","order"=>"asc")),
 				"topCount"=>array(array("field"=>"topCount","order"=>"desc")),	
+				"updateTime"=>array(array("field"=>"updateTime","order"=>"desc")),
 			);
 	}
 	

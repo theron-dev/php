@@ -31,8 +31,14 @@ class QDDTopService extends Service{
 			
 			$item = $dbContext->querySingleEntity("DBTop","`key`='{$key}' AND etype={$etype} AND eid={$eid}");
 			
-			if(!$item){
+			if($item){
 				
+				$item->updateTime = time();
+				$dbContext->update($item);
+				
+			}
+			else{
+
 				$item = new DBTop();
 				
 				$item->key = $key;
@@ -125,9 +131,21 @@ class QDDTopService extends Service{
 			
 			$offset = ($pageIndex - 1) * $pageSize;
 			
-			$rs = $dbContext->queryEntitys("DBTop","`key`='{$key}' AND etype={$etype} ORDER BY topCount DESC LIMIT {$offset},{$pageSize}");
+			$rs = $dbContext->queryEntitys("DBTop","`key`='{$key}' AND etype={$etype} ORDER BY topCount DESC,updateTime DESC LIMIT {$offset},{$pageSize}");
 			
-			
+			if($rs){
+				
+				$task->results = array();
+				
+				while($item  = $dbContext->nextObject($rs,"DBTop")){
+					
+					$task->results[] = $item;
+					
+				}
+				
+				$dbContext->free($rs);
+				
+			}
 			
 			return false;
 		}
