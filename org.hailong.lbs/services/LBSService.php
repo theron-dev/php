@@ -102,8 +102,6 @@ class LBSService extends Service{
 							." AND longitude>=".($longitude - $dr)
 							." AND longitude<=".($longitude + $dr);
 					
-					$context->setOutputDataValue("sql", $sql);
-					
 					$rs = $dbContext->query($sql);
 					
 					if($rs){
