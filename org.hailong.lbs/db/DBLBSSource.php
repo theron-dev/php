@@ -1,5 +1,9 @@
 <?php
 
+define("DBLBSSourceTypeNone",0);
+define("DBLBSSourceTypeUser",1);
+define("DBLBSSourceTypePublish",1);
+
 /**
  * 本地服务源
  * @author zhanghailong
@@ -12,6 +16,11 @@ class DBLBSSource extends DBEntity{
 	 * @var long
 	 */
 	public $ssid;
+	/**
+	 * 来源类型
+	 * @var DBLBSSourceType
+	 */
+	public $stype;
 	/**
 	 * 来源ID
 	 * @var int
@@ -63,6 +72,9 @@ class DBLBSSource extends DBEntity{
 		if($field == "ssid"){
 			return "BIGINT NOT NULL";
 		}
+		if($field == "stype"){
+			return "INT NULL";
+		}
 		if($field == "sid"){
 			return "BIGINT NULL";
 		}
@@ -90,6 +102,7 @@ class DBLBSSource extends DBEntity{
 			,"latitude"=>array(array("field"=>"latitude","order"=>"asc"))
 			,"longitude"=>array(array("field"=>"longitude","order"=>"asc"))
 			,"sid"=>array(array("field"=>"sid","order"=>"asc"))
+			,"stype"=>array(array("field"=>"stype","order"=>"asc"))
 		);
 	}
 }

@@ -1,5 +1,7 @@
 <?php
 
+
+
 /**
  * 本地搜索
  * @author zhanghailong
@@ -12,6 +14,11 @@ class DBLBSSearch extends DBEntity{
 	 * @var long
 	 */
 	public $ssid;
+	/**
+	 * 来源类型
+	 * @var DBLBSSourceType
+	 */
+	public $stype;
 	/**
 	 * 来源ID
 	 * @var int
@@ -68,6 +75,9 @@ class DBLBSSearch extends DBEntity{
 		if($field == "ssid"){
 			return "BIGINT NOT NULL";
 		}
+		if($field == "stype"){
+			return "INT NULL";
+		}
 		if($field == "sid"){
 			return "BIGINT NULL";
 		}
@@ -95,6 +105,7 @@ class DBLBSSearch extends DBEntity{
 	public static function indexs(){
 		return array(
 			"sid"=>array(array("field"=>"sid","order"=>"asc"))
+			,"stype"=>array(array("field"=>"stype","order"=>"asc"))
 			,"distance"=>array(array("field"=>"distance","order"=>"asc"))
 		);
 	}

@@ -94,45 +94,7 @@ class LBSService extends Service{
 					$dbContext->delete("DBLBSSearch","sid=$sid");
 					$dbContext->commit();
 					
-					$dr = $distance / 111100.0;
-					
-					$sql = "SELECT * FROM ".DBLBSSource::tableName()." WHERE sid!={$sid}"
-							." AND latitude>=".($latitude - $dr)
-							." AND latitude<=".($latitude + $dr)
-							." AND longitude>=".($longitude - $dr)
-							." AND longitude<=".($longitude + $dr);
-					
-					$rs = $dbContext->query($sql);
-					
-					if($rs){
-						
-						$t = new LBSDistanceTask();
-						
-						while($row = $dbContext->nextObject($rs,"DBLBSSource")){
-							
-							$r = new DBLBSSearch();
-							$r->sid = $sid;
-							$r->updateTime = $row->updateTime;
-							$r->createTime = time();
-							$r->near_sid = $row->sid;
-							$r->near_latitude = $row->latitude;
-							$r->near_longitude = $row->longitude;
-							
-							
-							$t->latitude1 = $latitude;
-							$t->longitude1 = $longitude;
-							$t->latitude2 = $row->latitude;
-							$t->longitude2 = $row->longitude;
-							
-							$context->handle("LBSDistanceTask",$t);
-							
-							$r->distance = $t->distance;
-							
-							$dbContext->insert($r);
-						}
-						
-						$dbContext->free($rs);
-					}
+					$task->onUpateSource($context, $dbContext);
 					
 					$item->searchTime = $item->updateTime;
 					

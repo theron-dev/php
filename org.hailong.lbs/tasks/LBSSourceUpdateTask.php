@@ -8,6 +8,11 @@
 class LBSSourceUpdateTask extends LBSTask{
 	
 	/**
+	 * 来源类型
+	 * @var DBLBSSourceType
+	 */
+	public $stype;
+	/**
 	 * 来源ID
 	 * @var int
 	 */
