@@ -30,6 +30,11 @@ class DBLBSSearch extends DBEntity{
 	 */
 	public $near_sid;
 	/**
+	 * 附近来源类型
+	 * @var int
+	 */
+	public $near_stype;
+	/**
 	 * 附近来源纬度
 	 * @var double
 	 */
@@ -83,6 +88,9 @@ class DBLBSSearch extends DBEntity{
 		}
 		if($field == "near_sid"){
 			return "BIGINT NULL";
+		}
+		if($field == "near_stype"){
+			return "INT NULL";
 		}
 		if($field == "near_latitude"){
 			return "DOUBLE NULL";

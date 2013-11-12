@@ -78,6 +78,7 @@ class LBSSearchTask extends LBSTask{
 				$r->updateTime = $row->updateTime;
 				$r->createTime = time();
 				$r->near_sid = $row->sid;
+				$r->near_stype = $row->stype;
 				$r->near_latitude = $row->latitude;
 				$r->near_longitude = $row->longitude;
 					
