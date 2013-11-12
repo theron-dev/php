@@ -78,9 +78,7 @@ class LBSService extends Service{
 					$dbContext->delete("DBLBSSearch","sid=$sid");
 					$dbContext->commit();
 					
-					$lc = 111.1 / cos($longitude * pi() / 180.0);
-					
-					$dr = $distance / 1000.0 / $lc;
+					$dr = $distance / 111100.0;
 					
 					$sql = "SELECT * FROM ".DBLBSSource::tableName()." WHERE sid!={$sid}"
 							." AND latitude>=".($latitude - $dr)
