@@ -5,7 +5,7 @@
  * @author zhanghailong
  *
  */
-class QDDTopService extends Service{
+class TopService extends Service{
 	
 	public function handle($taskType,$task){
 		
