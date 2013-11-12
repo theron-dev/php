@@ -48,10 +48,10 @@ class QDDTopService extends Service{
 					$eid = $row["eid"];
 					
 					if(isset($topCounts[$eid])){
-						$topCounts[$eid] +=  $row["topCount"];
+						$topCounts[$eid] -=  $row["topCount"];
 					}
 					else{
-						$topCounts[$eid] = $row["topCount"];
+						$topCounts[$eid] = - $row["topCount"];
 					}
 					
 				}
