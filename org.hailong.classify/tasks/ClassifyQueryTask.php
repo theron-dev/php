@@ -1,7 +1,7 @@
 <?php
 
 /**
-* 创建分类任务
+* 查询分类任务
 * @author zhanghailong
 *
 */
