@@ -150,14 +150,16 @@ class TagService extends Service{
 			
 			$rs = $dbContext->queryEntitys("DBTag","1 ORDER BY weight DESC,tid DESC LIMIT {$limit}");
 			
-			if($rs){
+			$context->setOutputDataValue("sql", $dbContext->getLastSql());
+			
+// 			if($rs){
 				
-				while($tag = $dbContext->nextObject($rs,"DBTag")){
-					$task->results[] = $tag;
-				}
+// 				while($tag = $dbContext->nextObject($rs,"DBTag")){
+// 					$task->results[] = $tag;
+// 				}
 				
-				$dbContext->free($rs);
-			}
+// 				$dbContext->free($rs);
+// 			}
 			return false;
 		}
 		
