@@ -61,6 +61,11 @@ class DBBooks extends DBEntity{
 	public $longitude;
 	
 	/**
+	 * 其他信息 json
+	 * @var String
+	 */
+	public $body;
+	/**
 	 * 修改时间
 	 * @var int
 	 */
@@ -113,6 +118,9 @@ class DBBooks extends DBEntity{
 		if($field == "longitude"){
 			return "DOUBLE NULL";
 		}
+		if($field == "body"){
+			return "TEXT NULL";
+		}
 		if($field == "updateTime"){
 			return "INT NULL";
 		}
@@ -126,7 +134,7 @@ class DBBooks extends DBEntity{
 	 * @return array("index_name"=>array(array("field"=>"field1","order"="desc"),array("field"=>"field2","order"="asc")))
 	 */
 	public static function indexs(){
-		return array("uid"=>array(array("field"=>"uid","order"=>"asc")));
+		return array("uid"=>array(array("field"=>"uid","order"=>"asc")),"createTime"=>array(array("field"=>"createTime","order"=>"asc")));
 	}
 	
 }

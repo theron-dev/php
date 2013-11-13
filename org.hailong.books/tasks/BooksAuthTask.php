@@ -5,7 +5,7 @@
  * @author zhanghailong
  *
  */
-class BooksTask implements ITask{
+class BooksAuthTask extends AuthTask{
 	
 	public function prefix(){
 		return "books";
