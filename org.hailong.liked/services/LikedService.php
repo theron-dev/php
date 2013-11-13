@@ -31,7 +31,7 @@ class LikedService extends Service{
 			$item = $dbContext->querySingleEntity("DBLiked","uid={$uid} and etype={$task->etype} and eid={$task->eid}");
 			
 			if($item){
-				if($item->deleted){
+				if(intval($item->deleted)){
 					$item->deleted = 0;
 					$item->updateTime = time();
 					$dbContext->update($item);
@@ -102,7 +102,7 @@ class LikedService extends Service{
 			$item = $dbContext->querySingleEntity("DBLiked","uid={$uid} and etype={$task->etype} and eid={$task->eid}");
 			
 			if($item){
-				if(!$item->deleted){
+				if(!intval($item->deleted)){
 					$item->deleted = 1;
 					$item->updateTime = time();
 					$dbContext->update($item);
