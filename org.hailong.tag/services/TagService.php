@@ -142,24 +142,20 @@ class TagService extends Service{
 		if($task instanceof TagTopTask){
 			
 			$context = $this->getContext();
-			$dbContext = $context->dbContext();
-				
-			$dbContextTask = new DBContextTask(DB_TAG);
-				
-			$context->handle("DBContextTask",$dbContextTask);
-				
-			if($dbContextTask->dbContext){
-				$dbContext = $dbContextTask->dbContext;
-			}
-			
+			$dbContext = $context->dbContext(DB_TAG);
+		
 			$task->results = array();
 			
-			$rs = $dbContext->queryEntitys("DBTag","1 ORDER BY weight DESC,tid DESC LIMIT {$task->limit}");
+			$limit = intval($task->limit);
+			
+			$rs = $dbContext->queryEntitys("DBTag","1 ORDER BY weight DESC,tid DESC LIMIT {$limit}");
 			
 			if($rs){
+				
 				while($tag = $dbContext->nextObject($rs,"DBTag")){
 					$task->results[] = $tag;
 				}
+				
 				$dbContext->free($rs);
 			}
 			return false;
