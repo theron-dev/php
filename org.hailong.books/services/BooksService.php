@@ -5,7 +5,7 @@
  * @author zhanghailong
  *
  */
-class QDDBooksService extends Service{
+class BooksService extends Service{
 	
 	public function handle($taskType,$task){
 		
