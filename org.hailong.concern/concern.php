@@ -27,5 +27,8 @@ if($library){
 	require_once "$library/org.hailong.concern/tasks/ConcernFollowCountTask.php";
 	require_once "$library/org.hailong.concern/tasks/ConcernIsFollowTask.php";
 	require_once "$library/org.hailong.concern/tasks/ConcernFetchFansTask.php";
+	require_once "$library/org.hailong.concern/tasks/ConcernIsFansTask.php";
+	require_once "$library/org.hailong.concern/tasks/ConcernIsMutualTask.php";
+	require_once "$library/org.hailong.concern/tasks/ConcernMutualCountTask.php";
 }
 ?>

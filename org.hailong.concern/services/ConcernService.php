@@ -25,16 +25,20 @@ class ConcernService extends Service{
 			}
 			
 			$uid = $task->uid;
+			$tuid = $task->tuid;
 			
 			if($uid === null){
 				$uid = $context->getInternalDataValue("auth");
 			}
+			
+			$titem = $dbContext->querySingleEntity("DBConcern","tuid={$uid} and uid={$tuid} and deleted<>1");
 			
 			$item = $dbContext->querySingleEntity("DBConcern","uid={$uid} and tuid={$task->tuid}");
 			$changed = false;
 			
 			if($item){
 				if(intval($item->deleted)){
+					$item->mutual = $titem ? 1: 0;
 					$item->deleted = 0;
 					$item->updateTime = time();
 					$dbContext->update($item);
@@ -48,6 +52,7 @@ class ConcernService extends Service{
 				$item->deleted = 0;
 				$item->tblock = 0;
 				$item->source = $task->source;
+				$item->mutual = $titem ? 1: 0;
 				$item->updateTime = time();
 				$item->createTime = time();
 				
@@ -58,6 +63,11 @@ class ConcernService extends Service{
 			$task->cid = $item->cid;
 		
 			if($changed){
+				
+				$titem->mutual = 1;
+				$titem->updateTime = time();
+				$dbContext->update($titem);
+				
 				$t = new CachePutTask();
 				$t->path = CACHE_CONCERN_TIMESTAMP;
 				$t->value = time();
@@ -79,17 +89,10 @@ class ConcernService extends Service{
 		if($task instanceof ConcernCancelTask){
 			
 			$context = $this->getContext();
-			$dbContext = $context->dbContext();
-			
-			$dbContextTask = new DBContextTask(DB_CONCERN);
-			
-			$context->handle("DBContextTask",$dbContextTask);
-			
-			if($dbContextTask->dbContext){
-				$dbContext = $dbContextTask->dbContext;
-			}
+			$dbContext = $context->dbContext(DB_CONCERN);
 
 			$uid = $task->uid;
+			$tuid = $task->tuid;
 			
 			if($uid === null){
 				$uid = $context->getInternalDataValue("auth");
@@ -99,9 +102,25 @@ class ConcernService extends Service{
 			
 			if($item){
 				if(! intval($item->deleted)){
+					
+					if($item->mutual){
+						
+						$titem = $dbContext->querySingleEntity("DBConcern","tuid={$uid} and uid={$tuid} and deleted<>1");
+							
+						if($titem){
+							$titem->mutual = 0;
+							$titem->updateTime = time();
+							$dbContext->update($titem);
+						}
+						
+						$item->mutual = 0;
+					}
+					
 					$item->deleted = 1;
 					$item->updateTime = time();
 					$dbContext->update($item);
+					
+					
 					
 					$t = new CachePutTask();
 					$t->path = CACHE_CONCERN_TIMESTAMP;
@@ -354,6 +373,22 @@ class ConcernService extends Service{
 			return false;
 		}
 		
+		if($task instanceof ConcernIsFansTask){
+				
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_CONCERN);
+		
+			$uid = $task->uid;
+		
+			if($uid === null){
+				$uid = $context->getInternalDataValue("auth");
+			}
+		
+			$task->results = $dbContext->countForEntity("DBConcern","tuid={$uid} and uid={$task->tuid} and deleted<>1") >0;
+		
+			return false;
+		}
+		
 		if($task instanceof ConcernFetchFansTask){
 		
 			$context = $this->getContext();
@@ -396,6 +431,39 @@ class ConcernService extends Service{
 		
 			return false;
 		}
+		
+		if($task instanceof ConcernMutualCountTask){
+		
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_CONCERN);
+		
+			$uid = $task->uid;
+		
+			if($uid === null){
+				$uid = $context->getInternalDataValue("auth");
+			}
+			
+			$task->results = $dbContext->countForEntity("DBConcern","uid={$uid} and deleted<>1 and mutual=1");
+		
+			return false;
+		}
+		
+		if($task instanceof ConcernIsMutualTask){
+		
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_CONCERN);
+		
+			$uid = $task->uid;
+		
+			if($uid === null){
+				$uid = $context->getInternalDataValue("auth");
+			}
+		
+			$task->results = $dbContext->countForEntity("DBConcern","tuid={$uid} and uid={$task->tuid} and deleted<>1 and mutual=1") >0;
+		
+			return false;
+		}
+		
 		
 		return true;
 	}

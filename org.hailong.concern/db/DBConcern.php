@@ -38,6 +38,11 @@ class DBConcern extends DBEntity{
 	*/
 	public $deleted;
 	/**
+	 * 双向关注
+	 * @var boolean
+	 */
+	public $mutual;
+	/**
 	 * 修改时间
 	 * @var int
 	 */
@@ -85,6 +90,9 @@ class DBConcern extends DBEntity{
 			return "VARCHAR(32) NULL";
 		}
 		if($field == "deleted"){
+			return "INT NULL";
+		}
+		if($field == "mutual"){
 			return "INT NULL";
 		}
 		if($field == "updateTime"){
