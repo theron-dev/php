@@ -158,7 +158,7 @@ class TagService extends Service{
 			
 			if($rs){
 				while($tag = $dbContext->nextObject($rs,"DBTag")){
-					$task->results[] = $tag->tag;
+					$task->results[] = $tag;
 				}
 				$dbContext->free($rs);
 			}
