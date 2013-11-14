@@ -184,15 +184,28 @@ class AppAuthService extends Service{
 			
 			$auth = $context->getInternalDataValue("auth");
 
-			if($auth && $task->did && $task->appid){
+			$did = $task->did;
+			
+			if($did === null){
+				$did = $context->getInternalDataValue("device-did");
+			}
+			
+			$appid = $task->appid;
+			
+			if($appid === null){
+				$appid = isset($config["appid"]) ? $config["appid"] : null;
+			}
+			
+			if($auth && $did && $appid){
 	
-				$app = $dbContext->querySingleEntity("DBApp","appid={$task->appid}");
+				$app = $dbContext->querySingleEntity("DBApp","appid={$appid}");
 				
 				if(!$app){
 					throw new AppException("not found app ".$task->appid,ERROR_APP_NOT_FOUND);
 				}
 			
-				$appAuth = $dbContext->querySingleEntity("DBAppAuth","appid={$task->appid} and uid=$auth and did={$task->did}");
+				$appAuth = $dbContext->querySingleEntity("DBAppAuth","appid={$appid} and uid={$auth} and did={$did}");
+				
 				if($appAuth){
 					$appAuth->secret = AppAuthService::genAuthSecret($app->secret);
 					$appAuth->sign = client_sign();
