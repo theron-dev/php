@@ -31,6 +31,8 @@ class AccountBindService extends Service{
 			
 			$bind = $dbContext->querySingleEntity("DBAccountBind","uid={$task->uid} and type={$task->type} and appKey='{$task->appKey}'");
 			
+			$context->setOutputDataValue("sql", $dbContext->getLastSql());
+			
 			if($bind){
 				$bind->eid = $task->eid;
 				$bind->appSecret = $task->appSecret;
