@@ -110,13 +110,13 @@ class DBAccount extends DBEntity{
 			return "VARCHAR(32) NULL";
 		}
 		if($field == "loginTime"){
-			return "INT NULL";
+			return "INT(11) NULL";
 		}
 		if($field == "updateTime"){
-			return "INT NULL";
+			return "INT(11) NULL";
 		}
 		if($field == "createTime"){
-			return "INT NULL";
+			return "INT(11) NULL";
 		}
 		return "VARCHAR(45) NULL";
 	}

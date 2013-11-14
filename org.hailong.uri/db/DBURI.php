@@ -52,10 +52,10 @@ class DBURI extends DBEntity{
 			return "VARCHAR(1024) NULL";
 		}
 		if($field == "browseCount"){
-			return "INT NULL";
+			return "INT(11) NULL";
 		}
 		if($field == "createTime"){
-			return "INT NULL";
+			return "INT(11) NULL";
 		}
 		return "VARCHAR(45) NULL";
 	}

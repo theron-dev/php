@@ -66,7 +66,7 @@ class DBAuthorityRole extends DBEntity{
 			return "VARCHAR(128) NULL";
 		}
 		if($field == "createTime"){
-			return "INT NULL";
+			return "INT(11) NULL";
 		}
 		return "VARCHAR(45) NULL";
 	}

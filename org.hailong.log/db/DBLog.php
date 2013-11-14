@@ -79,7 +79,7 @@ class DBLog extends DBEntity{
 			return "VARCHAR(256) NULL";
 		}
 		if($field == "createTime"){
-			return "INT NULL";
+			return "INT(11) NULL";
 		}
 		return "VARCHAR(45) NULL";
 	}
