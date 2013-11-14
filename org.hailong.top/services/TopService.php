@@ -91,7 +91,7 @@ class TopService extends Service{
 			$dbContext->delete("DBTopItem",$where);
 			
 			foreach ($topCounts as $eid => $topCount){
-				$dbContext->query("UPDATE `".DBTop::tableName()."` SET topCount=topCount+{$topCount} WHERE `key`='{$key}' AND etype={$etype} AND eid={$eid}");
+				$dbContext->query("UPDATE `".DBTop::tableName()."` SET topCount=topCount+{$topCount},updateTime=".time()." WHERE `key`='{$key}' AND etype={$etype} AND eid={$eid}");
 			}
 			
 			return false;
