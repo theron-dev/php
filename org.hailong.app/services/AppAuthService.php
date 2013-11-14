@@ -215,9 +215,9 @@ class AppAuthService extends Service{
 				}
 				else{
 					$appAuth = new DBAppAuth();
-					$appAuth->appid = $task->appid;
+					$appAuth->appid = $appid;
 					$appAuth->uid = $auth;
-					$appAuth->did = $task->did;
+					$appAuth->did = $did;
 					$appAuth->secret = AppAuthService::genAuthSecret($app->secret);
 					$appAuth->sign = client_sign();
 					$appAuth->token = AppAuthService::genAuthToken($task->appid,$appAuth->secret,$appAuth->sign,$auth,$task->did);
