@@ -35,7 +35,7 @@ class AccountBindService extends Service{
 				$bind->eid = $task->eid;
 				$bind->appSecret = $task->appSecret;
 				$bind->etoken = $task->etoken;
-				$bind->expires_in = $task->expires_in;
+				$bind->expires_in = $task->expires_in + time();
 				$bind->updateTime = time();
 				$dbContext->update($bind);
 			}
@@ -46,7 +46,7 @@ class AccountBindService extends Service{
 				$bind->appSecret = $task->appSecret;
 				$bind->type = $task->type;
 				$bind->etoken = $task->etoken;
-				$bind->expires_in = $task->expires_in;
+				$bind->expires_in = $task->expires_in + time();
 				$bind->eid = $task->eid;
 				$bind->updateTime = time();
 				$bind->createTime = time();
