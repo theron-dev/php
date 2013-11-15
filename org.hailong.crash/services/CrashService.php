@@ -38,6 +38,30 @@ class CrashService extends Service{
 			
 			return false;
 		}
+		
+		if($task instanceof CrashExportTask){
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_CRASH);
+
+			$cid = intval($task->cid);
+			
+			$item = $dbContext->querySingleEntity("DBCrash","cid={$cid}");
+			
+			if($item){
+				$len = strlen($item->exception);
+				$filename = $item->identifier."_".$item->version."_".$item->build."_".date("Y_m_d_H_i_s",$item->createTime);
+				header("Content-Type: text/plain;");
+				header("Content-Length: {$len};");
+				header("Content-Disposition: attachment; filename=\"{$filename}\"");
+				echo $item->exception;
+			}
+			else{
+				header("HTTP/1.1 404 Not Found");
+			}
+			
+			return false;
+		}
 	
 		return true;
 	}

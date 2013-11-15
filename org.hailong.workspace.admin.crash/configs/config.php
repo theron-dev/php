@@ -72,6 +72,12 @@ function config(){
 					"AuthorityEntityValidateTask","AuthorityRoleValidateTask"
 				),
 			),
+			array(
+				"class" => "CrashService",
+				"tasks" => array(
+					"CrashExportTask"
+				),
+			),
 		),
 	);
 }

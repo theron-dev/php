@@ -104,7 +104,7 @@ class CrashSearchController extends ViewController{
 				$item["systemVersion"] = $crash->systemVersion;
 				$item["model"] = $crash->model;
 				$item["deviceName"] = $crash->deviceName;
-				
+				$item["command"] = "<a href='export.php?cid={$crash->cid}'>下载</a>";
 				$item["createTime"] = date("Y-m-d H:i:s",$crash->createTime);
 
 				$items[] = $item;

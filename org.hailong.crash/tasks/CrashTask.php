@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 金币
+ * Crash
  * @author hailongz
  *
  */

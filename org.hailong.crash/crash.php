@@ -14,6 +14,7 @@ if($library){
 	require_once "$library/org.hailong.crash/db/DBCrash.php";
 	
 	require_once "$library/org.hailong.crash/tasks/CrashTask.php";
+	require_once "$library/org.hailong.crash/tasks/CrashExportTask.php";
 	
 	require_once "$library/org.hailong.crash/services/CrashService.php";
 	
