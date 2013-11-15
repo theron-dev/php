@@ -102,7 +102,7 @@ class DBCrash extends DBEntity{
 			return "VARCHAR(64) NULL";
 		}
 		if($field == "deviceName"){
-			return "VERCHAR(128) NULL";
+			return "VARCHAR(128) NULL";
 		}
 		if($field == "deviceIdentifier"){
 			return "VARCHAR(64) NULL";
