@@ -89,7 +89,7 @@ class CrashSearchController extends ViewController{
 	
 		$offset = ($pageIndex -1) *  $this->pageSize;
 	
-		$rs = $dbContext->queryEntitys("DBCrash",$sql." ORDER BY cid ASC LIMIT {$offset},{$this->pageSize}");
+		$rs = $dbContext->queryEntitys("DBCrash",$sql." ORDER BY cid DESC LIMIT {$offset},{$this->pageSize}");
 	
 		if($rs){
 	
