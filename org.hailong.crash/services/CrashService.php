@@ -54,7 +54,7 @@ class CrashService extends Service{
 			
 			if($item){
 				$len = strlen($item->exception);
-				$filename = $item->identifier."_".$item->version."_".$item->build."_".date("Y_m_d_H_i_s",$item->createTime);
+				$filename = $item->identifier."_".$item->version."_".$item->build."_".date("Y_m_d_H_i_s",$item->createTime).".crash";
 				header("Content-Type: text/plain;");
 				header("Content-Length: {$len};");
 				header("Content-Disposition: attachment; filename=\"{$filename}\"");
