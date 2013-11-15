@@ -14,6 +14,8 @@ class CrashService extends Service{
 			$context = $this->getContext();
 			$dbContext = $context->dbContext(DB_CRASH);
 			
+			var_dump($task);
+			
 			$identifier = trim($task->identifier);
 			
 			if($identifier){
