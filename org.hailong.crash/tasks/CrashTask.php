@@ -54,7 +54,7 @@ class CrashTask implements ITask{
 	public $exception;
 	
 	public function prefix(){
-		return "";
+		return null;
 	}
 	
 }
