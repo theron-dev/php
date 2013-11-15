@@ -53,12 +53,40 @@ class CrashService extends Service{
 			$item = $dbContext->querySingleEntity("DBCrash","cid={$cid}");
 			
 			if($item){
-				$len = strlen($item->exception);
-				$filename = $item->identifier."_".$item->version."_".$item->build."_".date("Y_m_d_H_i_s",$item->createTime).".crash";
+				
+				$cnt = "";
+				
+				$body = json_decode($item->exception,true);
+				
+				foreach ($body as $key => $value){
+					
+					if(is_array($value)){
+						
+						$cnt .= $key.":\r\n";
+						
+						foreach ($value as $v){
+
+							$cnt .= $v."\r\n";
+						
+						}
+						
+					}
+					else{
+						$cnt .= $key.":".$value."\r\n";
+					}
+					
+				}
+				
+				$len = strlen($cnt);
+				
+				$filename = $item->identifier."_".$item->version."_"
+						.$item->build."_".date("Y_m_d_H_i_s",$item->createTime).".crash";
+				
 				header("Content-Type: text/plain;");
 				header("Content-Length: {$len};");
 				header("Content-Disposition: attachment; filename=\"{$filename}\"");
-				echo $item->exception;
+				
+				echo $cnt;
 			}
 			else{
 				header("HTTP/1.1 404 Not Found");
