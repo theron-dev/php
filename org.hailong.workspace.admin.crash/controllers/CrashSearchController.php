@@ -1,6 +1,6 @@
 <?php
 
-class CacheSearchController extends ViewController{
+class CrashSearchController extends ViewController{
 	
 	private $searchTable;
 	private $searchPageListView;
