@@ -28,7 +28,7 @@ class BooksService extends Service{
 				}
 			}
 			
-			$item->expendMoneyMoney = $task->expendMoney;
+			$item->expendMoney = $task->expendMoney;
 			
 			if($task->payMoney === null){
 				$item->payMoney = $task->expendMoney;
