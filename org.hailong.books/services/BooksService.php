@@ -37,7 +37,7 @@ class BooksService extends Service{
 			$item->latitude = $task->latitude;
 			$item->longitude = $task->longitude;
 			$item->type = $task->type;
-			$item->uid = $task->unit;
+			$item->unit = $task->unit;
 			$item->updateTime = time();
 			$item->createTime = time();
 			
