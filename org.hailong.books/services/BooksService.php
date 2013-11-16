@@ -33,6 +33,9 @@ class BooksService extends Service{
 			if($task->payMoney === null){
 				$item->payMoney = $task->expendMoney;
 			}
+			else{
+				$item->payMoney = $task->payMoney;
+			}
 			
 			$item->latitude = $task->latitude;
 			$item->longitude = $task->longitude;
