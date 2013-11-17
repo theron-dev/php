@@ -46,6 +46,8 @@ class BooksService extends Service{
 			
 			$dbContext->insert($item);
 			
+			$item->body = json_decode($item->body,true);
+			
 			$task->results = $item;
 			
 			return false;
