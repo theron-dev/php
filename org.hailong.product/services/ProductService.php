@@ -1,0 +1,412 @@
+<?php
+
+/**
+ *　商品服务
+ * @author zhanghailong
+ *
+ */
+class ProductService extends Service{
+	
+	public function handle($taskType,$task){
+	
+		if($task instanceof ProductCreateTask){
+			
+			$config = $this->getConfig();
+
+			$context = $this->getContext();
+			$dbContext = $context->dbContext();
+			
+			$dbContextTask = new DBContextTask(DB_PRODUCT);
+			
+			$context->handle("DBContextTask",$dbContextTask);
+			
+			if($dbContextTask->dbContext){
+				$dbContext = $dbContextTask->dbContext;
+			}
+			
+			$uid = $context->getInternalDataValue("auth");
+			
+			if($uid){
+				
+				$item = new DBProduct();
+				
+				$item->uid = $uid;
+				$item->count = $task->count;
+				$item->etype = $task->etype;
+				$item->eid  = $task->eid;
+				$item->price = $task->price;
+				$item->salePrice = $task->salePrice;
+				$item->target = $task->target;
+				
+				$dbContext->insert($item);
+				
+				$task->pid = $item->pid;
+				
+			}
+			else{
+				throw new ProductException("not found uid", ERROR_PRODUCT_NOT_FOUND_UID);
+			}
+			
+			
+			return false;
+		}
+		
+		if($task instanceof ProductUpdateTask){
+				
+			$config = $this->getConfig();
+		
+			$context = $this->getContext();
+			$dbContext = $context->dbContext();
+				
+			$dbContextTask = new DBContextTask(DB_PRODUCT);
+				
+			$context->handle("DBContextTask",$dbContextTask);
+				
+			if($dbContextTask->dbContext){
+				$dbContext = $dbContextTask->dbContext;
+			}
+				
+			$uid = $context->getInternalDataValue("auth");
+				
+			if($uid){
+		
+				$item = $dbContext->get("DBProduct", array("pid"=>intval($task->pid)));
+					
+				if($item){
+					if($item->uid != $uid){
+						$t = new AuthorityEntityValidateTask(PRODUCT_ALIAS_ADMIN);
+						$t->uid = $uid;
+						$context->handle("AuthorityEntityValidateTask",$t);
+					}
+					
+					if($task->count !== null){
+						$item->count = $task->count;
+					}
+					if($task->price !== null){
+						$item->price = $task->price;
+					}
+					if($task->salePrice !== null){
+						$item->salePrice = $task->salePrice;
+					}
+					if($task->target !== null){
+						$item->target = $task->target;
+					}
+					$item->updateTime = time();
+					$dbContext->update($item);
+				}
+		
+			}
+			else{
+				throw new ProductException("not found uid", ERROR_PRODUCT_NOT_FOUND_UID);
+			}
+				
+				
+			return false;
+		}
+		
+		if($task instanceof ProductRemoveTask){
+				
+			$config = $this->getConfig();
+		
+			$context = $this->getContext();
+			$dbContext = $context->dbContext();
+				
+			$dbContextTask = new DBContextTask(DB_PRODUCT);
+				
+			$context->handle("DBContextTask",$dbContextTask);
+				
+			if($dbContextTask->dbContext){
+				$dbContext = $dbContextTask->dbContext;
+			}
+			
+			$uid = $context->getInternalDataValue("auth");
+				
+			if($uid){
+				
+				if($task->pid !== null){
+					$item = $dbContext->get("DBProduct", array("pid"=>intval($task->pid)));
+					
+					if($item){
+						if($item->uid != $uid){
+							$t = new AuthorityEntityValidateTask(PRODUCT_ALIAS_ADMIN);
+							$t->uid = $uid;
+							$context->handle("AuthorityEntityValidateTask",$t);
+						}
+						
+						$dbContext->delete($item);
+					}
+				}
+				else if($task->etype !== null){
+					
+					$where = "1<>1";
+					try{
+						$t = new AuthorityEntityValidateTask(PRODUCT_ALIAS_ADMIN);
+						$t->uid = $uid;
+						$context->handle("AuthorityEntityValidateTask",$t);
+						
+						$where = "etype={$task->etype}";
+						
+						if($task->eid !== null){
+							$where += " and eid={$task->eid}";
+						}
+					}
+					catch(Excpetion $ex){
+						
+						$where = "uid={$uid} and etype={$task->etype}";
+						
+						if($task->eid !== null){
+							$where += " and eid={$task->eid}";
+						}
+					}
+					
+					$dbContext->delete("DBProduct",$where);
+				}
+		
+			}
+			else{
+				throw new ProductException("not found uid", ERROR_PRODUCT_NOT_FOUND_UID);
+			}
+				
+				
+			return false;
+		}
+		
+		if($task instanceof ProductPublishTask){
+			
+			$config = $this->getConfig();
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext();
+			
+			$dbContextTask = new DBContextTask(DB_PRODUCT);
+			
+			$context->handle("DBContextTask",$dbContextTask);
+			
+			if($dbContextTask->dbContext){
+				$dbContext = $dbContextTask->dbContext;
+			}
+				
+			$uid = $context->getInternalDataValue("auth");
+			
+			if($uid){
+			
+				$item = $dbContext->get("DBProduct", array("pid"=>$task->pid));
+			
+				if($item){
+					if($item->uid != $uid){
+						$t = new AuthorityEntityValidateTask(PRODUCT_ALIAS_ADMIN);
+						$t->uid = $uid;
+						$context->handle("AuthorityEntityValidateTask",$t);
+					}
+						
+					if($item->state != DBProductStateSale){
+						$item->state = DBProductStateSale;
+						$item->updateTime = time();
+						if($task->endTime !== null){
+							$item->endTime = $task->endTime;
+						}
+						else{
+							$item->endTime = null;
+						}
+						if(intval($task->saleTime) !=0){
+							$item->saleTime = $task->saleTime;
+						}
+						else{
+							$item->saleTime = time();
+						}
+						if($task->count !== null){
+							$item->count = $task->count;
+						}
+						else if(intval($item->count)  === 0){
+							$item->count = -1;
+						}
+						if($task->price !== null){
+							$item->price = $task->price;
+						}
+						if($task->salePrice !== null){
+							$item->salePrice = $task->salePrice;
+						}
+		
+						$dbContext->update($item);
+
+					}
+				}
+				else{
+					throw new ProductException("not found product ".$task->pid, ERROR_PRODUCT_NOT_FOUND_PRODUCT);
+				}
+			
+			}
+			else{
+				throw new ProductException("not found uid", ERROR_PRODUCT_NOT_FOUND_UID);
+			}
+			
+			return false;
+		}
+		
+		if($task instanceof ProductUnpublishTask){
+				
+			$config = $this->getConfig();
+				
+			$context = $this->getContext();
+			$dbContext = $context->dbContext();
+				
+			$dbContextTask = new DBContextTask(DB_PRODUCT);
+				
+			$context->handle("DBContextTask",$dbContextTask);
+				
+			if($dbContextTask->dbContext){
+				$dbContext = $dbContextTask->dbContext;
+			}
+		
+			$uid = $context->getInternalDataValue("auth");
+				
+			if($uid){
+					
+				$item = $dbContext->get("DBProduct", array("pid"=>$task->pid));
+					
+				if($item){
+					if($item->uid != $uid){
+						$t = new AuthorityEntityValidateTask(PRODUCT_ALIAS_ADMIN);
+						$t->uid = $uid;
+						$context->handle("AuthorityEntityValidateTask",$t);
+					}
+		
+					if($item->state != DBProductStateDisabled){
+						$item->state = DBProductStateDisabled;
+						$item->updateTime = time();
+						$dbContext->update($item);
+					}
+				}
+				else{
+					throw new ProductException("not found product ".$task->pid, ERROR_PRODUCT_NOT_FOUND_PRODUCT);
+				}
+					
+			}
+			else{
+				throw new ProductException("not found uid", ERROR_PRODUCT_NOT_FOUND_UID);
+			}
+				
+			return false;
+		}
+		
+		if($task instanceof ProductTradeTask){
+			
+			
+			$config = $this->getConfig();
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext();
+			
+			$dbContextTask = new DBContextTask(DB_PRODUCT);
+			
+			$context->handle("DBContextTask",$dbContextTask);
+			
+			if($dbContextTask->dbContext){
+				$dbContext = $dbContextTask->dbContext;
+			}
+			
+			$count = intval($task->count);
+			
+			if($count <= 0){
+				throw new ProductException("sale count not > 0 ", ERROR_PRODUCT_SALE_COUNT);
+			}
+			
+			$item = $dbContext->querySingleEntity("DBProduct","pid=".intval($task->pid)." for update");
+
+			if($item){
+
+				if($item->state == DBProductStateSale){
+					$c = intval($item->count);
+					if($c == -1 || $count <= $c){
+						$item->count = $c == -1 ? -1 : $c - $count;
+						$item->updateTime = time();
+						$dbContext->update($item);
+					}
+					else{
+						throw new ProductException("product ".$task->pid." count out", ERROR_PRODUCT_COUNT_OUT);
+					}
+				}
+				else{
+					throw new ProductException("product ".$task->pid." not sale", ERROR_PRODUCT_NOT_SALE);
+				}
+			}
+			else{
+				throw new ProductException("not found product ".$task->pid, ERROR_PRODUCT_NOT_FOUND_PRODUCT);
+			}
+			
+			return false;
+			
+		}
+		
+		if($task instanceof ProductUntradeTask){
+				
+				
+			$config = $this->getConfig();
+				
+			$context = $this->getContext();
+			$dbContext = $context->dbContext();
+				
+			$dbContextTask = new DBContextTask(DB_PRODUCT);
+				
+			$context->handle("DBContextTask",$dbContextTask);
+				
+			if($dbContextTask->dbContext){
+				$dbContext = $dbContextTask->dbContext;
+			}
+				
+			$count = intval($task->count);
+				
+			if($count <= 0){
+				throw new ProductException("sale count not > 0 ", ERROR_PRODUCT_SALE_COUNT);
+			}
+		
+			$item = $dbContext->querySingleEntity("DBProduct","pid=".intval($task->pid)." for update");
+		
+			if($item){
+		
+				if($item->state == DBProductStateSale){
+					$c = intval($item->count);
+					if($c == -1 || $count <= $c){
+						$item->count = $c == -1 ? -1 : $c + $count;
+						$item->updateTime = time();
+						$dbContext->update($item);
+					}
+				}
+				else{
+					throw new ProductException("product ".$task->pid." not sale", ERROR_PRODUCT_NOT_SALE);
+				}
+			}
+			else{
+				throw new ProductException("not found product ".$task->pid, ERROR_PRODUCT_NOT_FOUND_PRODUCT);
+			}
+				
+			return false;
+				
+		}
+		
+		if($task instanceof ProductGetForUpdateTask){
+			
+			$config = $this->getConfig();
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext();
+			
+			$dbContextTask = new DBContextTask(DB_PRODUCT);
+			
+			$context->handle("DBContextTask",$dbContextTask);
+			
+			if($dbContextTask->dbContext){
+				$dbContext = $dbContextTask->dbContext;
+			}
+			
+			$task->results = $dbContext->querySingleEntity("DBProduct","pid=".intval($task->pid)." for update");
+
+			return false;
+		}
+		
+		
+		return true;
+	}
+}
+
+?>
