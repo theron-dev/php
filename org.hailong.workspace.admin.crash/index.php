@@ -10,7 +10,8 @@ require_once "configs/config.php";
 require_once "crash.php";
 
 session_start();
-	
+
+$context = new ServiceContext();
 
 Shell::staticRun(config(), new UserViewStateAdapter("workspace/admin/crash/index"),"views/index.html", "CrashSearchController");
 

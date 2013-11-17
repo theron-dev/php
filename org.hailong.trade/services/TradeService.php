@@ -416,6 +416,27 @@ class TradeService extends Service{
 			return false;
 		}
 		
+		if($task instanceof TradeGetProductCountTask){
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_TRADE);
+			
+			$sql = "SELECT SUM(t.count) as count FROM ".DBTrade::tableName()." as t WHERE pid={$task->pid}";
+			
+			$sql .= " AND state IN (".DBTradeStatePaid.",".DBTradeStateShipped.",".DBTradeStateConfirm.")";
+			
+			$rs = $dbContext->query($sql);
+			
+			if($rs){
+				if($row  = $dbContext->next($rs)){
+					$task->count = intval($row["count"]);
+				}
+				$dbContext->free($rs);
+			}
+			
+			return false;
+		}
+		
 		return true;
 	}
 }

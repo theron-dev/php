@@ -30,6 +30,7 @@ if($library){
 	require_once "$library/org.hailong.trade/tasks/TradeRefundCancelTask.php";
 	require_once "$library/org.hailong.trade/tasks/TradeRefundCloseTask.php";
 	
+	require_once "$library/org.hailong.trade/tasks/TradeGetProductCountTask.php";
 	
 	require_once "$library/org.hailong.trade/services/TradeService.php";
 }
