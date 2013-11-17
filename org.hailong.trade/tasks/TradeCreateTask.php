@@ -38,6 +38,12 @@ class TradeCreateTask extends TradeAuthTask{
 	 */
 	public $count;
 	
+	/**
+	 * 内容
+	 * @var Object
+	 */
+	public $body;
+	
 }
 
 ?>

@@ -41,6 +41,13 @@ class TradeService extends Service{
 				$item->unitPrice = $task->unitPrice;
 				$item->count = $task->count;
 				
+				if(is_string($task->body)){
+					$item->body = json_encode(array("body"=>$task->body));
+				}
+				else if($task->body){
+					$item->body = json_encode($task->body);
+				}
+				
 				$dbContext->insert($item);
 				
 				$task->tid = $item->tid;

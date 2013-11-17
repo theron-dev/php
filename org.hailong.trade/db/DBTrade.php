@@ -80,6 +80,11 @@ class DBTrade extends DBEntity{
 	*/
 	public $refundState;
 	/**
+	 * 内容 json
+	 * @var Object
+	 */
+	public $body;
+	/**
 	 * 修改时间
 	 * @var int
 	 */
@@ -140,6 +145,9 @@ class DBTrade extends DBEntity{
 		}
 		if($field == "refundState"){
 			return "INT NULL";
+		}
+		if($field == "body"){
+			return "TEXT NULL";
 		}
 		if($field == "updateTime"){
 			return "INT NULL";

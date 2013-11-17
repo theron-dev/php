@@ -1,8 +1,5 @@
 <?php
 
-define("DBPrizeStateNone",0);
-define("DBPrizeStateSell",1);
-
 /**
  * 奖品
  * @author zhanghailong
@@ -41,52 +38,10 @@ class DBPrize extends DBEntity{
 	public $image;
 	
 	/**
-	 * 积分
-	 * @var double
+	 * 规则
+	 * @var String
 	 */
-	public $integral;
-	
-	/**
-	 * 数量
-	 * @var int
-	 */
-	public $count;
-	
-	
-	/**
-	 * 喜欢数
-	 * @var int
-	 */
-	public $likedCount;
-	
-	/**
-	 * 评论数
-	 * @var int
-	 */
-	public $commentCount;
-		
-	/**
-	 * 支付金额
-	 * @var double
-	 */
-	public $payMoney;
-	
-	/**
-	 * 实际支出
-	 * @var double
-	 */
-	public $expendMoney;
-	
-	/**
-	 * 纬度
-	 * @var latitude
-	 */
-	public $latitude;
-	/**
-	 * 经度
-	 * @var longitude
-	 */
-	public $longitude;
+	public $rule;
 	
 	/**
 	 * 修改时间
@@ -109,7 +64,7 @@ class DBPrize extends DBEntity{
 	}
 	
 	public static function tableName(){
-		return "qdd_publish";
+		return "hl_prize";
 	}
 	
 	public static function tableField($field){
@@ -123,26 +78,17 @@ class DBPrize extends DBEntity{
 		if($field == "uid"){
 			return "BIGINT NULL";
 		}
+		if($field == "title"){
+			return "VARCHAR(256) NULL";
+		}
 		if($field == "body"){
 			return "TEXT NULL";
+		}
+		if($field == "image"){
+			return "VARCHAR(256) NULL";
 		}	
-		if($field == "likedCount"){
-			return "INT NULL";
-		}
-		if($field == "commentCount"){
-			return "INT NULL";
-		}
-		if($field == "payMoney"){
-			return "DOUBLE NULL";
-		}
-		if($field == "expendMoney"){
-			return "DOUBLE NULL";
-		}
-		if($field == "latitude"){
-			return "DOUBLE NULL";
-		}
-		if($field == "longitude"){
-			return "DOUBLE NULL";
+		if($field == "rule"){
+			return "TEXT NULL";
 		}
 		if($field == "updateTime"){
 			return "INT(11) NULL";
@@ -152,17 +98,7 @@ class DBPrize extends DBEntity{
 		}
 		return "VARCHAR(45) NULL";
 	}
-	
-	/**
-	 * @return array("index_name"=>array(array("field"=>"field1","order"="desc"),array("field"=>"field2","order"="asc")))
-	 */
-	public static function indexs(){
-		return array("uid"=>array(array("field"=>"uid","order"=>"asc"))
-				,"createTime"=>array(array("field"=>"createTime","order"=>"asc"))
-				,"latitude"=>array(array("field"=>"latitude","order"=>"asc"))
-				,"longitude"=>array(array("field"=>"longitude","order"=>"asc")));
-	}
-	
+
 }
 
 ?>

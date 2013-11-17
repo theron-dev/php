@@ -39,6 +39,7 @@ class ProductService extends Service{
 				$item->target = $task->target;
 				
 				$dbContext->insert($item);
+				$dbContext->commit();
 				
 				$task->pid = $item->pid;
 				
@@ -93,6 +94,7 @@ class ProductService extends Service{
 					}
 					$item->updateTime = time();
 					$dbContext->update($item);
+					$dbContext->commit();
 				}
 		
 			}
@@ -134,6 +136,7 @@ class ProductService extends Service{
 						}
 						
 						$dbContext->delete($item);
+						$dbContext->commit();
 					}
 				}
 				else if($task->etype !== null){
@@ -160,6 +163,7 @@ class ProductService extends Service{
 					}
 					
 					$dbContext->delete("DBProduct",$where);
+					$dbContext->commit();
 				}
 		
 			}
@@ -228,7 +232,7 @@ class ProductService extends Service{
 						}
 		
 						$dbContext->update($item);
-
+						$dbContext->commit();
 					}
 				}
 				else{
@@ -275,6 +279,7 @@ class ProductService extends Service{
 						$item->state = DBProductStateDisabled;
 						$item->updateTime = time();
 						$dbContext->update($item);
+						$dbContext->commit();
 					}
 				}
 				else{
@@ -321,6 +326,7 @@ class ProductService extends Service{
 						$item->count = $c == -1 ? -1 : $c - $count;
 						$item->updateTime = time();
 						$dbContext->update($item);
+						$dbContext->commit();
 					}
 					else{
 						throw new ProductException("product ".$task->pid." count out", ERROR_PRODUCT_COUNT_OUT);
@@ -370,6 +376,7 @@ class ProductService extends Service{
 						$item->count = $c == -1 ? -1 : $c + $count;
 						$item->updateTime = time();
 						$dbContext->update($item);
+						$dbContext->commit();
 					}
 				}
 				else{
