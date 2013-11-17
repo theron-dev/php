@@ -32,6 +32,7 @@ class ProductService extends Service{
 				
 				$item->uid = $uid;
 				$item->count = $task->count;
+				$item->publishCount = $task->count;
 				$item->etype = $task->etype;
 				$item->eid  = $task->eid;
 				$item->price = $task->price;
@@ -82,6 +83,7 @@ class ProductService extends Service{
 					
 					if($task->count !== null){
 						$item->count = $task->count;
+						$item->publishCount = $task->count;
 					}
 					if($task->price !== null){
 						$item->price = $task->price;
@@ -206,6 +208,7 @@ class ProductService extends Service{
 					if($item->state != DBProductStateSale){
 						$item->state = DBProductStateSale;
 						$item->updateTime = time();
+						
 						if($task->endTime !== null){
 							$item->endTime = $task->endTime;
 						}
@@ -220,9 +223,11 @@ class ProductService extends Service{
 						}
 						if($task->count !== null){
 							$item->count = $task->count;
+							$item->publishCount = $task->count;
 						}
 						else if(intval($item->count)  === 0){
 							$item->count = -1;
+							$item->publishCount = -1;
 						}
 						if($task->price !== null){
 							$item->price = $task->price;

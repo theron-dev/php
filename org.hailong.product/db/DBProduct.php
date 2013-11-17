@@ -48,6 +48,11 @@ class DBProduct extends DBEntity{
 	 */
 	public $count;
 	/**
+	 * 发布数
+	 * @var int
+	 */
+	public $publishCount;
+	/**
 	 * 状态
 	 * @var int
 	 */
@@ -108,7 +113,10 @@ class DBProduct extends DBEntity{
 			return "BIGINT NULL";
 		}
 		if($field == "count"){
-			return "INT NULL";
+			return "INT(11) NULL";
+		}
+		if($field == "publishCount"){
+			return "INT(11) NULL";
 		}
 		if($field == "price"){
 			return "DOUBLE NULL";
