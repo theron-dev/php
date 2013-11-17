@@ -143,6 +143,13 @@ class DBProduct extends DBEntity{
 		$this->endTime = 0;
 		$this->updateTime = $this->createTime = time();
 	}
+	
+	/**
+	 * @return array("index_name"=>array(array("field"=>"field1","order"="desc"),array("field"=>"field2","order"="asc")))
+	 */
+	public static function indexs(){
+		return array("state"=>array(array("field"=>"state","order"=>"asc")));
+	}
 }
 
 ?>
