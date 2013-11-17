@@ -74,8 +74,6 @@ class BooksService extends Service{
 			
 			$rs = $dbContext->queryEntitys("DBBooks",$sql);
 			
-			$context->setOutputDataValue("sql", $dbContext->getLastSql());
-			
 			$resutls = array();
 			
 			if($rs){
@@ -91,6 +89,8 @@ class BooksService extends Service{
 				
 				$dbContext->free($rs);
 			}
+			
+			$task->results = $resutls;
 				
 			return false;
 		}
