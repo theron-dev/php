@@ -15,6 +15,7 @@ if($library){
 	require_once "$library/org.hailong.coin/coin.php";
 	
 	require_once "$library/org.hailong.prize/db/DBPrize.php";
+	require_once "$library/org.hailong.prize/db/DBPrizeImage.php";
 	
 	require_once "$library/org.hailong.prize/tasks/PrizeTask.php";
 	require_once "$library/org.hailong.prize/tasks/PrizeAuthTask.php";
