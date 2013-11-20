@@ -91,6 +91,18 @@ function output($data,$inputData=null){
 		}
 			
 	}
+	else if($format == "jsonp"){
+		$callback = getParam("callback","",$inputData);
+		header("Content-Type: text/html;charset=utf8");
+		echo "<html><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'></head><body>";
+		echo "<script type='text/javascript'>";
+		echo $callback;
+		echo "(";
+		echo json_encode($data);
+		echo ");";
+		echo "</script>";
+		echo "</body></html>";
+	}
 	else{
 		header("Content-Type: text/javascript;charset=utf8");
 		echo json_encode($data);
