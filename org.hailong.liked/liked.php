@@ -20,6 +20,7 @@ if($library){
 	require_once "$library/org.hailong.liked/tasks/LikeCheckTask.php";
 	require_once "$library/org.hailong.liked/tasks/LikedTask.php";
 	require_once "$library/org.hailong.liked/tasks/LikedCountTask.php";
+	require_once "$library/org.hailong.liked/tasks/LikeUserQueryTask.php";
 	
 	require_once "$library/org.hailong.liked/services/LikedService.php";
 }

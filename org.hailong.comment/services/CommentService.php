@@ -132,9 +132,21 @@ class CommentService extends Service{
 				
 			$sql = "etype={$task->etype} AND eid={$task->eid} AND pcid={$task->pcid} ORDER BY cid DESC";
 			
-			$offset = ( $task->pageIndex -1) * $task->pageSize;
+			$pageIndex = intval($task->pageIndex);
 			
-			$sql .= " LIMIT {$offset},{$task->pageSize}";
+			if($pageIndex < 1){
+				$pageIndex = 1;
+			}
+			
+			$pageSize = intval($task->pageSize);
+			
+			if($pageSize <= 0){
+				$pageSize = 20;
+			}
+			
+			$offset = ( $pageIndex -1) * $pageSize;
+			
+			$sql .= " LIMIT {$offset},{$pageSize}";
 			
 			$rs = $dbContext->queryEntitys("DBComment",$sql);
 

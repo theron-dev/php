@@ -206,6 +206,48 @@ class LikedService extends Service{
 			return false;
 		}
 		
+
+		if($task instanceof LikeUserQueryTask){
+				
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_LIKED);
+
+			$etype = intval($task->etype);
+			$eid = intval($task->eid);
+			
+			$pageIndex = intval($task->pageIndex);
+			
+			if($pageIndex <1){
+				$pageIndex = 1;
+			}
+			
+			$pageSize = intval($task->pageSize);
+			
+			if($pageSize <= 0){
+				$pageSize = 10;
+			}
+			
+			$offset = ($pageIndex - 1) * $pageSize;
+			
+			$sql = "etype={$etype} AND eid={$eid} AND deleted<>1 ORDER BY updateTime ASC LIMIT $offset,$pageSize";
+				
+			$results = array();
+				
+			$rs = $dbContext->queryEntitys("DBLiked",$sql);
+
+			if($rs){
+				while($item = $dbContext->nextObject($rs,"DBLiked")){
+					
+					$results[] = $item;
+					
+				}
+			}
+			
+			$task->results = $results;
+			
+			return false;
+		}
+		
 		return true;
 		
 	}
