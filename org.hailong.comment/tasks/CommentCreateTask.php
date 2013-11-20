@@ -18,10 +18,10 @@ class CommentCreateTask extends CommentAuthTask{
 	 */
 	public $body;
 	/**
-	 * 父级评论ID 与 etype eid 选添
+	 * 目标用户ID
 	 * @var int
 	 */
-	public $pcid;
+	public $tuid;
 	/**
 	 * 目标类型
 	 * @var int
@@ -32,6 +32,16 @@ class CommentCreateTask extends CommentAuthTask{
 	 * @var int
 	 */
 	public $eid;
+	/**
+	 * 目标类型
+	 * @var int
+	 */
+	public $ttype;
+	/**
+	 * 目标ID
+	 * @var int
+	 */
+	public $tid;
 	/**
 	* 来源
 	* @var int

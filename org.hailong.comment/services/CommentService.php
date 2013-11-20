@@ -31,24 +31,13 @@ class CommentService extends Service{
 			$item = new DBComment();
 			$item->body = $task->body;
 			$item->uid = $uid;
-			$item->source = $task->source;
-			
-			if($task->pcid !== null){
-				$pItem = $dbContext->get("DBComment",array("cid"=>$task->pcid));
-				if($pItem){
-					$item->pcid = $task->pcid;
-					$item->etype = $pItem->etype;
-					$item->eid = $pItem->eid;
-				}
-				else{
-					throw new CommentException("ERROR_PARENT_COMMENT_NOT_FOUND", ERROR_PARENT_COMMENT_NOT_FOUND);
-				}
-			}
-			else{
-				$item->etype = $task->etype;
-				$item->eid = $task->eid;
-				$item->pcid = 0;
-			}
+			$item->source = $task->source;	
+			$item->etype = $task->etype;
+			$item->eid = $task->eid;
+			$item->ttype = $task->ttype;
+			$item->tid = $task->tid;
+			$item->tuid = $task->tuid;;
+		
 			$item->updateTime = time();
 			$item->createTime = time();
 			
@@ -117,7 +106,7 @@ class CommentService extends Service{
 			return false;
 		}
 		
-		if($task instanceof CommentListTask){
+		if($task instanceof CommentQueryTask){
 				
 			$context = $this->getContext();
 			$dbContext = $context->dbContext();
@@ -129,8 +118,34 @@ class CommentService extends Service{
 			if($dbContextTask->dbContext){
 				$dbContext = $dbContextTask->dbContext;
 			}
+
+			$sql = "1=1";
+			
+			if($task->uid !== null){
+				$sql .= " AND uid={$task->uid}";
+			}
+			
+			if($task->tuid !== null){
+				$sql .= " AND tuid={$task->tuid}";
+			}
+
+			if($task->etype !== null){
+				$sql .= " AND etype={$task->etype}";
+			}
+			
+			if($task->eid !== null){
+				$sql .= " AND eid={$task->eid}";
+			}
+			
+			if($task->ttype !== null){
+				$sql .= " AND ttype={$task->ttype}";
+			}
 				
-			$sql = "etype={$task->etype} AND eid={$task->eid} AND pcid={$task->pcid} ORDER BY cid DESC";
+			if($task->tid !== null){
+				$sql .= " AND tid={$task->tid}";
+			}
+			
+			$sql .= " ORDER BY cid DESC";
 			
 			$pageIndex = intval($task->pageIndex);
 			

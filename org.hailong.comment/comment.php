@@ -20,7 +20,7 @@ if($library){
 	require_once "$library/org.hailong.comment/tasks/CommentAuthTask.php";
 	require_once "$library/org.hailong.comment/tasks/CommentCreateTask.php";
 	require_once "$library/org.hailong.comment/tasks/CommentRemoveTask.php";
-	require_once "$library/org.hailong.comment/tasks/CommentListTask.php";
+	require_once "$library/org.hailong.comment/tasks/CommentQueryTask.php";
 	require_once "$library/org.hailong.comment/tasks/CommentGetTask.php";
 	
 	require_once "$library/org.hailong.comment/services/CommentService.php";

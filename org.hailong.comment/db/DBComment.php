@@ -1,8 +1,5 @@
 <?php
 
-define("DBCommentTypeNone",0);
-define("DBCommentTypeShare",1);
-
 define("DBCommentSourceNone",0);
 
 /**
@@ -18,30 +15,40 @@ class DBComment extends DBEntity{
 	 */
 	public $cid;
 	/**
-	 * 父级评论ID
-	 * @var int
-	 */
-	public $pcid;
-	/**
 	 * 用户ID 发起者
 	 * @var int
 	 */
 	public $uid;
+	/**
+	 * 目标用户ID
+	 * @var int
+	 */
+	public $tuid;
 	/**
 	 * 内容
 	 * @var String
 	 */
 	public $body;
 	/**
-	 * 目标类型
+	 * 实体类型
 	 * @var int
 	 */
 	public $etype;
 	/**
-	 * 目标ID
+	 * 实体ID
 	 * @var int
 	 */
 	public $eid;
+	/**
+	 * 目标类型
+	 * @var int
+	 */
+	public $ttype;
+	/**
+	 * 目标ID
+	 * @var int
+	 */
+	public $tid;
 	/**
 	 * 来源
 	 * @var int
@@ -79,10 +86,10 @@ class DBComment extends DBEntity{
 		if($field == "cid"){
 			return "BIGINT NOT NULL";
 		}
-		if($field == "pcid"){
+		if($field == "uid"){
 			return "BIGINT NULL";
 		}
-		if($field == "uid"){
+		if($field == "tuid"){
 			return "BIGINT NULL";
 		}
 		if($field == "body"){
@@ -92,6 +99,12 @@ class DBComment extends DBEntity{
 			return "INT NULL";
 		}
 		if($field == "eid"){
+			return "BIGINT NULL";
+		}
+		if($field == "ttype"){
+			return "INT NULL";
+		}
+		if($field == "tid"){
 			return "BIGINT NULL";
 		}
 		if($field == "source"){
@@ -106,6 +119,17 @@ class DBComment extends DBEntity{
 		return "VARCHAR(45) NULL";
 	}
 	
+	/**
+	 * @return array("index_name"=>array(array("field"=>"field1","order"="desc"),array("field"=>"field2","order"="asc")))
+	 */
+	public static function indexs(){
+		return array("uid"=>array(array("field"=>"uid","order"=>"asc"))
+				,"tuid"=>array(array("field"=>"tuid","order"=>"asc"))
+				,"eid"=>array(array("field"=>"etype","order"=>"asc"),array("field"=>"eid","order"=>"asc"))
+				,"tid"=>array(array("field"=>"ttype","order"=>"asc"),array("field"=>"tid","order"=>"asc"))
+				
+		);
+	}
 }
 
 ?>
