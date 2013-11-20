@@ -17,6 +17,11 @@ var domain = document.domain;
 var index = domain.indexOf(".");
 document.domain = domain.substr(index +1);
 
+Config = {
+	baseUrl:'<?php echo $config?>',
+	resourceUrl:'<?php echo require("$library/org.hailong.configs/resource_url.php")?>'
+};
+
 document.write("<script type='text/javascript' src='<?php echo $config?>/js/jquery-1.6.min.js'></script>");
 document.write("<script type='text/javascript' src='<?php echo $config?>/js/jquery-ui-1.8.21.custom.min.js'></script>");
 document.write("<script type='text/javascript' src='<?php echo $config?>/js/jquery.layout.js'></script>");
