@@ -52,7 +52,7 @@ class CommentCreateTask extends CommentAuthTask{
 	 * 输出	
 	 * @var DBComment;
 	 */
-	public $resutls;
+	public $results;
 	
 	public function __construct(){
 		$this->source = DBCommentSourceNone;
