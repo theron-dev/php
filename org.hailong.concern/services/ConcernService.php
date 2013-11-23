@@ -64,9 +64,11 @@ class ConcernService extends Service{
 		
 			if($changed){
 				
-				$titem->mutual = 1;
-				$titem->updateTime = time();
-				$dbContext->update($titem);
+				if($titem){
+					$titem->mutual = 1;
+					$titem->updateTime = time();
+					$dbContext->update($titem);
+				}
 				
 				$t = new CachePutTask();
 				$t->path = CACHE_CONCERN_TIMESTAMP;
