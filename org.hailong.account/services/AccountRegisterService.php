@@ -290,12 +290,21 @@ class AccountRegisterService extends Service{
 			
 			$tel = trim($task->tel);
 			$verify = trim($task->verify);
+			$nick = trim($task->nick);
 			
 			$user = $dbContext->querySingleEntity("DBAccount","tel=".$dbContext->parseValue($tel)." for update");
 			
 			if($user){
 				
 				if($user->tel_verify == $verify){
+					
+					if($nick){
+							
+						$u = $dbContext->querySingleEntity("DBAccountInfo","`uid`<>{$user->uid} `key`='".AccountInfoKeyNick."' and `value`=".$dbContext->parseValue($nick));
+						if($u){
+							throw new AccountException("nick is exists", ERROR_USER_NICK_EXISTS);
+						}
+					}
 					
 					$user->password = DBAccount::encodePassword($user->password);
 					$user->tel_verify = null;

@@ -12,7 +12,11 @@ class AccountTelRegisterTask implements ITask{
 	 * @var int
 	 */
 	public $uid;
-	
+	/**
+	 * 昵称 检测唯一
+	 * @var String
+	 */
+	public $nick;
 	/**
 	 * tel
 	 * @var String
