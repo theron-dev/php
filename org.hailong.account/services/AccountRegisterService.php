@@ -29,7 +29,7 @@ class AccountRegisterService extends Service{
 				throw new AccountException("email format error", ERROR_USER_EMAIL_FORMAT_ERROR);
 			}
 			
-			$count = $dbContext->countForEntity("DBAccount","email='{$task->email}'");
+			$count = $dbContext->countForEntity("DBAccount","email='{$task->email}' for update");
 
 			if($count != 0){
 				throw new AccountException("email is exists", ERROR_USER_EMAIL_EXISTS);
@@ -199,7 +199,9 @@ class AccountRegisterService extends Service{
 			
 			$dbContext->lockWrite(array("DBAccount","DBAccountInfo"));
 	
-			$user = $dbContext->querySingleEntity("DBAccount","account='{$task->account}'");
+			$v = $dbContext->parseValue($task->account);
+			
+			$user = $dbContext->querySingleEntity("DBAccount","account={$v} OR tel={$v} OR email={$v}");
 			
 			if(!$user){
 				
@@ -253,6 +255,64 @@ class AccountRegisterService extends Service{
 			else{
 				$dbContext->unlock();
 				throw new AccountException("account is exists", ERROR_USER_ACCOUNT_EXISTS);
+			}
+			
+			return false;
+		}
+		
+		if($task instanceof AccountTelVerifyTask){
+			
+			$tel = trim($task->tel);
+			
+			$user = $dbContext->querySingleEntity("DBAccount","tel=".$dbContext->parseValue($tel));
+			
+			if($user){
+				$user->tel_verify = DBAccount::generatedVerify();
+				$user->updateTime = time();
+				$dbContext->update($user->tel_verify);
+			}
+			else{
+				$user = new DBAccount();
+				$user->account = $task->tel;
+				$user->tel = $task->tel;
+				$user->tel_verify = DBAccount::generatedVerify();
+				$user->state = AccountStateGenerated;
+				$user->updateTime = time();
+				$user->createTime = time();
+			}
+			
+			$task->verify = $user->tel_verify;
+			
+			return false;
+		}
+		
+		if($task instanceof AccountTelRegisterTask){
+			
+			$tel = trim($task->tel);
+			$verify = trim($task->verify);
+			
+			$user = $dbContext->querySingleEntity("DBAccount","tel=".$dbContext->parseValue($tel)." for update");
+			
+			if($user){
+				
+				if($user->tel_verify == $verify){
+					
+					$user->password = DBAccount::encodePassword($user->password);
+					$user->tel_verify = null;
+					if($user->state == AccountStateGenerated){
+						$user->state = AccountStateNone;
+					}
+					$user->updateTime = time();
+					
+					$dbContext->update($user);
+					
+				}
+				else{
+					throw new AccountException("verify code error",ERROR_USER_VERIFY);
+				}
+			}
+			else{
+				throw new AccountException("verify code error",ERROR_USER_VERIFY);
 			}
 			
 			return false;

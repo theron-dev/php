@@ -2,7 +2,7 @@
 
 define("AccountPasswordToken","cdXDk49k23-");
 define("AccountGenneratePasswordToken","1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLMNBVCXZ");
-define("AccountGennerateVerifyToken","1234567890QWERTYUIOPASDFGHJKLMNBVCXZ");
+define("AccountGennerateVerifyToken","1234567890");
 define("AccountStateNone",0);
 define("AccountStateGenerated",1);
 define("AccountStateDisabled",100);
@@ -157,8 +157,8 @@ class DBAccount extends DBEntity{
 	
 	public static function indexs(){
 		return array("hl_account_account"=>array(array("field"=>"account","order"=>"asc"))
-		,"hl_account_tel"=>array(array("field"=>"tel","order"=>"asc"))
-		,"hl_account_email"=>array(array("field"=>"email","order"=>"asc")));
+			,"hl_account_tel"=>array(array("field"=>"tel","order"=>"asc"))
+			,"hl_account_email"=>array(array("field"=>"email","order"=>"asc")));
 	}
 }
 
