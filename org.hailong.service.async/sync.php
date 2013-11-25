@@ -62,7 +62,7 @@ if(!file_exists($lock)){
 				$data = array();
 			}
 			
-			require_once "{$library}/org.hailong.service.async/configs/{$async->config}.php";
+			require_once "{$library}/org.hailong.configs/{$async->config}.php";
 			
 			$config =array();
 			
