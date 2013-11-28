@@ -176,6 +176,8 @@ function formMultipartAction(form,action){
 	
 	for(var key in action){
 		
+		var value = action[key];
+		
 		el = document.createElement("input");
 		el.type = "hidden";
 		el.name = key;
