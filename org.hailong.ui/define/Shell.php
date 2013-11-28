@@ -73,6 +73,16 @@ class Shell{
 			}
 		}
 		
+		if($_FILES){
+		
+			$files = upload();
+			if($files && is_array($files)){
+				foreach($files as $name=>$value){
+					$inputData[$name] = $value;
+				}
+			}
+		}
+		
 		$context = new ServiceContext($inputData,$config);
 		
 		$viewContext = new RootViewContext();
