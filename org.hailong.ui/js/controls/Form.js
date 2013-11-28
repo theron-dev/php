@@ -4,10 +4,41 @@ UI.Form = $.extend({},UI.View,{
 	updateAttribute:function(el,name,value){
 		if(name == "fields"){
 			if(value){
-				for(var key in value){
-					var v = value[key];
-					$("input[name='"+key+"'],select[name='"+key+"'],textarea[name='"+key+"']",el).val(v);
+				
+				var fields = $("input[name],select[name],textarea[name]",el);
+				
+				for(var i=0;i<fields.size();i++){
+					var field = fields.eq(i);
+					var name = field.attr("name");
+					var v = value[name];
+					if(field[0].tagName == "input"){
+						var type = field.attr("type");
+						if(type == "radio"){
+							field[0].checked = v;
+						}
+						else if(type == "checkbox"){
+							
+							if(v && v.length !== undefined){
+								var ii = v.indexOf(field.val());
+								field[0].checked = ii >= 0;
+							}
+							else if(v){
+								field[0].checked = v == field.val();
+							}
+							else{
+								field[0].checked = false;
+							}
+							
+						}
+						else if(type == "text" || type=="password" || type=="hidden"){
+							field.val(v);
+						}
+					}
+					else{
+						fs[name] = field.val();
+					}
 				}
+				
 			}
 		}
 		else{
