@@ -3,6 +3,7 @@
 	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.coin"/>
 	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.account"/>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.authority"/>
 	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.trade"/>
 	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.db"/>
 	<buildpathentry kind="src" path=""/>

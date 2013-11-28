@@ -32,12 +32,6 @@ class DBPrize extends DBEntity{
 	public $body;
 	
 	/**
-	 * 图片
-	 * @var String
-	 */
-	public $image;
-	
-	/**
 	 * 规则
 	 * @var String
 	 */
@@ -84,9 +78,6 @@ class DBPrize extends DBEntity{
 		if($field == "body"){
 			return "TEXT NULL";
 		}
-		if($field == "image"){
-			return "VARCHAR(256) NULL";
-		}	
 		if($field == "rule"){
 			return "TEXT NULL";
 		}

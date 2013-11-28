@@ -90,6 +90,74 @@ class PrizeService extends Service{
 			return false;
 		}
 		
+		if($task instanceof PrizeCreateTask){
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_PRIZE);
+			
+			$uid = $context->getInternalDataValue("auth");
+				
+			$item = new DBPrize();
+			$item->uid = $uid;
+			$item->title = $task->title;
+			$item->body = $task->body;
+			$item->rule = $task->rule;
+			$item->createTime = $item->updateTime = time();
+			
+			$dbContext->insert($item);
+			
+			if($task->images){
+				foreach ($image as $task->images){
+					
+					$img = new DBPrizeImage();
+					$img->pid = $item->pid;
+					$img->uri = isset($image["uri"]) ? $image["uri"] : null;
+					$img->width = isset($image["width"]) ? $image["width"] : null;
+					$img->height = isset($image["height"]) ? $image["height"] : null;
+					$img->title =  isset($image["title"]) ? $image["title"] : null;
+					
+					$dbContext->insert($img);
+					
+				}
+			}
+			
+			return false;
+		}
+		
+		if($task instanceof PrizeRemoveTask){
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_PRIZE);
+				
+			$uid = $context->getInternalDataValue("auth");
+				
+			$pid = intval($task->pid);
+			
+			$item = $dbContext->get("DBPrize",array("pid"=>$pid));
+			
+			if($item){
+				
+				if($item->uid != $uid){
+					
+					$t = new AuthorityEntityValidateTask(PrizeAdminAuthorityEntity);
+					
+					$context->handle("AuthorityEntityValidateTask",$t);
+					
+				}
+				
+				$dbContext->delete($item);
+				$dbContext->query("DELETE FROM ".DBPrizeImage::tableName()." WHERE pid=".$pid);
+				
+				$t = new ProductRemoveTask();
+				$t->etype = PrizeProductEntityType;
+				$t->eid = $item->pid;
+				
+				$context->handle("ProductRemoveTask",$t);
+			}
+			
+			return false;
+		}
+		
 		return true;
 	}
 	
