@@ -158,6 +158,8 @@ class PrizeService extends Service{
 			return false;
 		}
 		
+		
+		
 		return true;
 	}
 	
