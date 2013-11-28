@@ -11,32 +11,35 @@ UI.Form = $.extend({},UI.View,{
 					var field = fields.eq(i);
 					var name = field.attr("name");
 					var v = value[name];
-					if(field[0].tagName == "input"){
-						var type = field.attr("type");
-						if(type == "radio"){
-							field[0].checked = v;
+					if(v !== undefined){	
+						if(field[0].tagName == "input"){
+							var type = field.attr("type");
+							if(type == "radio"){
+								field[0].checked = v;
+							}
+							else if(type == "checkbox"){
+								
+								if(v && v.length !== undefined){
+									var ii = v.indexOf(field.val());
+									field[0].checked = ii >= 0;
+								}
+								else if(v){
+									field[0].checked = v == field.val();
+								}
+								else{
+									field[0].checked = false;
+								}
+								
+							}
+							else if(type == "text" || type=="password" || type=="hidden"){
+								field.val(v);
+							}
 						}
-						else if(type == "checkbox"){
-							
-							if(v && v.length !== undefined){
-								var ii = v.indexOf(field.val());
-								field[0].checked = ii >= 0;
-							}
-							else if(v){
-								field[0].checked = v == field.val();
-							}
-							else{
-								field[0].checked = false;
-							}
-							
-						}
-						else if(type == "text" || type=="password" || type=="hidden"){
+						else{
 							field.val(v);
 						}
 					}
-					else{
-						fs[name] = field.val();
-					}
+	
 				}
 				
 			}
