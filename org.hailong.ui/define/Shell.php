@@ -93,13 +93,6 @@ class Shell{
 		
 		$isMultipart = strpos($_SERVER["CONTENT_TYPE"],'multipart/form-data') !== false;
 		
-		if($isMultipart){
-			
-			echo json_encode($inputData);
-			
-			exit();
-		}
-		
 		$viewStateAdapter->setContext($context);
 
 		$viewState = $viewStateAdapter->loadViewState();
