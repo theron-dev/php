@@ -83,7 +83,7 @@ UI.Form = $.extend({},UI.View,{
 								fs[name] = v;
 							}
 						}
-						else if(type == "text" || type=="password" || type=="hidden"){
+						else if(type == "text" || type=="password" || type=="hidden" || type=="file"){
 							fs[name] = field.val();
 						}
 					}
