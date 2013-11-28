@@ -164,6 +164,34 @@ function viewGetAttribute(viewId,name){
 
 var loadingTimeout = null;
 
+function formMultipartAction(form,action){
+	
+	var el = document.createElement("input");
+	
+	el.type = "hidden";
+	el.name = "data-json";
+	el.value = encodeJson({version:ViewStateVersion,data: ViewStateUpdated});
+	
+	form.appendChild(el);
+	
+	for(var key in action){
+		
+		el = document.createElement("input");
+		el.type = "hidden";
+		el.name = key;
+		if(value instanceof Object && value["vid"]){
+			el.value = viewGetAttribute(value["vid"],value["name"]);
+		}
+		else{
+			el.value = value;
+		}
+		
+		form.appendChild(el);
+	}
+	
+	return true;
+}
+
 function viewAction(action,callback,loading){
 	
 	var data = {};

@@ -416,6 +416,32 @@ class ProductService extends Service{
 			return false;
 		}
 		
+		if($task instanceof ProductGetTask){
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_PRODUCT);
+			
+			$results = array();
+			
+			$etype = intval($task->etype);
+			$eid = intval($task->eid);
+			
+			$rs = $dbContext->queryEntitys("DBProduct","etype={$etype} AND eid={$eid} ORDER BY pid ASC");
+			
+			if($rs){
+				
+				while($item = $dbContext->nextObject($rs,"DBProduct")){
+
+					$results[] = $item;
+				}
+				
+				$dbContext->free($rs);
+			}
+			
+			$task->results = $results;
+			
+		}
+		
 		
 		return true;
 	}

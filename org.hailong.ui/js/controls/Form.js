@@ -57,12 +57,23 @@ UI.Form = $.extend({},UI.View,{
 				}
 				
 				viewSetAttribute(id,"fields",fs);
+				
 				var action = viewGetAttribute(id,"submit-action");
 				if(action){
-					$("input[type='submit']",el).attr("disabled","disabled");
-					viewAction(action,function(){
-						$("input[type='submit']",el).removeAttr("disabled");
-					});
+					
+					var enctype = $this.attr("enctype");
+					
+					if(enctype == "multipart/form-data"){
+						
+						return formMultipartAction(this,action);
+						
+					}
+					else{
+						$("input[type='submit']",el).attr("disabled","disabled");
+						viewAction(action,function(){
+							$("input[type='submit']",el).removeAttr("disabled");
+						});
+					}
 				}
 			}
 			return false;

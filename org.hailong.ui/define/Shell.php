@@ -81,6 +81,8 @@ class Shell{
 		
 		$isPostback = $_SERVER["REQUEST_METHOD"] == 'POST';
 		
+		$isMultipart = strpos($_SERVER["CONTENT_TYPE"],'multipart/form-data') !== false;
+		
 		$viewStateAdapter->setContext($context);
 
 		$viewState = $viewStateAdapter->loadViewState();
@@ -131,7 +133,7 @@ class Shell{
 		
 		$redrect = $viewContext->getRedirect();
 		
-		if($isPostback){
+		if($isPostback && !$isMultipart){
 			if($redrect){
 				$viewContext->pushAttribute("window.location", "href", $redrect);
 			}

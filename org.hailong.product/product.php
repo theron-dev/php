@@ -27,6 +27,7 @@ if($library){
 	require_once "$library/org.hailong.product/tasks/ProductUntradeTask.php";
 	require_once "$library/org.hailong.product/tasks/ProductUpdateTask.php";
 	require_once "$library/org.hailong.product/tasks/ProductGetForUpdateTask.php";
+	require_once "$library/org.hailong.product/tasks/ProductGetTask.php";
 	
 	require_once "$library/org.hailong.product/services/ProductService.php";
 	
