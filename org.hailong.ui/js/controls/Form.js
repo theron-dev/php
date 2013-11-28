@@ -10,9 +10,10 @@ UI.Form = $.extend({},UI.View,{
 				for(var i=0;i<fields.size();i++){
 					var field = fields.eq(i);
 					var name = field.attr("name");
+					var tagName = field[0].tagName;
 					var v = value[name];
 					if(v !== undefined){	
-						if(field[0].tagName == "input"){
+						if(tagName == "INPUT"){
 							var type = field.attr("type");
 							if(type == "radio"){
 								field[0].checked = v;
@@ -64,7 +65,8 @@ UI.Form = $.extend({},UI.View,{
 				for(var i=0;i<fields.size();i++){
 					var field = fields.eq(i);
 					var name = field.attr("name");
-					if(field[0].tagName == "input"){
+					var tagName = field[0].tagName;
+					if(tagName == "INPUT"){
 						var type = field.attr("type");
 						if(type == "radio"){
 							if(field[0].checked){
