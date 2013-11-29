@@ -107,7 +107,7 @@ class PrizeService extends Service{
 			$dbContext->insert($item);
 			
 			if($task->images){
-				foreach ($image as $task->images){
+				foreach ($task->images as $image){
 					
 					$img = new DBPrizeImage();
 					$img->pid = $item->pid;
