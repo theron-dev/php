@@ -42,7 +42,7 @@ class ProductService extends Service{
 				$dbContext->insert($item);
 				$dbContext->commit();
 				
-				$task->pid = $item->pid;
+				$task->results = $item;
 				
 			}
 			else{

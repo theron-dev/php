@@ -1,12 +1,6 @@
 <?php
 
 class ProductCreateTask extends ProductAuthTask{
-
-	/**
-	*　商品ID 输出
-	* @var int
-	*/
-	public $pid;
 	
 	/**
 	 * 实体类型
@@ -38,6 +32,12 @@ class ProductCreateTask extends ProductAuthTask{
 	* @var String
 	*/
 	public $target;
+	
+	/**
+	 * 输出
+	 * @var DBProduct
+	 */
+	public $results;
 }
 
 ?>
