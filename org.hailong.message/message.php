@@ -47,6 +47,7 @@ if($library){
 	require_once "$library/org.hailong.message/tasks/MessageQueryTask.php";
 	require_once "$library/org.hailong.message/tasks/MeetingMemberTask.php";
 	require_once "$library/org.hailong.message/tasks/MessageSessionStateTask.php";
+	require_once "$library/org.hailong.message/tasks/MessageAttachTask.php";
 
 }
 ?>

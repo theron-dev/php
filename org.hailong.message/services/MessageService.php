@@ -185,6 +185,31 @@ class MessageService extends Service{
 			return false;
 		}
 		
+		if($task instanceof MessageAttachTask){
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_MESSAGE);
+			
+			$mid = intval($task->mid);
+			
+			$rs = $dbContext->queryEntitys("DBMessageAttach","mid={$mid}");
+			
+			if($rs){
+				
+				$task->results = array();
+				
+				while($item = $dbContext->nextObject($rs,"DBMessageAttach")){
+					
+					$task->results[] = $item;
+					
+				}
+				
+				$dbContext->free($rs);
+			}
+			
+			return false;
+		}
+		
 		return true;
 	}
 }
