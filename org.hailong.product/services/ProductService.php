@@ -152,7 +152,7 @@ class ProductService extends Service{
 						$where = "etype={$task->etype}";
 						
 						if($task->eid !== null){
-							$where += " and eid={$task->eid}";
+							$where .= " and eid={$task->eid}";
 						}
 					}
 					catch(Excpetion $ex){
@@ -160,7 +160,7 @@ class ProductService extends Service{
 						$where = "uid={$uid} and etype={$task->etype}";
 						
 						if($task->eid !== null){
-							$where += " and eid={$task->eid}";
+							$where .= " and eid={$task->eid}";
 						}
 					}
 					
