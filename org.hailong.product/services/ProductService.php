@@ -157,8 +157,6 @@ class ProductService extends Service{
 					}
 					catch(Exception $ex){
 						
-						var_dump($ex);
-						
 						$where = "uid={$uid} and etype={$task->etype}";
 						
 						if($task->eid !== null){
