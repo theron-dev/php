@@ -143,6 +143,8 @@ class ProductService extends Service{
 				}
 				else if($task->etype !== null){
 					
+					var_dump($task);
+					
 					$where = "1<>1";
 					try{
 						$t = new AuthorityEntityValidateTask(PRODUCT_ALIAS_ADMIN);
