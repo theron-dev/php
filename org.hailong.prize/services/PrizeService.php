@@ -107,14 +107,17 @@ class PrizeService extends Service{
 			$dbContext->insert($item);
 			
 			if($task->images){
+				
 				foreach ($task->images as $image){
 					
 					$img = new DBPrizeImage();
+					$img->uid = $uid;
 					$img->pid = $item->pid;
 					$img->uri = isset($image["uri"]) ? $image["uri"] : null;
-					$img->width = isset($image["width"]) ? $image["width"] : null;
-					$img->height = isset($image["height"]) ? $image["height"] : null;
+					$img->width = isset($image["width"]) ? $image["width"] : 0;
+					$img->height = isset($image["height"]) ? $image["height"] : 0;
 					$img->title =  isset($image["title"]) ? $image["title"] : null;
+					$img->updateTime = $img->createTime = time();
 					
 					$dbContext->insert($img);
 					
