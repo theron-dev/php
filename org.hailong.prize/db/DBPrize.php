@@ -38,6 +38,12 @@ class DBPrize extends DBEntity{
 	public $rule;
 	
 	/**
+	 * 周期
+	 * @var int
+	 */
+	public $period;
+	
+	/**
 	 * 修改时间
 	 * @var int
 	 */
@@ -80,6 +86,9 @@ class DBPrize extends DBEntity{
 		}
 		if($field == "rule"){
 			return "TEXT NULL";
+		}
+		if($field == "period"){
+			return "INT NULL";
 		}
 		if($field == "updateTime"){
 			return "INT(11) NULL";

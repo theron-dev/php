@@ -102,6 +102,7 @@ class PrizeService extends Service{
 			$item->title = $task->title;
 			$item->body = $task->body;
 			$item->rule = $task->rule;
+			$item->period = $task->period;
 			$item->createTime = $item->updateTime = time();
 			
 			$dbContext->insert($item);

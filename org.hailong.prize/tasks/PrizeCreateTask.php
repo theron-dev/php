@@ -30,6 +30,12 @@ class PrizeCreateTask extends PrizeAuthTask{
 	 * @var [{uri:"",width:"",height:""}]
 	 */
 	public $images;
+	
+	/**
+	 * 周期
+	 * @var int
+	 */
+	public $period;
 }
 
 ?>
