@@ -156,7 +156,9 @@ class DBProduct extends DBEntity{
 	 * @return array("index_name"=>array(array("field"=>"field1","order"="desc"),array("field"=>"field2","order"="asc")))
 	 */
 	public static function indexs(){
-		return array("state"=>array(array("field"=>"state","order"=>"asc")));
+		return array("state"=>array(array("field"=>"state","order"=>"asc"))
+				,"etype"=>array(array("field"=>"etype","order"=>"asc"))
+				,"eid"=>array(array("field"=>"eid","order"=>"desc")));
 	}
 }
 
