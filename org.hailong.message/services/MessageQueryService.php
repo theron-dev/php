@@ -34,7 +34,7 @@ class MessageQueryService extends Service{
 				$sql .= " AND mid <= {$task->maxMid}";
 			}
 			
-			$sql .= " ORDER BY mid ASC";
+			$sql .= " ORDER BY ".$task->orderBy;
 			
 			if($task->limit !== null){
 				$sql .= " LIMIT {$task->limit}";
