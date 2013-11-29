@@ -20,7 +20,6 @@ if($library){
 	
 	require_once "$library/org.hailong.log/log.php";
 	require_once "$library/org.hailong.account/account.php";
-	require_once "$library/org.hailong.dataspace/dataspace.php";
 	
 	require_once "$library/org.hailong.message/MessageException.php";
 	
