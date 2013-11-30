@@ -96,7 +96,7 @@ class ApplePushService extends Service{
 				|| $rs != strlen($apnsMessage)) {
 				$this->connect();
 				if( -- $reply ==0){
-					return new AppleException($errorString,ERROR_APPLE_PUSH_ERROR);
+					throw new AppleException("apple push error",ERROR_APPLE_PUSH_ERROR);
 				}
 			}
 			
