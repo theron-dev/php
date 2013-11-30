@@ -423,10 +423,20 @@ class ProductService extends Service{
 			
 			$results = array();
 			
-			$etype = intval($task->etype);
-			$eid = intval($task->eid);
+			$sql = "";
 			
-			$rs = $dbContext->queryEntitys("DBProduct","etype={$etype} AND eid={$eid} ORDER BY pid ASC");
+			if($task->pid !== null){
+				$sql = "pid=".intval($task->pid);
+			}
+			else{
+				$etype = intval($task->etype);
+				$eid = intval($task->eid);
+				$sql = "etype={$etype} AND eid={$eid}";
+			}
+			
+			$sql .= " ORDER BY pid ASC";
+			
+			$rs = $dbContext->queryEntitys("DBProduct",$sql);
 			
 			if($rs){
 				

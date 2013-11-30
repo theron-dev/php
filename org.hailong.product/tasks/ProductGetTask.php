@@ -2,6 +2,11 @@
 
 class ProductGetTask extends ProductTask{
 
+	/**商品id
+	 * 
+	 */
+	public $pid;
+	
 	/**
 	 * 实体类型
 	 * @var int
