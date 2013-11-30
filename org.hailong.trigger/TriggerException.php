@@ -1,0 +1,11 @@
+<?php
+
+define("ERROR_TRIGGER_NOT_FOUND_CLASS",ERROR_TRIGGER | 0x0001);
+define("ERROR_TRIGGER_NOT_FOUND_OPERATOR",ERROR_TRIGGER | 0x0002);
+define("ERROR_TRIGGER_OPERATOR",ERROR_TRIGGER | 0x0003);
+
+class TriggerException extends Exception{
+	
+}
+
+?>
