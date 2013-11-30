@@ -326,6 +326,15 @@ class ProductService extends Service{
 			if($item){
 
 				if($item->state == DBProductStateSale){
+					
+					if(time() < $item->saleTime){
+						throw new ProductException("product not start sale",ERROR_PRODUCT_SALETIME);
+					}
+					
+					if($item->endTime != 0 && time() > $item->endTime){
+						throw new ProductException("product sale ended",ERROR_PRODUCT_ENDTIME);
+					}
+					
 					$c = intval($item->count);
 					if($c == -1 || $count <= $c){
 						$item->count = $c == -1 ? -1 : $c - $count;
