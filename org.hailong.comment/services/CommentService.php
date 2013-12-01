@@ -126,7 +126,7 @@ class CommentService extends Service{
 			}
 			
 			if($task->tuid !== null){
-				$sql .= " AND tuid={$task->tuid}";
+				$sql .= " AND (tuid={$task->tuid} OR uid={$task->tuid})";
 			}
 
 			if($task->etype !== null){
