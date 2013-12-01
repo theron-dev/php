@@ -28,10 +28,10 @@ class MessageQueryService extends Service{
 			$sql = "(tuid={$auth} OR uid={$auth}) AND mstate IN (0,1,2)";
 			
 			if($task->minMid !== null){
-				$sql .= " AND mid >= ".intval($task->minMid);
+				$sql .= " AND mid > ".intval($task->minMid);
 			}
 			if($task->maxMid !== null){
-				$sql .= " AND mid <= ".intval($task->maxMid);
+				$sql .= " AND mid < ".intval($task->maxMid);
 			}
 			
 			$sql .= " ORDER BY ".$task->orderBy;
