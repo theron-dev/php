@@ -5,5 +5,4 @@
 	<buildpathentry kind="src" path=""/>
 	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.cache"/>
 	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.service"/>
-	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.configs"/>
 </buildpath>
