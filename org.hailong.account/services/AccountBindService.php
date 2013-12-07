@@ -86,8 +86,72 @@ class AccountBindService extends Service{
 			return false;
 		}
 		
+		if($task instanceof AccountTelBindTask){
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_ACCOUNT);
+				
+			if(!$task->uid){
+				$task->uid = $context->getInternalDataValue("auth");
+			}
+			
+			$user = $dbContext->querySingleEntity("DBAccount","uid={$task->uid}");
+			
+			if($user){
+				
+				$ut = $dbContext->querySingleEntity("DBAccount","tel=".$dbContext->parseValue($task->tel));
+				
+				if($ut){
+					if($ut->tel_verify == $task->tel_verify){
+						
+						if($ut->state == AccountStateGenerated){
+							
+							$user->tel = $task->tel;
+							$user->updateTime = time();
+							
+							$dbContext->update($user);
+							
+							$dbContext->delete($ut);
+							
+						}
+						else{
+							throw new AccountException("repeat tel",ERROR_USER_REPEAT_TEL);
+						}
+						
+					}
+					else{
+						throw new AccountException("verify code error",ERROR_USER_VERIFY);
+					}
+				}
+				else{
+					throw new AccountException("verify code error",ERROR_USER_VERIFY);
+				}
+			}
+			else{
+				throw new AccountException("not found account",ERROR_USER_NOT_FOUND);
+			}
+			
+			return false;
+		}
+		
+		if($task instanceof AccountTelUnBindTask){
+				
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_ACCOUNT);
+		
+			if(!$task->uid){
+				$task->uid = $context->getInternalDataValue("auth");
+			}
+				
+			$dbContext->query("UPDATE ".DBAccount::tableName()." SET tel=NULL,tel_verify=NULL WHERE uid={$task->uid}");
+				
+			return false;
+		}
+		
 		return true;
 	}
+	
+	
 }
 
 ?>
