@@ -84,7 +84,7 @@ if(!file_exists($lock)){
 					$context->handle($async->taskType, $task);
 					$async->state = AsyncTaskStateOK;
 					echo "Task type:{$async->taskType} class:{$async->taskClass} OK\n<br />";
-					$async->results = json_encode($context->getOutputData());
+					$async->results = "Task type:{$async->taskType} class:{$async->taskClass} outputData:".json_encode($context->getOutputData());
 				}
 				catch(Exception $ex){
 					var_dump($ex);
