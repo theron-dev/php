@@ -68,7 +68,9 @@ class SMSService extends Service{
 					}
 					
 					$ch = curl_init($url);
-						
+
+					$context->setOutputDataValue("sms-url", $url);
+					
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 					
 					if($method == "POST"){
