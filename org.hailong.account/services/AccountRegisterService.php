@@ -279,6 +279,7 @@ class AccountRegisterService extends Service{
 				$user->state = AccountStateGenerated;
 				$user->updateTime = time();
 				$user->createTime = time();
+				$dbContext->update($user);
 			}
 			
 			$task->verify = $user->tel_verify;
