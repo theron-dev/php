@@ -42,13 +42,14 @@ class SMSService extends Service{
 					$url = $cfg["url"];
 					$body = $cfg["body"];
 					$method = isset($cfg["method"]) ? $cfg["method"] : "POST";
+					$charset = isset($cfg["charset"]) ? $cfg["charset"] : "utf8";
 					
 					$query = array();
 				
 					foreach ($body as $key=>$value){
 						
 						if($value == "{body}"){
-							$query[$key] = $task->body;
+							$query[$key] = iconv("utf8", $charset, $task->body);
 						}
 						else if($value == "{tel}"){
 							$query[$key] = $task->tel;
@@ -69,8 +70,6 @@ class SMSService extends Service{
 					
 					$ch = curl_init($url);
 
-					echo $url;
-					
 					$context->setOutputDataValue("sms-url", $url);
 					
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
