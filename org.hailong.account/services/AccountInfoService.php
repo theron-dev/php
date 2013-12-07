@@ -113,7 +113,7 @@ class AccountInfoService extends Service{
 				
 				$task->infos = array("title"=>$user->title,"account"=>$user->account);
 				
-				if($user->tel && $user->tel_verify == null){
+				if($user->tel){
 					$task->infos["tel"] = $user->tel;
 				}
 				
