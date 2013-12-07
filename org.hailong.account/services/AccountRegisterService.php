@@ -273,8 +273,8 @@ class AccountRegisterService extends Service{
 			}
 			else{
 				$user = new DBAccount();
-				$user->account = $task->tel;
-				$user->tel = $task->tel;
+				$user->account = $tel;
+				$user->tel = $tel;
 				$user->tel_verify = DBAccount::generatedVerify();
 				$user->state = AccountStateGenerated;
 				$user->updateTime = time();
