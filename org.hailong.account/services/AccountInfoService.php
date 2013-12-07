@@ -113,6 +113,10 @@ class AccountInfoService extends Service{
 				
 				$task->infos = array("title"=>$user->title,"account"=>$user->account);
 				
+				if($user->tel && $user->tel_verify == null){
+					$task->infos["tel"] = $user->tel;
+				}
+				
 				$sql = "uid={$uid}";
 				
 				if($task->keys){
