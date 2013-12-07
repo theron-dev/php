@@ -299,23 +299,41 @@ class AccountRegisterService extends Service{
 				
 				if($user->tel_verify == $verify){
 					
+					$dbContext->lockWrite(array("DBAccount","DBAccountInfo"));
+					
 					if($nick){
 							
 						$u = $dbContext->querySingleEntity("DBAccountInfo","`uid`<>{$user->uid} `key`='".AccountInfoKeyNick."' and `value`=".$dbContext->parseValue($nick));
 						if($u){
+							$dbContext->unlock();
 							throw new AccountException("nick is exists", ERROR_USER_NICK_EXISTS);
 						}
 					}
 					
 					$user->password = DBAccount::encodePassword($task->password);
 					$user->tel_verify = null;
+					
 					if($user->state == AccountStateGenerated){
 						$user->state = AccountStateNone;
 					}
+					
 					$user->updateTime = time();
 					
 					$dbContext->update($user);
 					
+					if($nick){
+					
+						$info = new DBAccountInfo();
+						$info->uid = $user->uid;
+						$info->key = AccountInfoKeyNick;
+						$info->value = $nick;
+						$info->updateTime = time();
+						$info->createTime = time();
+							
+						$dbContext->insert($info);
+					}
+					
+					$dbContext->unlock();
 				}
 				else{
 					throw new AccountException("verify code error",ERROR_USER_VERIFY);
