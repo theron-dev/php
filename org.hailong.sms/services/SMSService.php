@@ -59,13 +59,23 @@ class SMSService extends Service{
 						
 					}
 					
+					if($method != "POST"){
+						if(strpos($url, "?") === false){
+							$url .="?";
+						}
+						
+						$url.=http_build_query($query);
+					}
+					
 					$ch = curl_init($url);
 						
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					
 					if($method == "POST"){
 						curl_setopt($ch, CURLOPT_POST, true);
+						curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($query));
 					}
-					curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($query));
+
 						
 					$result = curl_exec($ch);
 						
