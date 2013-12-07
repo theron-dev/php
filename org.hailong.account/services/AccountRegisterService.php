@@ -269,7 +269,7 @@ class AccountRegisterService extends Service{
 			if($user){
 				$user->tel_verify = DBAccount::generatedVerify();
 				$user->updateTime = time();
-				$dbContext->update($user->tel_verify);
+				$dbContext->update($user);
 			}
 			else{
 				$user = new DBAccount();
