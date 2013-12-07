@@ -41,6 +41,7 @@ class SMSService extends Service{
 					
 					$url = $cfg["url"];
 					$body = $cfg["body"];
+					$method = isset($cfg["method"]) ? $cfg["method"] : "POST";
 					
 					$query = array();
 				
@@ -61,7 +62,9 @@ class SMSService extends Service{
 					$ch = curl_init($url);
 						
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-					curl_setopt($ch, CURLOPT_POST, true);
+					if($method == "POST"){
+						curl_setopt($ch, CURLOPT_POST, true);
+					}
 					curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($query));
 						
 					$result = curl_exec($ch);
