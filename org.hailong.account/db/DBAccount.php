@@ -2,7 +2,7 @@
 
 define("AccountPasswordToken","cdXDk49k23-");
 define("AccountGenneratePasswordToken","1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLMNBVCXZ");
-define("AccountGennerateVerifyToken","1234567890");
+define("AccountGennerateVerifyToken","1234567890123456789067802489283767480987567432");
 define("AccountStateNone",0);
 define("AccountStateGenerated",1);
 define("AccountStateDisabled",100);
@@ -130,7 +130,7 @@ class DBAccount extends DBEntity{
 		$len = strlen(AccountGenneratePasswordToken);
 		srand(time());
 		for($i=0;$i<6;$i++){
-			$password .= substr(AccountGenneratePasswordToken, rand(0, $len),1);
+			$password .= substr(AccountGenneratePasswordToken, rand(0, $len -1),1);
 		}
 		return $password;
 	}
@@ -140,7 +140,7 @@ class DBAccount extends DBEntity{
 		$len = strlen(AccountGennerateVerifyToken);
 		srand(time());
 		for($i=0;$i<4;$i++){
-			$verify .= substr(AccountGennerateVerifyToken, rand(0, $len),1);
+			$verify .= substr(AccountGennerateVerifyToken, rand(0, $len -1),1);
 		}
 		return $verify;
 	}
