@@ -307,7 +307,7 @@ class AccountRegisterService extends Service{
 						}
 					}
 					
-					$user->password = DBAccount::encodePassword($user->password);
+					$user->password = DBAccount::encodePassword($task->password);
 					$user->tel_verify = null;
 					if($user->state == AccountStateGenerated){
 						$user->state = AccountStateNone;
