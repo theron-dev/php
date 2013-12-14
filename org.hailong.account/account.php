@@ -94,6 +94,8 @@ if($library){
 	require_once "$library/org.hailong.account/tasks/AccountTelBindTask.php";
 	require_once "$library/org.hailong.account/tasks/AccountTelUnBindTask.php";
 	
+	require_once "$library/org.hailong.account/tasks/AccountIDByBindTask.php";
+	
 	require_once "$library/org.hailong.account/controllers/LoginController.php";
 	require_once "$library/org.hailong.account/controllers/LogoutController.php";
 	require_once "$library/org.hailong.account/controllers/UserInfoController.php";
