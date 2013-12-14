@@ -67,7 +67,20 @@ class TimelineService extends Service{
 			$config = $this->getConfig();
 			$entityClass = $config["dbTable"];
 			
-			$task->dbContext->delete($entityClass,array("tlid"=>$task->tlid));
+			if($task->tlid){
+				$task->dbContext->delete($entityClass,"tlid=".intval($task->tlid));
+			}
+			else if($task->etype){
+				
+				$sql = "etype=".intval($task->etype);
+				
+				if($task->eid){
+					$sql .= " AND eid=".intval($task->eid);
+				}
+				
+				$task->dbContext->delete($entityClass,$sql);
+			}
+			
 				
 			return false;
 		}

@@ -14,6 +14,8 @@ class TimelineRemoveTask extends TimelineTask{
 	 */
 	public $tlid;
 
+	public $etype;
+	public $eid;
 }
 
 ?>
