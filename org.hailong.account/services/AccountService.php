@@ -265,6 +265,23 @@ class AccountService extends Service{
 			return false;
 		}
 		
+		if($task instanceof AccountIDByBindTask){
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_ACCOUNT);
+
+			$etype = intval($task->etype);
+			$eid = intval($task->eid);
+			
+			$user = $dbContext->querySingleEntity("DBAccountBind","type={$etype} AND eid={$eid}");
+			
+			if($user){
+				$task->uid = $user->uid;
+			}
+			
+			return false;
+		}
+		
 		return true;
 	}
 }
