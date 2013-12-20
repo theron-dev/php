@@ -6,6 +6,7 @@
 
 if($library){
 	require_once "$library/org.hailong.workspace.admin.app/controllers/AppSearchController.php";
+	require_once "$library/org.hailong.workspace.admin.app/controllers/AppDeviceSearchController.php";
 }
 
 

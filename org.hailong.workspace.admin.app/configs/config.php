@@ -29,7 +29,7 @@ function config(){
 					"DBContextTask"
 					),
 				"config" => array(
-					"entitys"=>array("DBAccount","DBUserViewState","DBAuthority","DBAuthorityRole","DBAuthorityEntity","DBLog","DBApp")
+					"entitys"=>array("DBAccount","DBUserViewState","DBAuthority","DBAuthorityRole","DBAuthorityEntity","DBLog","DBApp","DBAppDevice")
 				),
 				"createInstance" =>true,
 			),
