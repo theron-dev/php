@@ -26,6 +26,11 @@ if($library){
 	require_once "$library/org.hailong.app/tasks/AppAuthRemoveTask.php";
 	require_once "$library/org.hailong.app/tasks/AppAutoAuthTask.php";
 	
+	require_once "$library/org.hailong.app/tasks/AppVersionCreateTask.php";
+	require_once "$library/org.hailong.app/tasks/AppVersionUpdateTask.php";
+	require_once "$library/org.hailong.app/tasks/AppVersionRemoveTask.php";
+	require_once "$library/org.hailong.app/tasks/AppVersionSetLastTask.php";
+	
 	require_once "$library/org.hailong.app/services/AppAuthService.php";
 	require_once "$library/org.hailong.app/services/AppVersionService.php";
 	require_once "$library/org.hailong.app/services/AppDeviceService.php";

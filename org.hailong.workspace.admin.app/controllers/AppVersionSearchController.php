@@ -1,6 +1,6 @@
 <?php
 
-class AppSearchController extends ViewController{
+class AppVersionSearchController extends ViewController{
 	
 	private $searchTable;
 	private $searchPageListView;
@@ -38,7 +38,15 @@ class AppSearchController extends ViewController{
 		$context = $this->getContext();
 		$dbContext = $context->dbContext();
 	
-		$rowCount = $dbContext->countForEntity("DBApp");
+		$sql = "1=1";
+		
+		$appid = $context->getInputDataValue("appid");
+		
+		if($appid){
+			$sql .= " AND appid=".intval($appid);
+		}
+		
+		$rowCount = $dbContext->countForEntity("DBAppVersion",$sql);
 	
 		$pageIndex = $this->searchPageListView->getSelectedValue();
 		if(!$pageIndex){
@@ -60,21 +68,28 @@ class AppSearchController extends ViewController{
 	
 		$offset = ($pageIndex -1) *  $this->pageSize;
 	
-		$rs = $dbContext->queryEntitys("DBApp","1=1 ORDER BY createTime DESC LIMIT {$offset},{$this->pageSize}");
+		$rs = $dbContext->queryEntitys("DBAppVersion",$sql." ORDER BY avid DESC LIMIT {$offset},{$this->pageSize}");
 	
 		if($rs){
 	
-			while($app = $dbContext->nextObject($rs,"DBApp")){
+			while($app = $dbContext->nextObject($rs,"DBAppVersion")){
 				$item = array();
-				$item["key"] = $app->appid;
-				$item["title"] = $app->title;
-				$item["description"] = $app->description;
-				$item["createTime"] = date("Y-m-d H:i:s",$app->createTime);
-				$item["command"] = "<input type='button' value='修改' class='edit' key='{$app->appid}'></input>"
-					."<input type='button' value='删除' action='delete' key='{$app->appid}'></input>"
-					."<input type='button' value='设备' onclick=\"window.location.href='device.php?appid={$app->appid}'\"></input>"
-					."<input type='button' value='版本' onclick=\"window.location.href='version.php?appid={$app->appid}'\"></input>";
+				$item["key"] = $app->avid;
+				$item["appid"] = $app->appid;
+				$item["platform"] = $app->platform;
+				$item["version"] = $app->version;
+				$item["content"] = $app->content;
+				$item["uri"] = $app->uri;
+				$item["updateLevel"] = $app->udpateLevel;
+				$item["isLastVersion"] = $app->isLastVersion;
+				$command =  "<input type='button' value='修改' class='edit' key='{$app->avid}'></input>"
+					."<input type='button' value='删除' action='delete' key='{$app->avid}'></input>";
 				
+				if($app->isLastVersion){
+					$command .= "<input type='button' value='设为最新版' action='set' key='{$app->avid}'></input>";
+				}
+				
+				$item["command"] = $command;
 				$items[] = $item;
 			}
 			$dbContext->free($rs);
@@ -90,13 +105,16 @@ class AppSearchController extends ViewController{
 		$actionData = $this->searchTable->getActionData();
 		
 		if($action == "add"){
-			$task = new AppCreateTask();
-			$task->appid = isset($actionData["key"]) && intval($actionData["key"]) >0 ? intval($actionData["key"]) : null;
-			$task->title = isset($actionData["title"]) ? $actionData["title"] : null;
-			$task->description = isset($actionData["description"]) ? $actionData["description"] : null;
+			$task = new AppVersionCreateTask();
+			$task->appid = isset($actionData["appid"]) ? intval($actionData["appid"]) : null;
+			$task->platform = isset($actionData["platform"]) ? $actionData["platform"] : null;
+			$task->version = isset($actionData["version"]) ? $actionData["version"] : null;
+			$task->content = isset($actionData["content"]) ? $actionData["content"] : null;
+			$task->uri = isset($actionData["uri"]) ? $actionData["uri"] : null;
+			$task->updateLevel = isset($actionData["updateLevel"]) ? $actionData["updateLevel"] : null;
 			
 			try{
-				$this->getContext()->handle("AppCreateTask",$task);
+				$this->getContext()->handle("AppVersionCreateTask",$task);
 				$this->loadContent();
 			}
 			catch(Exception $ex){
@@ -104,24 +122,25 @@ class AppSearchController extends ViewController{
 			}
 		}
 		else if($action == "edit"){
-			$task = new AppUpdateTask();
-			$task->appid = $key;
-			$task->title = isset($actionData["title"]) ? $actionData["title"] : null;
-			$task->description = isset($actionData["description"]) ? $actionData["description"] : null;
+			$task = new AppVersionUpdateTask();
+			$task->avid = $key;
+			$task->content = isset($actionData["content"]) ? $actionData["content"] : null;
+			$task->uri = isset($actionData["uri"]) ? $actionData["uri"] : null;
+			$task->updateLevel = isset($actionData["updateLevel"]) ? $actionData["updateLevel"] : null;
 			
 			try{
-				$this->getContext()->handle("AppUpdateTask",$task);
+				$this->getContext()->handle("AppVersionUpdateTask",$task);
 				$this->loadContent();
 			}
 			catch(Exception $ex){
 				getCurrentViewContext()->pushFunction("window.alert",$ex->getMessage());
 			}
 		}
-		else if($action == "delete"){
-			$task = new AppRemoveTask();
-			$task->appid= $key;
+		else if($action == "set"){
+			$task = new AppVersionSetLastTask();
+			$task->avid= $key;
 			try{
-				$this->getContext()->handle("AppRemoveTask",$task);
+				$this->getContext()->handle("AppVersionSetLastTask",$task);
 				$this->loadContent();
 			}
 			catch(Exception $ex){

@@ -72,7 +72,7 @@ class AppDeviceSearchController extends ViewController{
 	
 		$offset = ($pageIndex -1) *  $this->pageSize;
 	
-		$rs = $dbContext->queryEntitys("DBAppDevice","1=1 ORDER BY updateTime DESC LIMIT {$offset},{$this->pageSize}");
+		$rs = $dbContext->queryEntitys("DBAppDevice",$sql." ORDER BY updateTime DESC LIMIT {$offset},{$this->pageSize}");
 	
 		if($rs){
 	

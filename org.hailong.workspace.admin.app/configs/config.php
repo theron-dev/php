@@ -72,6 +72,12 @@ function config(){
 					"AppCreateTask","AppUpdateTask","AppRemoveTask"
 				),
 			),
+			array(
+				"class" => "AppVersionService",
+				"tasks" => array(
+					"AppVersionCreateTask","AppVersionUpdateTask","AppVersionRemoveTask","AppVersionSetLastTask"
+				),
+			),
 		),
 	);
 }
