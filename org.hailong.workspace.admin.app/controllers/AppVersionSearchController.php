@@ -85,7 +85,7 @@ class AppVersionSearchController extends ViewController{
 				$command =  "<input type='button' value='修改' class='edit' key='{$app->avid}'></input>"
 					."<input type='button' value='删除' action='delete' key='{$app->avid}'></input>";
 				
-				if($app->isLastVersion){
+				if(!$app->isLastVersion){
 					$command .= "<input type='button' value='设为最新版' action='set' key='{$app->avid}'></input>";
 				}
 				
@@ -138,6 +138,17 @@ class AppVersionSearchController extends ViewController{
 		}
 		else if($action == "set"){
 			$task = new AppVersionSetLastTask();
+			$task->avid= $key;
+			try{
+				$this->getContext()->handle("AppVersionSetLastTask",$task);
+				$this->loadContent();
+			}
+			catch(Exception $ex){
+				getCurrentViewContext()->pushFunction("window.alert",$ex->getMessage());
+			}
+		}
+		else if($action == "delete"){
+			$task = new AppVersionRemoveTask();
 			$task->avid= $key;
 			try{
 				$this->getContext()->handle("AppVersionSetLastTask",$task);
