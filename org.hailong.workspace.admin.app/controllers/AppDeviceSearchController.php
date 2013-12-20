@@ -40,7 +40,15 @@ class AppDeviceSearchController extends ViewController{
 		$context = $this->getContext();
 		$dbContext = $context->dbContext();
 	
-		$rowCount = $dbContext->countForEntity("DBAppDevice");
+		$sql = "1=1";
+		
+		$appid = $context->getInputDataValue("appid");
+		
+		if($appid){
+			$sql .= " AND appid=".intval($appid);
+		}
+		
+		$rowCount = $dbContext->countForEntity("DBAppDevice",$sql);
 	
 		$this->rowCountLabel->setText("总设备数: ".$rowCount);
 		

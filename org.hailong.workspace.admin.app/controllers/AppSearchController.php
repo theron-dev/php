@@ -72,7 +72,7 @@ class AppSearchController extends ViewController{
 				$item["createTime"] = date("Y-m-d H:i:s",$app->createTime);
 				$item["command"] = "<input type='button' value='修改' class='edit' key='{$app->appid}'></input>"
 					."<input type='button' value='删除' action='delete' key='{$app->appid}'></input>"
-					."<input type='button' value='设备' onclick=\"window.location.href='device.php'\"></input>";
+					."<input type='button' value='设备' onclick=\"window.location.href='device.php?appid={$app->appid}'\"></input>";
 				$items[] = $item;
 			}
 			$dbContext->free($rs);
