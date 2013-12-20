@@ -53,12 +53,12 @@ class AppDeviceService extends Service{
 						$hasChange = true;
 					}
 					
-					if($item->version != $version){
+					if($version && $item->version != $version){
 						$item->version = $version;
 						$hasChange = true;
 					}
 					
-					if($item->build != $build){
+					if($build && $item->build != $build){
 						$item->build = $build;
 						$hasChange = true;
 					}
