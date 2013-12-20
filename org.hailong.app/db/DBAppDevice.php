@@ -27,6 +27,16 @@ class DBAppDevice extends DBEntity{
 	 */
 	public $token;
 	/**
+	 * 应用版本
+	 * @var String
+	 */
+	public $version;
+	/**
+	 * 编译版本
+	 * @var String
+	 */
+	public $build;
+	/**
 	* 修改时间
 	* @var int
 	*/
@@ -65,6 +75,12 @@ class DBAppDevice extends DBEntity{
 		}
 		if($field == "token"){
 			return "VARCHAR(128) NULL";
+		}
+		if($field == "version"){
+			return "VARCHAR(32) NULL";
+		}
+		if($field == "build"){
+			return "VARCHAR(32) NULL";
 		}
 		if($field == "updateTime"){
 			return "INT(11) NULL";

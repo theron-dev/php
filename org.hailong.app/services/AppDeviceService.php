@@ -27,6 +27,8 @@ class AppDeviceService extends Service{
 			$appid = $task->appid;
 			$did = $task->did;
 			$token = $task->token;
+			$version = $task->version;
+			$build = $task->build;
 			
 			if($appid ===null && isset($config["appid"])){
 				$appid = $config["appid"];
@@ -36,18 +38,34 @@ class AppDeviceService extends Service{
 				$did = $context->getInternalDataValue("device-did");
 			}
 
-			if($appid && $did && $token ){
+			if($appid && $did){
 				
 				$item = $dbContext->querySingleEntity("DBAppDevice","`appid`=$appid AND did=$did");
                 
+				$hasTokenChange = false;
 				$hasChange = false;
 				
 				if($item){
+					
 					if($item->token != $token){
 						$item->token = $token;
+						$hasTokenChange = true;
+						$hasChange = true;
+					}
+					
+					if($item->version != $version){
+						$item->version = $version;
+						$hasChange = true;
+					}
+					
+					if($item->build != $build){
+						$item->build = $build;
+						$hasChange = true;
+					}
+					
+					if($hasChange){
 						$item->updateTime = time();
 						$dbContext->update($item);
-						$hasChange = true;
 					}
 				}
 				else{
@@ -55,13 +73,15 @@ class AppDeviceService extends Service{
 					$item->appid = $appid;
 					$item->did = $did;
 					$item->token = $token;
+					$item->version = $version;
+					$item->build = $build;
 					$item->updateTime = time();
 					$item->createTime = time();
 					$dbContext->insert($item);
-					$hasChange = true;
+					$hasTokenChange = true;
 				}
 			
-				if($hasChange){
+				if($hasTokenChange){
 					$dbContext->delete("DBAppDevice","`appid`=$appid AND `token`=".$dbContext->parseValue($token)." AND `did`<>$did");
 				}
 				

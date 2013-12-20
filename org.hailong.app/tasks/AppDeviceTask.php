@@ -24,6 +24,16 @@ class AppDeviceTask implements ITask{
 	 */
 	public $token;
 	/**
+	 * 应用版本
+	 * @var String
+	 */
+	public $version;
+	/**
+	 * 编译版本
+	 * @var String
+	 */
+	public $build;
+	/**
 	 * Setting
 	 * @var any
 	 */
