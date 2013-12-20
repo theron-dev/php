@@ -69,6 +69,13 @@ table .page input{
 	float:left;
 }
 
+table .page label{
+	float:left;
+	padding-top: 6px;
+	padding-left: 6px;
+	color: #000000;
+}
+
 table .page select{
 	float:right;
 }
