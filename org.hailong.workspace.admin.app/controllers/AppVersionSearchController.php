@@ -80,7 +80,7 @@ class AppVersionSearchController extends ViewController{
 				$item["version"] = $app->version;
 				$item["content"] = $app->content;
 				$item["uri"] = $app->uri;
-				$item["updateLevel"] = $app->udpateLevel;
+				$item["updateLevel"] = $app->updateLevel;
 				$item["isLastVersion"] = $app->isLastVersion;
 				$command =  "<input type='button' value='修改' class='edit' key='{$app->avid}'></input>"
 					."<input type='button' value='删除' action='delete' key='{$app->avid}'></input>";
