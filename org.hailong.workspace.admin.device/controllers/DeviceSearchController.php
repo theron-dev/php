@@ -5,12 +5,14 @@ class DeviceSearchController extends ViewController{
 	private $searchTable;
 	private $searchPageListView;
 	private $pageSize = 50;
+	private $rowCountLabel;
 	
 	public function __construct($context,$isPostback=false){
 		parent::__construct($context,$isPostback);
 		
 		$this->searchTable = new TableView("search_table");
 		$this->searchPageListView = new ListView("search_page");
+		$this->rowCountLabel = new Label("rowCount");
 		
 		$task = new AuthorityEntityValidateTask("workspace/admin/device");
 		
@@ -40,6 +42,8 @@ class DeviceSearchController extends ViewController{
 	
 		$rowCount = $dbContext->countForEntity("DBDevice");
 	
+		$this->rowCountLabel->setText("总设备数: ".$rowCount);
+		
 		$pageIndex = $this->searchPageListView->getSelectedValue();
 		if(!$pageIndex){
 			$pageIndex = 1;
