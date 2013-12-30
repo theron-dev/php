@@ -18,6 +18,9 @@ if($_FILES){
 				$uploadDir = "images/";
 				$isImage = true;
 			}
+			else if($extName == ".spx" || $extName == ".mp3" || $extName == ".m4a"){
+				$uploadDir = "audios/";
+			}
 			else{
 				$uploadDir = "res/";
 			}

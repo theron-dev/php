@@ -94,6 +94,9 @@ function upload_extname($file){
 	else if($type == "image/gif"){
 		$value .= ".gif";
 	}
+	else if($type == "audio/speex"){
+		$value .= ".spx";
+	}
 	else {
 		$index = strrpos($file["name"],".");
 		if($index !== false){
