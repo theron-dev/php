@@ -75,7 +75,7 @@ function config(){
 			array(
 				"class" => "CacheService",
 				"tasks" => array(
-					"CacheRemoveTask"
+					"CacheRemoveTask","CacheCleanupTask"
 				),
 			),
 		),

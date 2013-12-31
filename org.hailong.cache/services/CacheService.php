@@ -101,6 +101,7 @@ class CacheService extends Service{
 			
 			$config  = $this->getConfig();
 			$timeout = isset($config["timeout"]) ? $config["timeout"] : 120;
+			$expire  = $task->expire ? intval($task->expire) : 3600;
 			
 			$path = $task->path;
 
@@ -125,6 +126,7 @@ class CacheService extends Service{
 					$item->value = json_encode($task->value);
 					if(!$memcache || (time() - $item->updateTime) > $timeout){
 						$item->updateTime = time();
+						$item->expire = $expire;
 						$dbContext->update($item);
 					}
 				}
@@ -132,6 +134,7 @@ class CacheService extends Service{
 					$item = new DBCache();
 					$item->value = 	json_encode($task->value);
 					$item->path = $path;
+					$item->expire = $expire;
 					$item->updateTime = time();
 					$item->createTime = time();
 					$dbContext->insert($item);
@@ -139,7 +142,7 @@ class CacheService extends Service{
 			}
 			
 			if($memcache){
-				$memcache->set($path,$item);
+				$memcache->set($path,$item,null,$expire);
 			}
 			
 			$this->cahce[$path] = $item;
@@ -165,6 +168,16 @@ class CacheService extends Service{
 				
 			$dbContext->delete("DBCache",array("cid"=>$task->cid));
 		
+			return false;
+		}
+		
+		if($task instanceof CacheCleanupTask){
+			
+			$context = $this->getContext();
+			$dbContext = $context->dbContext(DB_CACHE);
+			
+			$dbContext->delete("DBCache",time()." - updateTime > expire OR isnull(expire)");
+			
 			return false;
 		}
 		

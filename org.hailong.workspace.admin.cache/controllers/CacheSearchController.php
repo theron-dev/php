@@ -100,6 +100,20 @@ class CacheSearchController extends ViewController{
 
 		}
 		
+		if($action == "cleanup"){
+				
+			$task = new CacheCleanupTask();
+
+			try{
+				$this->getContext()->handle("CacheCleanupTask",$task);
+				$this->loadContent();
+			}
+			catch(Exception $ex){
+				getCurrentViewContext()->pushFunction("window.alert",$ex->getMessage());
+			}
+		
+		}
+		
 	}
 }
 

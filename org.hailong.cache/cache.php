@@ -15,6 +15,7 @@ if($library){
 	require_once "$library/org.hailong.cache/tasks/CacheGetTask.php";
 	require_once "$library/org.hailong.cache/tasks/CachePutTask.php";
 	require_once "$library/org.hailong.cache/tasks/CacheRemoveTask.php";
+	require_once "$library/org.hailong.cache/tasks/CacheCleanupTask.php";
 	
 	require_once "$library/org.hailong.cache/services/CacheService.php";
 	

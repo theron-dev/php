@@ -39,7 +39,6 @@ class StatisticsService extends Service{
 				}
 				
 				$cachePath = CACHE_PATH_STATISTICS."/".$dbClass."/".$task->target."/".$task->source."/".$uid;
-				$storagePath = CACHE_PATH_STATISTICS."/".$dbClass."/".$task->target."/".$task->source."/".$uid."/timestamp";
 				$value = 0;
 				$storageTime = 0;
 				
@@ -49,18 +48,10 @@ class StatisticsService extends Service{
 				$context->handle("CacheGetTask",$cacheTask);
 				
 				if($cacheTask->value){
-					$value = intval($cacheTask->value);
+					$value = isset($cacheTask->value["v"]) ? $cacheTask->value["v"]: 0;;
+					$storageTime = isset($cacheTask->value["t"]) ? $cacheTask->value["t"]: 0;
 				}
-				
-				$cacheTask = new CacheGetTask();
-				$cacheTask->path = $storagePath;
-				
-				$context->handle("CacheGetTask",$cacheTask);
-				
-				if($cacheTask->value){
-					$storageTime = intval($cacheTask->value);
-				}
-				
+
 				if(($storageTime == 0 && time() >= $beginTime) || (time() - $storageTime >= $timeout )){
 
 					$key = $task->key;
@@ -86,20 +77,15 @@ class StatisticsService extends Service{
 
 					$cacheTask = new CachePutTask();
 					$cacheTask->path = $cachePath;
-					$cacheTask->value = 0;
+					$cacheTask->value = array("v"=>0,"t"=>$item->updateTime);
 						
 					$context->handle("CachePutTask",$cacheTask);
 					
-					$cacheTask = new CachePutTask();
-					$cacheTask->path = $storagePath;
-					$cacheTask->value = $item->updateTime;
-					
-					$context->handle("CachePutTask",$cacheTask);
 				}
 				else{
 					$cacheTask = new CachePutTask();
 					$cacheTask->path = $cachePath;
-					$cacheTask->value = $value + $task->count;
+					$cacheTask->value =  array("v"=>$value + $task->count,"t"=>$storageTime) ;
 					$context->handle("CachePutTask",$cacheTask);	
 				}
 			}

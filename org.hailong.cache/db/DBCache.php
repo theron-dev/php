@@ -23,6 +23,11 @@ class DBCache extends DBEntity{
 	 */
 	public $value;
 	/**
+	 * 超时时间
+	 * @var int
+	 */
+	public $expire;
+	/**
 	 * 修改时间
 	 * @var int
 	 */
@@ -58,6 +63,9 @@ class DBCache extends DBEntity{
 		}
 		if($field == "value"){
 			return "TEXT NULL";
+		}
+		if($field == "expire"){
+			return "INT(11) NULL";
 		}
 		if($field == "updateTime"){
 			return "INT(11) NULL";

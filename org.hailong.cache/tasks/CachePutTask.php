@@ -15,6 +15,12 @@ class CachePutTask extends CacheTask{
 	public $value;
 	
 	/**
+	 * 超时时间，默认 3600 秒
+	 * @var int
+	 */
+	public $expire;
+	
+	/**
 	* 输出 时间戳
 	* @var int
 	*/
