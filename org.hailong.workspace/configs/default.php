@@ -1,6 +1,7 @@
 <?php
 
 
+global $library;
 
 $dbConfig = require "$library/org.hailong.configs/db_default.php";
 
@@ -29,7 +30,9 @@ return array(
 					"DBContextTask"
 					),
 				"config" => array(
-					"entitys"=>array("DBAccount","DBUserViewState","DBAuthority","DBAuthorityRole","DBAuthorityEntity","DBLog","DBStatisticsUniversal","DBCache")
+					"entitys"=>array("DBAccount","DBUserViewState"
+							,"DBAuthority","DBAuthorityRole","DBAuthorityEntity"
+							,"DBLog","DBStatisticsUniversal","DBCache")
 				),
 				"createInstance" =>true,
 			),

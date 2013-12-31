@@ -85,6 +85,8 @@ class DBContext{
 		
 			$this->dbAdapter->query($sql);
 	
+			echo $sql;
+			
 			return true;
 		}
 		
