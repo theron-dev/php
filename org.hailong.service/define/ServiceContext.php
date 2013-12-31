@@ -121,22 +121,33 @@ class ServiceContext implements IServiceContext{
 	}
 	
 	
-	public function fillTask($task,$defaultData=null,$class=null){
+	public function fillTask($task,$defaultData=null,$namespace=null,$class=null){
 		
 
 		if($class == null){
-			$this->fillTask($task,$defaultData,get_class($task));
+			$this->fillTask($task,$defaultData,$namespace,get_class($task));
 		}
 		else{
 			
 			$classs = class_parents($class);
 			
 			foreach($classs as $c){
-				$this->fillTask($task,$defaultData,$c);
+				$this->fillTask($task,$defaultData,$namespace,$c);
 			}
+			
 			$values = array();
 			$t = new $class();
 			$prefix = $t->prefix();
+			
+			if($namespace){
+				if($prefix){
+					$prefix = $namespace."-".$prefix;
+				}
+				else{
+					$prefix = $namespace;
+				}
+			}
+			
 			foreach($t as $key=>$value){
 				if($defaultData && isset($defaultData[$key])){
 					$values[$key] = $defaultData[$key];

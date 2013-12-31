@@ -117,6 +117,18 @@ class AccountInfoService extends Service{
 					$task->infos["tel"] = $user->tel;
 				}
 				
+				if($user->weibo_uid){
+					$task->infos["weibo_uid"] = $user->weibo_uid;
+				}
+				
+				if($user->douban_uid){
+					$task->infos["douban_uid"] = $user->douban_uid;
+				}
+				
+				if($user->qq_uid){
+					$task->infos["qq_uid"] = $user->qq_uid;
+				}
+				
 				$sql = "uid={$uid}";
 				
 				if($task->keys){

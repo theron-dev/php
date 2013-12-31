@@ -49,7 +49,7 @@ interface IServiceContext{
 	
 	public function setOutputDataValue($key,$value);
 
-	public function fillTask($task,$defaultData=null);
+	public function fillTask($task,$defaultData=null,$namespace=null);
 	
 	public function fillData(&$data,$task);
 	

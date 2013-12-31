@@ -47,6 +47,8 @@ if($library){
 	
 	require_once "$library/org.hailong.account/services/TaobaoLoginService.php";
 	
+	require_once "$library/org.hailong.account/services/DoubanLoginService.php";
+	
 	require_once "$library/org.hailong.account/tasks/AuthTask.php";
 	require_once "$library/org.hailong.account/tasks/LoginTask.php";
 	require_once "$library/org.hailong.account/tasks/LogoutTask.php";
@@ -95,6 +97,10 @@ if($library){
 	require_once "$library/org.hailong.account/tasks/AccountTelUnBindTask.php";
 	
 	require_once "$library/org.hailong.account/tasks/AccountIDByBindTask.php";
+	
+	require_once "$library/org.hailong.account/tasks/DoubanLoginTask.php";
+	require_once "$library/org.hailong.account/tasks/DoubanBindTask.php";
+	
 	
 	require_once "$library/org.hailong.account/controllers/LoginController.php";
 	require_once "$library/org.hailong.account/controllers/LogoutController.php";

@@ -19,5 +19,8 @@ if($library){
 	
 	require_once "$library/org.hailong.service/tasks/DBContextTask.php";
 	require_once "$library/org.hailong.service/services/DBService.php";
+	
+	require_once "$library/org.hailong.service/tasks/GatherTask.php";
+	require_once "$library/org.hailong.service/services/GatherService.php";
 }
 ?>
