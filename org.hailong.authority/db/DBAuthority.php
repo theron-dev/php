@@ -70,10 +70,10 @@ class DBAuthority extends DBEntity{
 			return "INT NULL";
 		}
 		if($field == "arid"){
-			return "BITINT NULL";
+			return "BIGINT NULL";
 		}
 		if($field == "aeid"){
-			return "BITINT NULL";
+			return "BIGINT NULL";
 		}
 		if($field == "createTime"){
 			return "INT(11) NULL";
