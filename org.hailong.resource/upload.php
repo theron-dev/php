@@ -7,6 +7,7 @@ $rs = array();
 $uploadDir = "res/";
 
 if($_FILES){
+	var_dump($_FILES);
 	foreach($_FILES as $name=>$file){
 		if($file["size"] >0 && $file["tmp_name"]){
 			
