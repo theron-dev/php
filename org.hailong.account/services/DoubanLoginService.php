@@ -153,7 +153,7 @@ class DoubanLoginService extends Service{
 	
 	public static function getDoubanUserInfo($appkey,$token){
 		
-		$ch = curl_init("https://api.douban.com/v2/user/~me?appkey={$appkey}");
+		$ch = curl_init("https://api.douban.com/v2/user/~me");
 		
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer {$token}"));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
