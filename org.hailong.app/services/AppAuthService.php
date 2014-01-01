@@ -41,7 +41,6 @@ class AppAuthService extends Service{
 				throw new AppException("not found app ".$task->appid,ERROR_APP_NOT_FOUND);
 			}
 			
-		
 			if($task->account && $task->password){
 				
 				$loginTask = new LoginTask();
@@ -53,7 +52,7 @@ class AppAuthService extends Service{
 				
 				$auth = $context->getInternalDataValue("auth");
 				$did = $context->getInternalDataValue("device-did");
-				
+					
 				if($auth && $did){
 					$appAuth = $dbContext->querySingleEntity("DBAppAuth","appid={$task->appid} and uid=$auth and did=$did");
 					if($appAuth){
@@ -93,7 +92,7 @@ class AppAuthService extends Service{
 				}
 				else{
 					if(!$anonymous){
-						throw new AppException("not found LoginTask handle service", ERROR_APP_NOT_HANDLE_LOGIN_TASK);
+						throw new AppException("not handle Login task", ERROR_APP_NOT_HANDLE_LOGIN_TASK);
 					}
 				}
 			}
@@ -110,7 +109,6 @@ class AppAuthService extends Service{
 				if($did === null){
 					$did = $context->getInternalDataValue("device-did");
 				}
-				
 				
 				if($auth && $did){
 					$appAuth = $dbContext->querySingleEntity("DBAppAuth","appid={$task->appid} and uid={$task->uid} and did=$did");

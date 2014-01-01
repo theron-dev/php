@@ -16,10 +16,17 @@ class DeviceAuthService extends Service{
 			$context = $this->getContext();
 			$dbContext = $context->dbContext();
 			
+			$config = $this->getConfig();
+			
+			$anonymous = isset($config["anonymous"]) ? $config["anonymous"] : false;
+			
 			if($task->did){
 				$device = $dbContext->get("DBDevice",array("did"=>$task->did));
 				if($device == null){
-					throw new DeviceException("not found device",ERROR_NOT_FOUND_DEVICE_ID);
+					if(!$anonymous){
+						throw new DeviceException("not found device",ERROR_NOT_FOUND_DEVICE_ID);
+					}
+					return false;
 				}
 				
 				$context->setInternalDataValue("device-did",$device->did);
@@ -48,7 +55,10 @@ class DeviceAuthService extends Service{
 						$dbContext->insert($device);
 					}
 					else{
-						throw new DeviceException("not found device",ERROR_NOT_FOUND_DEVICE_ID);
+						if(!$anonymous){
+							throw new DeviceException("not found device",ERROR_NOT_FOUND_DEVICE_ID);
+						}
+						return false;
 					}
 				}
 				else{
