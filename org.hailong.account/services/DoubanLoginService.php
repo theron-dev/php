@@ -63,7 +63,7 @@ class DoubanLoginService extends Service{
 	
 				$user = new DBAccount();
 				$user->account = "#DOUBAN_".$douban_uid;
-				$user->weibo_uid = $douban_uid;
+				$user->douban_uid = $douban_uid;
 				$user->password = DBAccount::generatedPassword();
 				$user->title = isset($userInfo["name"]) ? $userInfo["name"]:null;
 				$user->state = AccountStateNone;
