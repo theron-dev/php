@@ -155,7 +155,7 @@ class DoubanLoginService extends Service{
 		
 		$ch = curl_init("https://api.douban.com/v2/user/~me?appkey={$appkey}");
 		
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array("access_token: {$token}"));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer {$token}"));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		
 		$rs = curl_exec($ch);
