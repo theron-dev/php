@@ -123,29 +123,41 @@ class AppAuthService extends Service{
 					
 					if($appAuth){
 						if($appAuth->token != $token 
-							|| $appAuth->secret != AppAuthService::genAuthSecret($app->secret)
-							|| ($appAuth->sign != client_sign() && (time() - $appAuth->updateTime) > $timeout)
-							){
+							|| $appAuth->secret != AppAuthService::genAuthSecret($app->secret)){
 							if(!$anonymous){
 								throw new AppException("auth token error", ERROR_APP_AUTH_TOKEN);
 							}
 						}
 						else{
+							
 							if($appAuth->sign != client_sign() 
-								|| ($task->setting && $task->setting != $appAuth->setting)){
-								$appAuth->sign = client_sign();
-								if($task->setting){
-									$appAuth->setting = $task->setting;
+									&& (time() - $appAuth->updateTime) > $timeout){
+								if(!$anonymous){
+									throw new AppException("auth token error", ERROR_APP_AUTH_TOKEN);
 								}
-								$appAuth->updateTime = time();
-								$dbContext->update($appAuth);
+							}
+							else{
 								
-								$context->setOutputDataValue("auth-setting", $appAuth->setting);
+								if($appAuth->sign != client_sign() 
+									|| ($task->setting && $task->setting != $appAuth->setting)){
+									$appAuth->sign = client_sign();
+									if($task->setting){
+										$appAuth->setting = $task->setting;
+									}
+									$appAuth->updateTime = time();
+									$dbContext->update($appAuth);
+								}
+								
+								if($appAuth->setting){
+									$context->setOutputDataValue("auth-setting", $appAuth->setting);
+								}
+								
+								$context->setInternalDataValue("auth", $appAuth->uid);
+								$context->setInternalDataValue("auth-token", $token);
+								$context->setOutputDataValue("auth", $appAuth->uid);
 							}
 							
-							$context->setInternalDataValue("auth", $appAuth->uid);
-							$context->setInternalDataValue("auth-token", $token);
-							$context->setOutputDataValue("auth", $appAuth->uid);
+							
 						}
 						
 					}
