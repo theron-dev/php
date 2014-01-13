@@ -11,8 +11,6 @@ VTPublish = {
 		
 			this.baseUrl = baseUrl.substr(0,i);
 			
-			this.show();
-			
 			if(!window.jQuery){
 				VTPublish.loadScript(VTPublish.jQuery);
 			}
@@ -22,7 +20,7 @@ VTPublish = {
 			VTPublish.loadScript("/plugins/run.js");
 		},
 		
-		loadScript:function(src){
+		loadScript:function(src,onload){
 			var i = src.indexOf("http://");
 			if(i !== 0){
 				src = this.baseUrl + src;
@@ -31,6 +29,7 @@ VTPublish = {
 			element.type = "text/javascript; charset=utf8";
 			element.charset = "utf8";
 			element.src = src;
+			element.onload = onload;
 			document.body.appendChild(element);
 		},
 	
