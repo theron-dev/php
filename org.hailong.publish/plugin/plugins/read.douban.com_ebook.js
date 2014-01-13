@@ -1,6 +1,6 @@
 
 
-VTPublish.Publish.push(
+VTPublish.Plugins.push(
 		{
 			"hasPrefix":"http://read.douban.com/ebook/",
 			"fields":[
