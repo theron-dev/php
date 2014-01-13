@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema>
+	<match hasPrefix="http://read.douban.com/ebook/"></match>
+	<form>
+		<field name="type" type="hidden">"ebook"</field>
+		<field name="url">window.location.href</field>
+		<field name="bookId">window.location.href.split("/")[4]</field>
+		<field name="title">$(".article-title").html()</field>
+		<field name="image">$(".article-profile-primary > .cover > img").attr("src")</field>
+		<field name="image">$(".article-profile-primary > .cover > img").attr("src")</field>
+		<field name="author">$(".article-profile-primary .author a ").html()</field>
+	</form>
+</schema>
