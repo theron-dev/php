@@ -24,7 +24,7 @@ VTPublish = {
 			element.type = "text/javascript; charset=utf8";
 			element.charset = "utf8";
 			element.src = src;
-			document.body.append(Child);
+			document.body.appendChild(element);
 		},
 		
 		plugin: function(){
