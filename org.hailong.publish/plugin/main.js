@@ -11,8 +11,15 @@ VTPublish = {
 		
 			this.baseUrl = baseUrl.substr(0,i);
 			
+			this.show();
 			
+			if(!window.jQuery){
+				VTPublish.loadScript(VTPublish.jQuery);
+			}
+
+			VTPublish.loadScript("/plugins/read.douban.com_ebook.js");
 			
+			VTPublish.loadScript("/plugins/run.js");
 		},
 		
 		loadScript:function(src){
@@ -26,47 +33,7 @@ VTPublish = {
 			element.src = src;
 			document.body.appendChild(element);
 		},
-		
-		plugin: function(){
-			
-			var plugin = null;
-			
-			for(plugin in this.Plugins){
-				if(plugin.match && typeof plugin.match == "function"){
-					if(plugin.match()){
-						break;
-					}
-				}
-				else if(plugin.hasPrefix && typeof plugin.hasPrefix == "string"){
-					var hasPrefix = plugin.hasPrefix;
-					var len = hasPrefix.length;
-					var href = window.location.href;
-					if(len <= href.length){
-						var i = 0;
-						for( i=0;i<len;i++){
-							if(hasPrefix[i] != href[i]){
-								break;
-							}
-						}
-						if( i >= len){
-							break;
-						}
-					}
-				}
-			}
-			
-			return plugin;
-		},
-		
-		show: function(){
-			
-			
-			
-		}
+	
 };
 
-if(!window.jQuery){
-	VTPublish.loadScript(VTPublish.jQuery);
-}
 
-VTPublish.loadScript("/plugins/read.douban.com_ebook.js");
