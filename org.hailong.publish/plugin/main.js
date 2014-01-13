@@ -26,8 +26,6 @@ VTPublish = {
 				src = this.baseUrl + src;
 			}
 			var element = document.createElement("script");
-			element.type = "text/javascript; charset=utf8";
-			element.charset = "utf8";
 			element.src = src;
 			element.onload = onload;
 			document.body.appendChild(element);
