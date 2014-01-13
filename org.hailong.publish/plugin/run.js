@@ -28,8 +28,6 @@
 		}
 	}
 	
-	if(plugin){
-		
-	}
+	var html = "<form width='100%'";
 	
 })(VTPublish);

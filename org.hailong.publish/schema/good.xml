@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book>
+	<title>商品</title>
+	<field name="bookType" type="string" length="32"></field>
+	<field name="bookId" type="string" length="128"></field>
+	<field name="ISBN" type="string" length="128"></field>
+	<field name="title" type="string" length="256"></field>
+	<field name="author" type="string" length="256"></field>
+</book>

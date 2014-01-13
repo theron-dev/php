@@ -23,11 +23,11 @@ class DBPublishSchemaRuntime{
 		$this->domain = $domain;
 		$this->scheam = $scheam;
 		
-		$this->tableName = "ps_{$domain}_{$schema->path}_{$schema->version}";
+		$this->tableName = md5("ps_{$domain}_{$schema->path}_{$schema->version}");
 		
 		$this->document = new DOMDocument();
 		
-		@$doc->loadXML($this->scheam->content);
+		@$this->document->loadXML($this->scheam->content);
 		
 		$this->fields = array();
 		
@@ -83,7 +83,7 @@ class DBPublishSchemaRuntime{
 		}
 		else{
 			
-			$sql = "CREATE TABLE IF NOT EXISTS `".$this->tableName."` (`id` BIGINT NOT NULL AUTO_INCREMENT,`sid` BIGINT";
+			$sql = "CREATE TABLE IF NOT EXISTS `".$this->tableName."` (`eid` BIGINT NOT NULL AUTO_INCREMENT";
 
 			foreach($this->fields as $field){
 				$name = $this->elementAttrValue($field,"name");
@@ -94,7 +94,7 @@ class DBPublishSchemaRuntime{
 				}
 			}
 			
-			$sql .= " `timestamp` INT, PRIMARY KEY (`id`)";
+			$sql .= " `timestamp` INT(11), PRIMARY KEY (`eid`)";
 
 			$sql .= ") AUTO_INCREMENT = 1;";
 			
@@ -107,119 +107,142 @@ class DBPublishSchemaRuntime{
 		$this->dbContext->query("DELETE FROM `{$this->tableName}`");
 	}
 	
-	public function put($data,$sid,$timestamp){
+	public function remove($eid){
+		$this->dbContext->query("DELETE FROM `{$this->tableName}` WHERE eid=".intval($eid));
+	}
+	
+	public function add($data,$timestamp){
 		
 		$dbContext = $this->dbContext;
 		$dbAdapter = $dbContext->getDBAdapter();
 		
-		$sid = $dbContext->parseValue($sid);
-		
-		$sql = "SELECT * FROM `{$this->tableName}` WHERE `sid`={$sid}";
-		
-		$data = null;
-		
-		$rs = $dbContext->query($sql);
-		
-		if($rs){
-			$data = $dbContext->next($rs);
-			$dbContext->free($rs);
+		if(!$timestamp){
+			$timestamp = time();
 		}
 		
-		if($data){
-			
-			if($date->timestamp != $timestamp){
-				
-				$sql = "UPDATE `{$this->tableName}` SET `timestamp`={$timestamp}";
+		$sql = "INSERT INTO `{$this->tableName}`(`timestamp`";
+		
+		foreach($this->fields as $field){
+			$name = $this->elementAttrValue($field,"name");
+			if($name){
+				$sql .= ",`{$name}`";
+			}
+		}
+		
+		$sql .=") VALUES ({$timestamp}";
 
-				foreach($this->fields as $field){
-					$name = $this->elementAttrValue($field,"name");
-					if($name){
-						
-						$v = null;
-						if(isset($data[$name])){
-							$v = $data[$name];
-						}
-						else if(isset($data->$name)){
-							$v = $data->$name;
-						}
-						
-							
-						if($v){
-							if($type == "object"){
-								$v = json_encode($v);
-							}
-						}
-						
-						$sql .= ",`{$name}`=".$dbContext->parseValue($v);
-					}
-				}
+		foreach($this->fields as $field){
+			$name = $this->elementAttrValue($field,"name");
+			$type = $this->elementAttrValue($field, "type");
+			if($name){
 				
-				$sql .=" WHERE `sid`={$sid}";
-			
-				$dbContext->query($sql);
-				
-				return true;
-			}
-		}
-		else{
-			$sql = "INSERT INTO `{$this->tableName}`(`sid`,`timestamp`";
-			
-			foreach($this->fields as $field){
-				$name = $this->elementAttrValue($field,"name");
-				if($name){
-					$sql .= ",`{$name}`";
+				$v = null;
+				if(isset($data[$name])){
+					$v = $data[$name];
 				}
-			}
-			
-			$sql .=") VALUES (".$dbContext->parseValue($sid).",{$timestamp}";
-	
-			foreach($this->fields as $field){
-				$name = $this->elementAttrValue($field,"name");
-				$type = $this->elementAttrValue($field, "type");
-				if($name){
-					
-					$v = null;
-					if(isset($data[$name])){
-						$v = $data[$name];
-					}
-					else if(isset($data->$name)){
-						$v = $data->$name;
-					}
+				else if(isset($data->$name)){
+					$v = $data->$name;
+				}
 
-					if($v){
-						if($type == "object"){
-							$v = json_encode($v);
-						}
+				if($v){
+					if($type == "object"){
+						$v = json_encode($v);
 					}
-					
-					$sql .= ",".$dbContext->parseValue($v);
 				}
+				
+				$sql .= ",".$dbContext->parseValue($v);
 			}
-			
-			$sql .=");";
-			
-			$dbContext->query($sql);
-			
-			return $dbAdapter->getInsertId();
 		}
+		
+		$sql .=");";
+		
+		$dbContext->query($sql);
+		
+		return $dbAdapter->getInsertId();
 	}
 	
-	public function xslt($xslt){
-	
-		$document = null;
-		if($xslt instanceof DOMDocument){
-			$document = $xslt;
-		}
-		else{
-			$document = new DOMDocument();
-			@$document->loadXML($xslt, LIBXML_NOCDATA);
-		}
-	
-		$proc = new XSLTProcessor();
+	public function releaseTo($todir){
 		
-		$proc->importStylesheet( $document );
+		$todir .= "/".$this->domain->domain."/".$this->scheam->path."/".$this->scheam->version;
 		
-		return $proc->transformToXml($this->document);
+		if(!file_exists($todir)){
+			mkdir($todir,null,true);
+		}
+		
+		$xmlContent = '<?xml version="1.0" encoding="UTF-8"?><data>';
+
+		$sql = "SELECT * FROM `{$this->tableName}` ORDER BY `timestamp` DESC";
+		
+		$rs = $this->dbContext->query($sql);
+		
+		if($rs){
+			
+			while($row = $dbContext->next($rs)){
+				
+				$xmlContent .= "<item";
+				
+				foreach($this->fields as $field){
+					$name = $this->elementAttrValue($field,"name");
+					if($name && isset($row[$name])){
+						$xmlContent .= ' '.$name.'="'.htmlspecialchars($row[$name]).'"';
+					}
+				}
+				
+				$xmlContent .= "></item>";
+				
+			}
+			
+			$dbContext->free($rs);
+			
+		}
+		
+		$xmlContent .= '</data>';
+		
+		file_put_contents($todir.'/data.xml', $xmlContent);
+		
+		$data = new DOMDocument();
+		
+		@$data->loadXML($xmlContent);
+		
+		$dbContext = $this->context->dbContext(DB_PUBLISH);
+		
+		$rs = $dbContext->queryEntitys("DBPublishSchemaEntity","psid={$this->scheam->psid}");
+		
+		if($rs){
+			
+			while($entity = $dbContext->nextObject($rs,"DBPublishSchemaEntity")){
+				
+				if($entity->content){
+					
+					if($entity->entityType == DBPublishSchemaEntityTypeHtml || $entity->entityType == DBPublishSchemaEntityTypeXml){
+						
+						$proc = new XSLTProcessor();
+						
+						$xsl = new DOMDocument();
+						
+						@$xsl->loadXML($entity->content);
+						
+						$proc->importStylesheet( $xsl );
+						
+						$xml = $proc->transformToXml($doc);
+						
+						if($xml !== false){
+							
+							$ext = $entity->entityType == DBPublishSchemaEntityTypeHtml ? '.html' : '.xml';
+							
+							file_put_contents($todir.'/'.$entity->name.$ext, $xml);
+							
+						}
+						
+					}
+					
+				}
+				
+			}
+			
+			$dbContext->free($entity);
+		}
+		
 	}
 	
 	public function elementAttrValue($element,$name){
@@ -253,14 +276,6 @@ class DBPublishSchemaRuntime{
 			}
 			else{
 				return "DOUBLE";
-			}
-		}
-		else if($type == "object"){
-			if($length){
-				return "TEXT($length)";
-			}
-			else{
-				return "TEXT";
 			}
 		}
 		else{

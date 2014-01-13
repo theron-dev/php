@@ -1,39 +1,40 @@
 <?php
 
 /**
-* 发布解锁任务
+* 发布任务
 * @author zhanghailong
 *
 */
-class PublishUnlockTask extends AuthTask{
+class PublishReleaseTask extends AuthTask{
 	
 	/**
 	 * 发布目标
-	 * domain
-	 * domain/path
 	 * domain/path/version
 	 * @var String
 	 */
 	public $target;
-	
 	/**
-	 * 发布目录
+	 * 发布数据库Key
 	 * @var String
 	 */
-	public $dir;
+	public $dbKey;
+	/**
+	 * 沙盒子
+	 * @var boolean
+	 */
+	public $sandbox;
 	
 	public function __construct($target=null,$sandbox=false){
 		parent::__construct();
 		
 		$this->target = $target;
-		
-		global $library;
+		$this->sandbox = $sandbox;
 		
 		if($sandbox){
-			$this->dir = "$library/org.hailong.publish/sandbox";
+			$this->dbKey = "publish/sandbox";
 		}
 		else{
-			$this->dir = "$library/org.hailong.publish/runtime";
+			$this->dbKey = "publish/runtime";
 		}
 	}
 }

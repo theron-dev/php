@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book>
+	<title>图书</title>
+	<field name="bookType" type="string" length="32" title="图书类型"></field>
+	<field name="bookId" type="string" length="128" title="图书ID"></field>
+	<field name="ISBN" type="string" length="128" title="ISBN"></field>
+	<field name="title" type="string" length="256" title="标题"></field>
+	<field name="author" type="string" length="256" title="作者"></field>
+	<field name="price" type="double" title="价格"></field>
+	<field name="url" type="string" length="1024" title="URL"></field>
+</book>

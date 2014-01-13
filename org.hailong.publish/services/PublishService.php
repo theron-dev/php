@@ -9,252 +9,6 @@
 class PublishService extends Service{
 	
 	public function handle($taskType,$task){
-	
-		if($task instanceof PublishPutTask){
-			
-			$context = $this->getContext();
-			$dbContext = $context->dbContext();
-				
-			$dbContextTask = new DBContextTask(DB_PUBLISH);
-				
-			$context->handle("DBContextTask",$dbContextTask);
-				
-			if($dbContextTask->dbContext){
-				$dbContext = $dbContextTask->dbContext;
-			}
-			
-			$targetDBContext = $context->dbContext();
-			
-			$dbContextTask = new DBContextTask($task->dbKey);
-			
-			$context->handle("DBContextTask",$dbContextTask);
-			
-			if($dbContextTask->dbContext){
-				$targetDBContext = $dbContextTask->dbContext;
-			}
-			
-			$paths = split("/",	 $task->target);
-			
-			if(count($paths) >0){
-				
-				$domain = $paths[0];
-				
-				$dom = $dbContext->querySingleEntity("DBPublishDomain","domain='{$doamin}'");
-				
-				if($dom){
-					
-					$t = new AuthorityEntityValidateTask("org/hailong/publish/{$domain}/put");
-					
-					$context->handle("AuthorityEntityValidateTask", $t);
-					
-					$path = null;
-					
-					if(count($paths) > 1){
-						$path = $paths[1];
-					}
-					
-					$version = null;
-					
-					if(count($paths) > 2){
-						$version = $paths[2];
-					}
-					
-					$source = $task->source;
-					
-					if($path && $version && $source){
-				
-						$sql = "pdid={$dom->pdid} AND state<>".DBPublishSchemaStateDisabled." AND path='{$path}' AND version='$version'";
-						
-						$rs = $dbContext->queryEntitys("DBPublishSchema",$sql);
-						
-						global $library;
-						
-						$xsltDir = "$library/org.hailong.publish/xslt";
-						
-						if($rs){
-							
-							while($schema = $dbContext->nextObject($rs, "DBPublishSchema")){
-								
-								$dir = $task->dir."/".$domain."/".$schema->path."/".$scheam->version;
-								
-								mkdir($dir,0777,true);
-									
-								$runtime = new DBPublishSchemaRuntime($context, $targetDBContext, $dom->domain, $scheam);
-								
-								$xslt = file_get_contents("$xsltDir/query.xsl");
-								
-								if($xslt){
-									$xml = $runtime->xslt($xslt);
-									file_put_contents("$dir/query.xml", $xml);
-								}
-								
-								$c = $source->publishDataSourceCount();
-								
-								for($i=0;$i<$c;$i++){
-									$data = $source->publishDataSourceData($i);
-									$sid = $source->publishDataSourceId($data);
-									$timestamp = $source->publishDataSourceTimestamp($data);
-									if($data && $sid && $timestamp){
-										$runtime->put($data, $sid, $timestamp);
-									}
-								}
-	
-							}
-							
-							$dbContext->free($rs);
-						}
-					}
-				}
-			}
-			
-			return false;
-		}
-		
-		if($task instanceof PublishLockTask){
-			
-			$context = $this->getContext();
-			$dbContext = $context->dbContext();
-			
-			$dbContextTask = new DBContextTask(DB_PUBLISH);
-			
-			$context->handle("DBContextTask",$dbContextTask);
-			
-			if($dbContextTask->dbContext){
-				$dbContext = $dbContextTask->dbContext;
-			}
-			
-			$paths = split("/",	 $task->target);
-				
-			if(count($paths) >0){
-			
-				$domain = $paths[0];
-			
-				$dom = $dbContext->querySingleEntity("DBPublishDomain","domain='{$doamin}'");
-			
-				if($dom){
-						
-					$t = new AuthorityEntityValidateTask("org/hailong/publish/{$domain}/put");
-						
-					$context->handle("AuthorityEntityValidateTask", $t);
-						
-					$path = null;
-						
-					if(count($paths) > 1){
-						$path = $paths[1];
-					}
-						
-					$version = null;
-						
-					if(count($paths) > 2){
-						$version = $paths[2];
-					}
-					
-					$sql = "pdid={$dom->pdid} AND state<>".DBPublishSchemaStateDisabled;
-						
-					if($path){
-						$sql .=" AND path='$path'";
-					}
-						
-					if($version){
-						$sql .=" AND version='$version'";
-					}
-					
-					$rs = $dbContext->queryEntitys("DBPublishSchema",$sql);
-						
-					if($rs){
-
-						while($schema = $dbContext->nextObject($rs, "DBPublishSchema")){
-								
-							$p = $domain."/".$schema->path."/".$scheam->version;
-							$dir = $this->dir."/".$p;
-							$lock =  "$dir/.lock";
-							
-							if(file_exists($lock)){
-								throw new PublishException($p." is locked", ERROR_PUBLISH_SCHEMA_IS_LOCK);
-							}
-							else{
-								file_put_contents($lock, $p);
-							}
-					
-						}
-					
-						$dbContext->free($rs);
-					}
-
-				}
-			}
-		}
-		
-		if($task instanceof PublishUnlockTask){
-				
-			$context = $this->getContext();
-			$dbContext = $context->dbContext();
-			
-			$dbContextTask = new DBContextTask(DB_PUBLISH);
-			
-			$context->handle("DBContextTask",$dbContextTask);
-			
-			if($dbContextTask->dbContext){
-				$dbContext = $dbContextTask->dbContext;
-			}
-			
-			$paths = split("/",	 $task->target);
-		
-			if(count($paths) >0){
-					
-				$domain = $paths[0];
-					
-				$dom = $dbContext->querySingleEntity("DBPublishDomain","domain='{$doamin}'");
-					
-				if($dom){
-		
-					$t = new AuthorityEntityValidateTask("org/hailong/publish/{$domain}/put");
-		
-					$context->handle("AuthorityEntityValidateTask", $t);
-		
-					$path = null;
-		
-					if(count($paths) > 1){
-						$path = $paths[1];
-					}
-		
-					$version = null;
-		
-					if(count($paths) > 2){
-						$version = $paths[2];
-					}
-						
-					$sql = "pdid={$dom->pdid} AND state<>".DBPublishSchemaStateDisabled;
-		
-					if($path){
-						$sql .=" AND path='$path'";
-					}
-		
-					if($version){
-						$sql .=" AND version='$version'";
-					}
-						
-					$rs = $dbContext->queryEntitys("DBPublishSchema",$sql);
-		
-					if($rs){
-		
-						while($schema = $dbContext->nextObject($rs, "DBPublishSchema")){
-		
-							$p = $domain."/".$schema->path."/".$scheam->version;
-							$dir = $this->dir."/".$p;
-							$lock =  "$dir/.lock";
-								
-							unlink($lock);
-						}
-							
-						$dbContext->free($rs);
-					}
-		
-				}
-			}
-			
-			return false;
-		}
 		
 		if($task instanceof PublishCreateTask){
 			
@@ -304,7 +58,7 @@ class PublishService extends Service{
 					}
 					$version = $paths[$i];
 					
-					$schema = $dbContext->querySingleEntity("DBPublishSchema","pdid={$dom->pdid} AND `path`=`{$path}` AND `version`=`{$version}`");
+					$schema = $dbContext->querySingleEntity("DBPublishSchema","pdid={$dom->pdid} AND `path`='{$path}' AND `version`='{$version}'");
 					if(!$schema){
 						$schema = new DBPublishSchema();
 						$schema->uid = $uid;
@@ -328,10 +82,203 @@ class PublishService extends Service{
 			return false;
 		}
 		
+		if($task instanceof PublishCreateVersionTask){
+				
+			$context = $this->getContext();
+			$dbContext = $context->dbContext();
+		
+			$dbContextTask = new DBContextTask(DB_PUBLISH);
+		
+			$context->handle("DBContextTask",$dbContextTask);
+		
+			if($dbContextTask->dbContext){
+				$dbContext = $dbContextTask->dbContext;
+			}
+		
+			$paths = split("/",	 $task->target);
+				
+			$uid = $context->getInternalDataValue("auth");
+				
+			if(count($paths) >2){
+		
+				$domain = $paths[0];
+		
+				$dom = $dbContext->querySingleEntity("DBPublishDomain","domain='{$domain}'");
+				
+				if(!$dom){
+					throw new PublishException("not found schema",ERROR_PUBLISH_NOT_FOUND_DOMAIN);
+				}
+				
+				$task->domain = $dom;
+				
+				$path = $paths[1];
+				
+				$i = 2;
+				while($i<count($paths) -1){
+					$path .= "/".$paths[$i];
+					$i ++;
+				}
+				
+				$version = $paths[$i];
+				
+				$schema = $dbContext->querySingleEntity("DBPublishSchema","pdid={$dom->pdid} AND `path`='{$path}' AND `version`='{$version}'");
+				
+				if($schema){
+					
+					$psid = $schema;
+					
+					$schema = $dbContext->querySingleEntity("DBPublishSchema","pdid={$dom->pdid} AND `path`='{$path}' AND `version`=".$dbContext->parseValue($task->version));
+					
+					if($schema){
+						$task->schema = $schema;
+					}
+					else{
+	
+						$schema = new DBPublishSchema();
+						$schema->uid = $uid;
+						$schema->pdid = $dom->pdid;
+						$schema->path = $path;
+						$schema->version = $task->version;
+						$schema->title = $task->title;
+						$schema->body = $task->body;
+						$schema->state = DBPublishSchemaStateNone;
+						$schema->updateTime = time();
+						$schema->createTime = time();
+						$dbContext->insert($schema);
+						
+						$task->schema = $schema;
+						
+						$rs = $dbContext->queryEntitys("DBPublishSchemaEntity","psid={$psid}");
+						
+						if($rs){
+							
+							while($entity = $dbContext->nextObject($rs,"DBPublishSchemaEntity")){
+								
+								$entity->psid = $schema->psid;
+								$entity->updateTime = $entity->createTime = time();
+								$entity->publishTime = null;
+								
+								$dbContext->insert($entity);
+								
+							}
+							
+							$dbContext->free($rs);
+						}
+					}
+				}
+				else{
+					throw new PublishException("not found schema",ERROR_PUBLISH_NOT_FOUND_SCHEMA);
+				}
+				
+			}
+				
+			return false;
+		}
+		
+		if($task instanceof PublishDataAddTask){
+			
+			$runtime = $this->getRuntime($task->target, $task->dbKey);
+			
+			$runtime->add($task->data,$task->timestamp);
+			
+			return false;
+		}
+		
+		if($task instanceof PublishDataRemoveTask){
+				
+			$runtime = $this->getRuntime($task->target, $task->dbKey);
+				
+			$runtime->remove($task->eid);
+				
+			return false;
+		}
+		
+		if($task instanceof PublishDataClearTask){
+		
+			$runtime = $this->getRuntime($task->target, $task->dbKey);
+		
+			$runtime->clear();
+		
+			return false;
+		}
+		
+		if($task instanceof PublishReleaseTask){
+			
+			$runtime = $this->getRuntime($task->target, $task->dbKey);
+			
+			global $library;
+			
+			if($task->sandbox){
+				$runtime->releaseTo("$library/org.hailong.publish/sandbox");
+			}
+			else{
+				$runtime->releaseTo("$library/org.hailong.publish/runtime");
+			}
+			
+			return false;
+		}
 		
 		return true;
 	}
 	
+	private $_runtimes;
+	
+	public function getRuntime($target,$dbKey){
+		
+		if(isset($this->_runtimes[$target])){
+			return $this->_runtimes[$target];
+		}
+		
+		$context = $this->getContext();
+		
+		$dbContext = $context->dbContext(DB_PUBLISH);
+		
+		$paths = split("/", $target);
+		
+		$domain = $paths[0];
+		
+		$dom = $dbContext->querySingleEntity("DBPublishDomain","domain='{$domain}'");
+		
+		if(!$dom){
+			throw new PublishException("not found schema",ERROR_PUBLISH_NOT_FOUND_DOMAIN);
+		}
+		
+		$uid = $context->getInternalDataValue("auth");
+		
+		if($dom->uid != $uid){
+			
+			$t = new AuthorityEntityValidateTask("publish/{$dom->domain}");
+			
+			$context->handle("AuthorityEntityValidateTask", $t);
+			
+		}
+		
+		$path = $paths[1];
+		
+		$i = 2;
+		while($i<count($paths) -1){
+			$path .= "/".$paths[$i];
+			$i ++;
+		}
+		
+		$version = $paths[$i];
+		
+		$schema = $dbContext->querySingleEntity("DBPublishSchema","pdid={$dom->pdid} AND `path`='{$path}' AND `version`='{$version}'");
+		
+		if(!$schema){
+			throw new PublishException("not found schema",ERROR_PUBLISH_NOT_FOUND_SCHEMA);
+		}
+		
+		$runtime = new DBPublishSchemaRuntime($context, $context->dbContext($dbKey), $domain, $scheam);
+		
+		if(!$this->_runtimes){
+			$this->_runtimes = array();
+		}
+		
+		$this->_runtimes[$target] = $runtime;
+		
+		return $runtime;
+	}
 }
 
 ?>
