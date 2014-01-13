@@ -17,7 +17,7 @@ VTPublish = {
 
 			VTPublish.loadScript("/plugins/read.douban.com_ebook.js");
 			
-			VTPublish.loadScript("/plugins/run.js");
+			VTPublish.loadScript("/run.js");
 		},
 		
 		loadScript:function(src,onload){
