@@ -128,6 +128,9 @@ class DBPublishSchema extends DBEntity{
 		return "VARCHAR(45) NULL";
 	}
 	
+	public static function indexs(){
+		return array("path"=>array(array("field"=>"path","order"=>"asc")),"version"=>array(array("field"=>"version","order"=>"asc")),"pdid"=>array(array("field"=>"pdid","order"=>"asc")));
+	}
 }
 
 ?>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hailong Studio</title>
+<link rel="stylesheet" href="css/log.css" />
+
+<script type='text/javascript' src='js.php' ></script>
+
+</head>
+<body>
+<div class='screen'>
+	<div class='toolbar'>
+		tag : <input type='text' id='tagText' view='UI.TextView' />
+		source : <input type='text' id='sourceText' view='UI.TextView' />
+		<input type='button' value='搜索' id='searchButton' view='UI.Button' />
+		<input type='button' value='全部' id='allButton' view='UI.Button' />
+		<input type='button' value='清除所有日志' id='clearButton' view='UI.Button' />
+	</div>
+	<table class='user-table' id='search_table' view='UI.TableView'>
+		<thead>
+			<tr>
+				<th field='key'>lid</th>
+				<th field='tag'>tag</th>
+				<th field='source'>source</th>
+				<th field='level'>level</th>
+				<th field='body'>body</th>
+				<th field='createTime' >创建时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>加载中...</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan='6' class='page'>
+					<select id='search_page' view="UI.Select">
+						<option value="1">1</option>
+					</select>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+
+</div>
+</body>
+</html>

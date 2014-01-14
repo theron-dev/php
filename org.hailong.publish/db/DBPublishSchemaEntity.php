@@ -112,6 +112,9 @@ class DBPublishSchemaEntity extends DBEntity{
 		return "VARCHAR(45) NULL";
 	}
 	
+	public static function indexs(){
+		return array("psid"=>array(array("field"=>"psid","order"=>"asc")),"pdid"=>array(array("field"=>"pdid","order"=>"asc")));
+	}
 }
 
 ?>

@@ -95,6 +95,9 @@ class DBPublishDomain extends DBEntity{
 		return "VARCHAR(45) NULL";
 	}
 	
+	public static function indexs(){
+		return array("domain"=>array(array("field"=>"domain","order"=>"asc")));
+	}
 }
 
 ?>
