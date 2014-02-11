@@ -24,7 +24,7 @@ class ClassifyMatchTask extends ClassifyTask{
 	public $results;
 	
 	public function __construct(){
-		$this->target = DBClassifyTargetGoods;
+		$this->target = DBClassifyTargetDefault;
 	}
 	
 }
