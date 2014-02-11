@@ -594,7 +594,7 @@ class GoodsService extends Service{
 				$image = false;
 				$price = false;
 				
-				var_dump($rs);
+				echo $rs->saveXML();
 				
 				$nodes = $rs->getElementsByTagName("title");
 				
