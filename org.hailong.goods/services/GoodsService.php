@@ -651,9 +651,7 @@ class GoodsService extends Service{
 					$node = $nodes->item(0);
 					$body =  $rs->saveHTML($node);
 				}
-				
-				echo $rs->saveHTML();
-				
+
 				if($eid){
 					
 					if($url){
