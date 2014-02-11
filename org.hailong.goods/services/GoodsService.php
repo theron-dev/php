@@ -585,7 +585,7 @@ class GoodsService extends Service{
 		
 			header("Content-Type: text/xml;charset=utf8");
 		
-			$rs = @$xslt->transformToDoc( $html );
+			$rs = $xslt->transformToDoc( $html );
 			
 			if($rs){
 				
@@ -593,9 +593,7 @@ class GoodsService extends Service{
 				$eid = false;
 				$image = false;
 				$price = false;
-				
-				echo $rs->saveXML();
-				
+
 				$nodes = $rs->getElementsByTagName("title");
 				
 				if($nodes && $nodes->length >0){
