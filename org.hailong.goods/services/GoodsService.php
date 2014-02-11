@@ -143,8 +143,7 @@ class GoodsService extends Service{
 			return false;
 		}
 		
-		var_dump($task);
-		
+
 		if($taskType == "GoodsImportTask"){
 			
 			$context = $this->getContext();
@@ -595,6 +594,7 @@ class GoodsService extends Service{
 				$image = false;
 				$price = false;
 				
+				var_dump($rs);
 				
 				$nodes = $rs->getElementsByTagName("title");
 				
@@ -646,7 +646,7 @@ class GoodsService extends Service{
 					$task->source = $source;
 					$task->url = $url;
 					$task->wapUrl = $url;
-					var_dump($task);
+		
 					$context->handle("GoodsCreateTask",$task);
 					
 					return $task->results;
