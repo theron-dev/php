@@ -137,6 +137,28 @@ class GoodsService extends Service{
 					}
 				}
 			}
+			else{
+				
+				if($task->body){
+					$item->body = $task->body;
+				}
+				
+				if($task->price){
+					$item->price = $task->price;
+				}
+				
+				if($task->title){
+					$item->title = $task->title;
+				}
+
+				if($task->image){
+					$item->image = $task->image;
+				}
+				
+				$item->updateTime = time();
+				
+				$dbContext->update($item);
+			}
 			
 			$task->results = $item;
 
