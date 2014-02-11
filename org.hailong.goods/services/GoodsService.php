@@ -567,8 +567,6 @@ class GoodsService extends Service{
 		$httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		$contentType = curl_getinfo($curl, CURLINFO_CONTENT_TYPE);
 		
-		var_dump($htmlSource);
-		
 		if($htmlSource && $httpCode == 200){
 		
 			$html = new DOMDocument();
@@ -648,7 +646,7 @@ class GoodsService extends Service{
 					$task->source = $source;
 					$task->url = $url;
 					$task->wapUrl = $url;
-					
+					var_dump($task);
 					$context->handle("GoodsCreateTask",$task);
 					
 					return $task->results;
