@@ -623,11 +623,11 @@ class GoodsService extends Service{
 					$price=  $node->textContent;
 				}
 				
-				$nodes = $rs->getElementsByTagName("price");
+				$nodes = $rs->getElementsByTagName("body");
 				
 				if($nodes && $nodes->length >0){
 					$node = $nodes->item(0);
-					$body =  $rs->saveXML($node);
+					$body =  $rs->saveHTML($node);
 				}
 				
 				if($eid){
