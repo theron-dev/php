@@ -585,7 +585,7 @@ class GoodsService extends Service{
 		
 			header("Content-Type: text/xml;charset=utf8");
 		
-			$rs = $xslt->transformToDoc( $html );
+			$rs = @$xslt->transformToDoc( $html );
 			
 			if($rs){
 				
