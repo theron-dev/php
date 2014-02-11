@@ -81,6 +81,7 @@ class Shell{
 					$inputData[$name] = $value;
 				}
 			}
+			var_dump($files);
 		}
 		
 		$context = new ServiceContext($inputData,$config);

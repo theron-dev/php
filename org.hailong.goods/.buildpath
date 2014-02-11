@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.account"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.functions"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.taobao"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.spread"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.classify"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.uri"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.tag"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/org.hailong.service"/>
+	<buildpathentry kind="src" path=""/>
+</buildpath>
