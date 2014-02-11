@@ -143,6 +143,8 @@ class GoodsService extends Service{
 			return false;
 		}
 		
+		var_dump($task);
+		
 		if($taskType == "GoodsImportTask"){
 			
 			$context = $this->getContext();
@@ -204,7 +206,7 @@ class GoodsService extends Service{
 					throw new GoodsException("does not support item url {$url}", ERROR_GOODS_NOT_SUPPORT_ITEM_URL);
 				}
 				
-				var_dump($task);
+				
 			}
 			
 			return false;
