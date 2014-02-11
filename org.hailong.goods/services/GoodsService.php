@@ -593,7 +593,8 @@ class GoodsService extends Service{
 				$eid = false;
 				$image = false;
 				$price = false;
-
+				$body = false;
+				
 				$nodes = $rs->getElementsByTagName("title");
 				
 				if($nodes && $nodes->length >0){
@@ -622,6 +623,13 @@ class GoodsService extends Service{
 					$price=  $node->textContent;
 				}
 				
+				$nodes = $rs->getElementsByTagName("price");
+				
+				if($nodes && $nodes->length >0){
+					$node = $nodes->item(0);
+					$body =  $rs->saveXML($node);
+				}
+				
 				if($eid){
 					
 					if($url){
@@ -644,7 +652,8 @@ class GoodsService extends Service{
 					$task->source = $source;
 					$task->url = $url;
 					$task->wapUrl = $url;
-		
+					$task->body = $body;
+					
 					$context->handle("GoodsCreateTask",$task);
 					
 					return $task->results;
