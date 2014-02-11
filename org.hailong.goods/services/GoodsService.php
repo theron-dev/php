@@ -203,6 +203,8 @@ class GoodsService extends Service{
 				else{
 					throw new GoodsException("does not support item url {$url}", ERROR_GOODS_NOT_SUPPORT_ITEM_URL);
 				}
+				
+				var_dump($task);
 			}
 			
 			return false;
