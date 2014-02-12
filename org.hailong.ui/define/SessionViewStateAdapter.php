@@ -32,7 +32,7 @@ class SessionViewStateAdapter implements IViewStateAdapter{
 			
 			$sessionId = session_id();
 			
-			$text = file_get_contents($UI_SESSION_DIR.'/'.$sessionId.'_'.md5($alias).'.json');
+			$text = file_get_contents($UI_SESSION_DIR.'/'.$sessionId.'_'.md5($this->alias).'.json');
 			
 			if($text){
 				$this->viewState = json_decode($text,true);
