@@ -50,7 +50,7 @@ function config(){
 			array(
 				"class" => "AuthService",
 				"tasks" => array(
-					"AuthTask","UserViewStateSaveTask","UserViewStateLoadTask","UserViewStateClearTask","AccountPasswordChangeTask"
+					"AuthTask","UserViewStateSaveTask","UserViewStateLoadTask","UserViewStateClearTask","AccountPasswordChangeTask","AuthorityEntityValidateTask","AuthorityRoleValidateTask"
 				),
 			),
 			array(

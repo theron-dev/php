@@ -109,7 +109,7 @@ class AccountRegisterController extends ViewController{
 					
 				$context->handle("LoginTask",$task);
 
-				getCurrentViewContext()->pushAttribute("window.location","href","active.php");
+				getCurrentViewContext()->redirect("active.php");
 			}
 			catch(Exception $ex){
 				$this->emailMessageLabel->setHidden(false);

@@ -23,7 +23,7 @@ class StatisticsSearchController extends ViewController{
 			$context->handle("AuthorityEntityValidateTask",$task);
 		}
 		catch(Exception $ex){
-			getCurrentViewContext()->pushAttribute("window.location","href","active.php");
+			getCurrentViewContext()->redirect("active.php");
 			return ;
 		}
 		

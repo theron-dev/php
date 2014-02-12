@@ -51,7 +51,7 @@ function config(){
 				"class" => "AuthService",
 				"tasks" => array(
 					"AuthTask","UserViewStateSaveTask","UserViewStateLoadTask","UserViewStateClearTask","AuthorityRoleAddTask","AuthorityRoleRemoveTask","AuthorityRoleUpdateTask"
-					,"AuthorityEntityAddTask","AuthorityEntityRemoveTask","AuthorityEntityUpdateTask","AuthorityAddTask","AuthorityRemoveTask"
+					,"AuthorityEntityAddTask","AuthorityEntityRemoveTask","AuthorityEntityUpdateTask","AuthorityAddTask","AuthorityRemoveTask","AuthorityEntityValidateTask","AuthorityRoleValidateTask"
 				),
 			),
 			array(
