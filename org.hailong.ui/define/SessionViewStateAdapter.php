@@ -16,7 +16,10 @@ class SessionViewStateAdapter implements IViewStateAdapter{
 		if($this->viewState){
 			global $UI_SESSION_DIR;
 			$sessionId = session_id();
-			file_put_contents($UI_SESSION_DIR.'/'.$sessionId.'_'.md5($this->alias).'.json', json_encode($this->viewState));
+			
+			$data = base64_encode(gzcompress( serialize($this->viewState) ,9) );
+		
+			file_put_contents($UI_SESSION_DIR.'/'.$sessionId.'_'.md5($this->alias).'.vst', $data);
 		}
 	}
 	
@@ -32,10 +35,10 @@ class SessionViewStateAdapter implements IViewStateAdapter{
 			
 			$sessionId = session_id();
 			
-			$text = file_get_contents($UI_SESSION_DIR.'/'.$sessionId.'_'.md5($this->alias).'.json');
+			$data = file_get_contents($UI_SESSION_DIR.'/'.$sessionId.'_'.md5($this->alias).'.vst');
 			
-			if($text){
-				$this->viewState = json_decode($text,true);
+			if($data){
+				$this->viewState = unserialize( gzuncompress(base64_decode($data)));
 			}
 			else{
 				$this->viewState = null;
