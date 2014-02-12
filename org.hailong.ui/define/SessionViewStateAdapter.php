@@ -16,7 +16,7 @@ class SessionViewStateAdapter implements IViewStateAdapter{
 		if($this->viewState){
 			global $UI_SESSION_DIR;
 			$sessionId = session_id();
-			file_put_contents($UI_SESSION_DIR.'/'.$sessionId.'_'.md5($this->alias).'.json', json_encode($this->viewStates));
+			file_put_contents($UI_SESSION_DIR.'/'.$sessionId.'_'.md5($this->alias).'.json', json_encode($this->viewState));
 		}
 	}
 	
