@@ -12,7 +12,7 @@ require_once "classify.php";
 session_start();
 	
 
-Shell::staticRun(config(), new UserViewStateAdapter("workspace/admin/classify/index"),"views/index.html", "ClassifySearchController");
+Shell::staticRun(config(), new SessionViewStateAdapter("workspace/admin/classify/index"),"views/index.html", "ClassifySearchController");
 
 
 ?>

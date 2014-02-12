@@ -12,7 +12,7 @@ require_once "app.php";
 session_start();
 	
 
-Shell::staticRun(config(), new UserViewStateAdapter("workspace/admin/app/device"),"views/device.html", "AppDeviceSearchController");
+Shell::staticRun(config(), new SessionViewStateAdapter("workspace/admin/app/device"),"views/device.html", "AppDeviceSearchController");
 
 
 ?>

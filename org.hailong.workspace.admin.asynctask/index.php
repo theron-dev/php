@@ -12,7 +12,7 @@ require_once "asynctask.php";
 session_start();
 	
 
-Shell::staticRun(config(), new UserViewStateAdapter("workspace/admin/asynctask/index"),"views/asynctask.html", "AsyncTaskSearchController");
+Shell::staticRun(config(), new SessionViewStateAdapter("workspace/admin/asynctask/index"),"views/asynctask.html", "AsyncTaskSearchController");
 
 
 ?>

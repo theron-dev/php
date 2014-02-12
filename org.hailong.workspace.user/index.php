@@ -12,7 +12,7 @@ require_once "user.php";
 session_start();
 	
 
-Shell::staticRun(config(), new UserViewStateAdapter("workspace/user/home"),"views/home.html", "UserHomeController");
+Shell::staticRun(config(), new SessionViewStateAdapter("workspace/user/home"),"views/home.html", "UserHomeController");
 
 
 ?>

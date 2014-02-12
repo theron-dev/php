@@ -10,6 +10,6 @@ require_once 'configs/config.php';
 
 session_start();
 
-Shell::staticRun(config(), new UserViewStateAdapter("account/index"),"views/index.html", "AccountIndexController");
+Shell::staticRun(config(), new SessionViewStateAdapter("account/index"),"views/index.html", "AccountIndexController");
 
 ?>

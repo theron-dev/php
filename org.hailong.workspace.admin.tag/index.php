@@ -12,7 +12,7 @@ require_once "tag.php";
 session_start();
 	
 
-Shell::staticRun(config(), new UserViewStateAdapter("workspace/admin/tag/index"),"views/tag.html", "TagSearchController");
+Shell::staticRun(config(), new SessionViewStateAdapter("workspace/admin/tag/index"),"views/tag.html", "TagSearchController");
 
 
 ?>

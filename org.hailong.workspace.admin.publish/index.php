@@ -12,7 +12,7 @@ require_once "publish.php";
 session_start();
 	
 
-Shell::staticRun(config(), new UserViewStateAdapter("workspace/admin/publish/index"),"views/domain.html", "DomainSearchController");
+Shell::staticRun(config(), new SessionViewStateAdapter("workspace/admin/publish/index"),"views/domain.html", "DomainSearchController");
 
 
 ?>

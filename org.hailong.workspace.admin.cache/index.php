@@ -12,7 +12,7 @@ require_once "cache.php";
 session_start();
 	
 
-Shell::staticRun(config(), new UserViewStateAdapter("workspace/admin/cache/index"),"views/index.html", "CacheSearchController");
+Shell::staticRun(config(), new SessionViewStateAdapter("workspace/admin/cache/index"),"views/index.html", "CacheSearchController");
 
 
 ?>

@@ -12,7 +12,7 @@ require_once "statistics.php";
 session_start();
 	
 
-Shell::staticRun(config(), new UserViewStateAdapter("workspace/admin/statistics/index"),"views/index.html", "StatisticsSearchController");
+Shell::staticRun(config(), new SessionViewStateAdapter("workspace/admin/statistics/index"),"views/index.html", "StatisticsSearchController");
 
 
 ?>

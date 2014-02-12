@@ -12,7 +12,7 @@ require_once "log.php";
 session_start();
 	
 
-Shell::staticRun(config(), new UserViewStateAdapter("workspace/admin/log/index"),"views/log.html", "LogSearchController");
+Shell::staticRun(config(), new SessionViewStateAdapter("workspace/admin/log/index"),"views/log.html", "LogSearchController");
 
 
 ?>

@@ -13,7 +13,7 @@ session_start();
 
 $context = new ServiceContext();
 
-Shell::staticRun(config(), new UserViewStateAdapter("workspace/admin/crash/index"),"views/index.html", "CrashSearchController");
+Shell::staticRun(config(), new SessionViewStateAdapter("workspace/admin/crash/index"),"views/index.html", "CrashSearchController");
 
 
 ?>

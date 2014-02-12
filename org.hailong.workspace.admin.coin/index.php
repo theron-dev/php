@@ -11,7 +11,7 @@ require_once "coin.php";
 session_start();
 	
 
-Shell::staticRun(config(), new UserViewStateAdapter("workspace/admin/coin/index"),"views/index.html", "CoinSearchController");
+Shell::staticRun(config(), new SessionViewStateAdapter("workspace/admin/coin/index"),"views/index.html", "CoinSearchController");
 
 
 ?>

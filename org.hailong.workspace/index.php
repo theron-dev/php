@@ -12,6 +12,6 @@ require_once "controllers/DefaultController.php";
 
 session_start();
 
-Shell::staticRun($workspace["config"], new UserViewStateAdapter("workspace/default"),"views/default.html", "DefaultController");
+Shell::staticRun($workspace["config"], new SessionViewStateAdapter("workspace/default"),"views/default.html", "DefaultController");
 
 ?>

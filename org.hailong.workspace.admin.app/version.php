@@ -12,7 +12,7 @@ require_once "app.php";
 session_start();
 	
 
-Shell::staticRun(config(), new UserViewStateAdapter("workspace/admin/app/version"),"views/version.html", "AppVersionSearchController");
+Shell::staticRun(config(), new SessionViewStateAdapter("workspace/admin/app/version"),"views/version.html", "AppVersionSearchController");
 
 
 ?>
