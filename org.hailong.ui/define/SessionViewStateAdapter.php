@@ -35,9 +35,9 @@ class SessionViewStateAdapter implements IViewStateAdapter{
 			
 			$sessionId = session_id();
 			
-			$data = file_get_contents($UI_SESSION_DIR.'/'.$sessionId.'_'.md5($this->alias).'.vst');
+			$path = $UI_SESSION_DIR.'/'.$sessionId.'_'.md5($this->alias).'.vst';
 			
-			if($data){
+			if(file_exists($path) && ($data = file_get_contents($path))){
 				$this->viewState = unserialize( gzuncompress(base64_decode($data)));
 			}
 			else{
