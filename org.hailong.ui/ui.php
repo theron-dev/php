@@ -4,6 +4,9 @@
 */
 if($library){
 
+	global $UI_SESSION_DIR;
+
+	$UI_SESSION_DIR = "$library/org.hailong.ui/sessions";
 
 	require_once "$library/org.hailong.ui/define/IViewContext.php";
 	require_once "$library/org.hailong.ui/define/Action.php";
