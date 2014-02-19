@@ -37,6 +37,7 @@ class TagSearchController extends ViewController{
 			$this->searchTable->setClickAction(new Action($this,"TableAction"));
 			$this->loadContent();
 		}
+		var_dump($this);
 	}
 	
 	public function onSearchPageAction(){
@@ -117,8 +118,6 @@ class TagSearchController extends ViewController{
 		}
 	
 		$this->searchTable->setItems($items);
-		
-		echo json_encode($items);
 	}
 	
 	public function onTableAction(){
