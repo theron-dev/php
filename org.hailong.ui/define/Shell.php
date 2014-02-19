@@ -186,7 +186,8 @@ class Shell{
 				}
 			}
 			
-			
+			var_dump($viewContext->outputData());
+
 			echo "\n<script type='text/javascript'>";
 			echo 'PostData=';
 			echo json_encode($viewContext->outputData(),true);
