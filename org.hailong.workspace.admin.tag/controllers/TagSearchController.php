@@ -117,6 +117,8 @@ class TagSearchController extends ViewController{
 		}
 	
 		$this->searchTable->setItems($items);
+		
+		echo json_encode($items);
 	}
 	
 	public function onTableAction(){
