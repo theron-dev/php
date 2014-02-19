@@ -117,9 +117,9 @@ class TagSearchController extends ViewController{
 			$dbContext->free($rs);
 		}
 	
-		var_dump($items);
-		
 		$this->searchTable->setItems($items);
+		
+		var_dump($items);
 		
 	}
 	
