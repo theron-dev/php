@@ -102,8 +102,6 @@ class TagSearchController extends ViewController{
 		
 		$rs = $dbContext->queryEntitys("DBTag",$where." ORDER BY weight DESC,createTime ASC LIMIT {$offset},{$this->pageSize}");
 	
-		echo $dbContext->getLastSql();
-		
 		if($rs){
 	
 			while($tag = $dbContext->nextObject($rs,"DBTag")){
@@ -119,7 +117,10 @@ class TagSearchController extends ViewController{
 			$dbContext->free($rs);
 		}
 	
+		var_dump($items);
+		
 		$this->searchTable->setItems($items);
+		
 	}
 	
 	public function onTableAction(){
