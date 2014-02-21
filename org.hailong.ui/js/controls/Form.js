@@ -83,6 +83,21 @@ UI.Form = $.extend({},UI.View,{
 								fs[name] = v;
 							}
 						}
+						else if(type == "hidden"){
+							var fn = field[0].onsubmit;
+							if(fn){
+								if(typeof fn == "function"){
+									fn.call(field[0]);
+								}
+								else{
+									var ffn = function(){
+										eval(fn);
+									};
+									ffn.call(field[0]);
+								}
+							}
+							fs[name] = field.val();
+						}
 						else if(type == "text" || type=="password" || type=="hidden" || type=="file"){
 							fs[name] = field.val();
 						}
