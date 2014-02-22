@@ -32,7 +32,25 @@ UI.Form = $.extend({},UI.View,{
 								}
 								
 							}
-							else if(type == "text" || type=="password" || type=="hidden"){
+							else if(type == "hidden"){
+								field.val(v);
+								
+								var fn = field[0].onsetted;
+								
+								if(fn){
+									if(typeof fn == 'function'){
+										fn.call(field[0]);
+									}
+									else{
+										var ffn = function(){
+											eval(fn);
+										};
+										ffn.call(field[0]);
+									}
+								}
+								
+							}
+							else if(type == "text" || type=="password" ){
 								field.val(v);
 							}
 						}
