@@ -38,7 +38,7 @@ UI.Form = $.extend({},UI.View,{
 								var fn = field[0].onsetted;
 								
 								if(!fn){
-									fn = filed.attr("onsetted");
+									fn = field.attr("onsetted");
 								}
 								
 								if(fn){
