@@ -37,6 +37,10 @@ UI.Form = $.extend({},UI.View,{
 								
 								var fn = field[0].onsetted;
 								
+								if(!fn){
+									fn = filed.attr("onsetted");
+								}
+								
 								if(fn){
 									if(typeof fn == 'function'){
 										fn.call(field[0]);
@@ -103,6 +107,9 @@ UI.Form = $.extend({},UI.View,{
 						}
 						else if(type == "hidden"){
 							var fn = field[0].onsubmit;
+							if(!fn){
+								fn = field.attr("onsubmit");
+							}
 							if(fn){
 								if(typeof fn == "function"){
 									fn.call(field[0]);
