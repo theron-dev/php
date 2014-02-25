@@ -12,9 +12,9 @@ class SessionViewStateAdapter implements IViewStateAdapter{
 		
 		$key = md5($this->alias).'.svs';
 		
-		$file = $UI_SESSION_DIR.'/'.session_id();
+		$file = $UI_SESSION_DIR.'/'.session_id().'/';
 		
-		$file .= '/'.$key;
+		$file .= $key;
 		
 		if(file_exists($file)){
 			$data = file_get_contents($file);
@@ -31,13 +31,13 @@ class SessionViewStateAdapter implements IViewStateAdapter{
 		
 		$key = md5($this->alias).'.svs';
 		
-		$file = $UI_SESSION_DIR.'/'.session_id();
+		$file = $UI_SESSION_DIR.'/'.session_id().'/';
 		
 		if(!file_exists($file)){
 			mkdir($file,0777,true);
 		}
 		
-		$file .= '/'.$key;
+		$file .= $key;
 		
 		$data = gzcompress( serialize($this->data));
 		
