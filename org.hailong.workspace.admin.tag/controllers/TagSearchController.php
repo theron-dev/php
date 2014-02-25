@@ -119,6 +119,8 @@ class TagSearchController extends ViewController{
 	
 		$this->searchTable->setItems($items);
 	
+		var_dump($items);
+		
 	}
 	
 	public function onTableAction(){
