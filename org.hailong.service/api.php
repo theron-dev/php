@@ -43,11 +43,6 @@ if($config){
 	}
 }
 
-$rs["timestamp"] = time();
-
-if($CFG_DEBUG){
-	$rs["run-time"] = ( doubleval( time()) + microtime() ) - $timestamp;
-}
 
 output($rs,$inputData);
 
