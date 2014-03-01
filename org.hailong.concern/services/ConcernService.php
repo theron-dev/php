@@ -14,26 +14,22 @@ class ConcernService extends Service{
 		if($task instanceof ConcernCreateTask){
 			
 			$context = $this->getContext();
-			$dbContext = $context->dbContext();
+			$dbContext = $context->dbContext(DB_CONCERN);
 				
-			$dbContextTask = new DBContextTask(DB_CONCERN);
-				
-			$context->handle("DBContextTask",$dbContextTask);
-				
-			if($dbContextTask->dbContext){
-				$dbContext = $dbContextTask->dbContext;
-			}
-			
 			$uid = $task->uid;
-			$tuid = $task->tuid;
+			$tuid = intval($task->tuid);
 			
 			if($uid === null){
 				$uid = $context->getInternalDataValue("auth");
 			}
+			else{
+				$uid = intval($uid);
+			}
 			
 			$titem = $dbContext->querySingleEntity("DBConcern","tuid={$uid} and uid={$tuid} and deleted<>1");
 			
-			$item = $dbContext->querySingleEntity("DBConcern","uid={$uid} and tuid={$task->tuid}");
+			$item = $dbContext->querySingleEntity("DBConcern","uid={$uid} and tuid={$tuid}");
+			
 			$changed = false;
 			
 			if($item){
@@ -48,7 +44,7 @@ class ConcernService extends Service{
 			else{
 				$item = new DBConcern();
 				$item->uid = $uid;
-				$item->tuid = $task->tuid;
+				$item->tuid = $tuid;
 				$item->deleted = 0;
 				$item->tblock = 0;
 				$item->source = $task->source;
@@ -61,7 +57,8 @@ class ConcernService extends Service{
 			}
 			
 			$task->cid = $item->cid;
-		
+			$task->changed = $changed;
+			
 			if($changed){
 				
 				if($titem){
@@ -94,13 +91,16 @@ class ConcernService extends Service{
 			$dbContext = $context->dbContext(DB_CONCERN);
 
 			$uid = $task->uid;
-			$tuid = $task->tuid;
+			$tuid = intval( $task->tuid);
 			
 			if($uid === null){
 				$uid = $context->getInternalDataValue("auth");
 			}
+			else{
+				$uid = intval($uid);
+			}
 			
-			$item = $dbContext->querySingleEntity("DBConcern","uid={$uid} and tuid={$task->tuid}");
+			$item = $dbContext->querySingleEntity("DBConcern","uid={$uid} and tuid={$tuid}");
 			
 			if($item){
 				if(! intval($item->deleted)){
@@ -122,7 +122,7 @@ class ConcernService extends Service{
 					$item->updateTime = time();
 					$dbContext->update($item);
 					
-					
+					$task->changed = true;
 					
 					$t = new CachePutTask();
 					$t->path = CACHE_CONCERN_TIMESTAMP;

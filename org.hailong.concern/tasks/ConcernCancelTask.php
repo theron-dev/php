@@ -19,6 +19,12 @@ class ConcernCancelTask extends ConcernAuthTask{
 	 */
 	public $tuid;
 	
+	/**
+	 * 输出
+	 * @var boolean
+	 */
+	public $changed;
+	
 	public function prefix(){
 		return "concern";
 	}

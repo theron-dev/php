@@ -31,6 +31,12 @@ class ConcernCreateTask extends ConcernAuthTask{
 	 */
 	public $cid;
 	
+	/**
+	 * 输出 
+	 * @var boolean
+	 */
+	public $changed;
+	
 	public function prefix(){
 		return "concern";
 	}
