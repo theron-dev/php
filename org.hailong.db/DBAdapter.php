@@ -13,7 +13,8 @@ class DBAdapter{
 	protected $password;
 	protected $conn=null;
 	protected $isConnected = false;
-		
+	protected $charset="utf8";
+	
 	public function DBAdapter($servername,$database,$username,$password){
 		$this->servername = $servername;
 		$this->database = $database;
@@ -46,7 +47,11 @@ class DBAdapter{
 	}
 	
 	public function setCharset($charset){
-		
+		$this->charset = $charset;
+	}
+	
+	public function getCharset(){
+		return $this->charset;
 	}
 	
 	public function getInserId(){
@@ -107,6 +112,7 @@ class MYSQLAdapter extends DBAdapter{
 	
 	public function setCharset($charset){
 		mysql_set_charset($charset,$this->conn);
+		parent::setCharset($charset);
 	}
 	
 	public function getInsertId(){
