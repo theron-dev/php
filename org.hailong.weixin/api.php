@@ -18,7 +18,7 @@ global $token;
 $token = $cfg["token"];
 
 $wechatObj = new wechatCallbackapiTest();
-$wechatObj->responseMsg();
+$wechatObj->valid();
 
 class wechatCallbackapiTest
 {
