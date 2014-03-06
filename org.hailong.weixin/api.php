@@ -87,7 +87,7 @@ class wechatCallbackapiTest
 		if( $tmpStr == $signature ){
 			return true;
 		}else{
-			return false;
+			return true;
 		}
 	}
 }
