@@ -13,6 +13,8 @@ date_default_timezone_set("PRC");
 
 //define your token
 
+global $token;
+
 $token = $cfg["token"];
 
 $wechatObj = new wechatCallbackapiTest();
@@ -75,6 +77,8 @@ class wechatCallbackapiTest
         $timestamp = $_GET["timestamp"];
         $nonce = $_GET["nonce"];	
         		
+        global $token;
+        
 		$tmpArr = array($token, $timestamp, $nonce);
 		sort($tmpArr);
 		$tmpStr = implode( $tmpArr );
