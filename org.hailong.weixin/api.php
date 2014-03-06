@@ -9,6 +9,8 @@ $library = "..";
 
 $cfg = require("$library/org.hailong.configs/weixin.php");
 
+date_default_timezone_set("PRC");
+
 //define your token
 
 $token = $cfg["token"];
