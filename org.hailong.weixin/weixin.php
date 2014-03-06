@@ -1,0 +1,5 @@
+<?php
+
+global $library;
+
+$library = "..";
