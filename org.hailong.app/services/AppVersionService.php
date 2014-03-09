@@ -22,8 +22,10 @@ class AppVersionService extends Service{
 				$dbContext = $dbTask->dbContext;
 			}
 			
+			$cfg = $this->getConfig();
 			
-			$appid = intval($task->appid);
+			$appid = isset($cfg["appid"]) ? $cfg["appid"] : intval($task->appid);
+			
 			$platform = intval($task->platform);
 			$version = $dbContext->parseValue( $task->version );
 			
