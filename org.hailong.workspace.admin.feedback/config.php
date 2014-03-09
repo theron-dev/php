@@ -9,7 +9,7 @@ return array(
 // 	"url-active" => "../org.hailong.workspace.admin.feedback/active.php",
 	"url" => "workspace/admin/feedback/index.php",
 	"url-active" => "workspace/feedback/crash/active.php",
-	"auth-alias" => "workspace/feedback/crash",
+	"auth-alias" => "workspace/admin/feedback",
 );
 
 ?>
