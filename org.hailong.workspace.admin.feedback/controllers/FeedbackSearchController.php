@@ -89,7 +89,7 @@ class FeedbackSearchController extends ViewController{
 	
 		$offset = ($pageIndex -1) *  $this->pageSize;
 	
-		$rs = $dbContext->queryEntitys("DBFeedback",$sql." ORDER BY cid DESC LIMIT {$offset},{$this->pageSize}");
+		$rs = $dbContext->queryEntitys("DBFeedback",$sql." ORDER BY fid DESC LIMIT {$offset},{$this->pageSize}");
 	
 		if($rs){
 	
