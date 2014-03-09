@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hailong Studio</title>
+<link rel="stylesheet" href="css/index.css" />
+
+<script type='text/javascript' src='js.php' ></script>
+
+</head>
+<body>
+<div class='screen'>
+	<div class='toolbar'>
+		identifier : <input type='text' id='identifierText' view='UI.TextView' />
+		version : <input type='text' id='versionText' view='UI.TextView' />
+		build : <input type='text' id='buildText' view='UI.TextView' />
+		<input type='button' value='搜索' id='searchButton' view='UI.Button' />
+	</div>
+	<table class='user-table' id='search_table' view='UI.TableView'>
+		<thead>
+			<tr>
+				<th field='uid'>uid</th>
+				<th field='did'>did</th>
+				<th field='identifier'>identifier</th>
+				<th field='version'>version</th>
+				<th field='build'>build</th>
+				<th field='systemName'>systemName</th>
+				<th field='systemVersion'>systemVersion</th>
+				<th field='model'>model</th>
+				<th field='deviceName'>deviceName</th>
+				<th field='body'>body</th>
+				<th field='createTime'>创建时间</th>
+				<th field='command'></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>加载中...</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan='12' class='page'>
+					<select id='search_page' view="UI.Select">
+						<option value="1">1</option>
+					</select>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	
+</div>
+</body>
+</html>
