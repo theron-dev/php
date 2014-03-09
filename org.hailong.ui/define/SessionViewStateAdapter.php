@@ -35,6 +35,7 @@ class SessionViewStateAdapter implements IViewStateAdapter{
 		
 		if(!file_exists($file)){
 			mkdir($file,0777,true);
+			chmod($file, 0777);
 		}
 		
 		$file .= $key;
