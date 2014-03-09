@@ -7,13 +7,13 @@ require_once "$library/org.hailong.account/account.php";
 
 require_once "configs/config.php";
 
-require_once "crash.php";
+require_once "feedback.php";
 
 session_start();
 
 $context = new ServiceContext();
 
-Shell::staticRun(config(), new SessionViewStateAdapter("workspace/admin/crash/index"),"views/index.html", "CrashSearchController");
+Shell::staticRun(config(), new SessionViewStateAdapter("workspace/admin/feedback/index"),"views/index.html", "FeedbackSearchController");
 
 
 ?>
