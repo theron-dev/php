@@ -65,7 +65,7 @@ class eMailService extends Service{
 				     'username' => $user,
 				     'password' => $password));
 				
-				$rs = $mail->send($to, $headers, $task->title);
+				$rs = $mail->send($to, $headers, $task->body);
 				
 				if($rs instanceof Exception){
 					throw new eMailException($rs->getCode(), $rs->getMessage());
