@@ -1,5 +1,3 @@
 <?php
 
-global $library;
 
-$library = "..";
