@@ -145,7 +145,12 @@ class CommentService extends Service{
 				$sql .= " AND tid={$task->tid}";
 			}
 			
-			$sql .= " ORDER BY cid DESC";
+			if($task->orderType == "asc"){
+				$sql .= " ORDER BY cid ASC";
+			}
+			else{
+				$sql .= " ORDER BY cid DESC";
+			}
 			
 			$pageIndex = intval($task->pageIndex);
 			

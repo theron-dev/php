@@ -39,6 +39,12 @@ class CommentQueryTask extends CommentTask{
 	 */
 	public $tid;
 	
+	/**
+	 * asc,desc 默认 desc
+	 * @var String
+	 */
+	public $orderType;
+	
 	public $pageIndex;
 	public $pageSize;
 	
