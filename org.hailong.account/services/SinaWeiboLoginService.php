@@ -86,7 +86,7 @@ class SinaWeiboLoginService extends Service{
 				
 				$auth = $user->uid;
 				
-				$this->isertWeiboUserInfo($dbContext,$auth,$rs);
+				$this->isertWeiboUserInfo($dbContext,$auth,$rs,$context);
 				
 				
 				$_SESSION["auth"] = $auth;
@@ -119,7 +119,7 @@ class SinaWeiboLoginService extends Service{
 							$user->createTime = time();
 							$dbContext->insert($user);
 								
-							$this->isertWeiboUserInfo($dbContext,$user->uid,$item);
+							$this->isertWeiboUserInfo($dbContext,$user->uid,$item,$context);
 							
 							$relation = new UserRelationTask();
 							$relation->uid = $auth;
@@ -207,7 +207,7 @@ class SinaWeiboLoginService extends Service{
 	}
 	
 
-	public static function isertWeiboUserInfo($dbContext,$auth,$user){
+	public static function isertWeiboUserInfo($dbContext,$auth,$user,$context){
 		
 		$info = new DBAccountInfo();
 		$info->uid = $auth;
@@ -244,6 +244,35 @@ class SinaWeiboLoginService extends Service{
 		$info->updateTime = time();
 		
 		$dbContext->insert($info);
+		
+		if(isset($user["name"])){
+				
+			$index = 1;
+				
+			$t = new AccountIDCheckNickTask();
+			$t->nick = trim($user["name"]);
+			$t->uid = null;
+				
+			$context->handle("AccountIDCheckNickTask",$t);
+				
+			while($t->uid !== null){
+		
+				$t->nick = $t->nick."_".($index ++);
+				$t->uid = null;
+					
+				$context->handle("AccountIDCheckNickTask",$t);
+			}
+				
+			$info = new DBAccountInfo();
+			$info->uid = $auth;
+			$info->key = AccountInfoKeyNick;
+			$info->value = $t->nick;
+			$info->createTime = time();
+			$info->updateTime = time();
+				
+			$dbContext->insert($info);
+				
+		}
 	}
 }
 

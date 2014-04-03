@@ -88,7 +88,7 @@ class QQLoginService extends Service{
 				
 				$auth = $user->uid;
 				
-				$this->isertQQInfo($dbContext,$auth,$rs);
+				$this->isertQQInfo($dbContext,$auth,$rs,$context);
 				
 				
 				$this->importRelation($context,$dbContext,$task->appKey,$task->etoken,$openid,$auth);
@@ -175,7 +175,7 @@ class QQLoginService extends Service{
 		return true;
 	}
 	
-	public static function isertQQInfo($dbContext,$auth,$user){
+	public static function isertQQInfo($dbContext,$auth,$user,$context){
 	
 		$logo = false;
 		
@@ -261,6 +261,34 @@ class QQLoginService extends Service{
 			$dbContext->insert($info);
 		}
 		
+		if(isset($user["nickname"])){
+			
+			$index = 1;
+			
+			$t = new AccountIDCheckNickTask();
+			$t->nick = trim($user["nickname"]);
+			$t->uid = null;
+			
+			$context->handle("AccountIDCheckNickTask",$t);
+			
+			while($t->uid !== null){
+				
+				$t->nick = $t->nick."_".($index ++);
+				$t->uid = null;
+					
+				$context->handle("AccountIDCheckNickTask",$t);
+			}
+			
+			$info = new DBAccountInfo();
+			$info->uid = $auth;
+			$info->key = AccountInfoKeyNick;
+			$info->value = $t->nick;
+			$info->createTime = time();
+			$info->updateTime = time();
+			
+			$dbContext->insert($info);
+			
+		}
 	}
 	
 	public static function importRelation($context,$dbContext,$appkey,$token,$openid,$auth){
@@ -282,7 +310,7 @@ class QQLoginService extends Service{
 					$user->createTime = time();
 					$dbContext->insert($user);
 		
-					QQLoginService::isertQQInfo($dbContext,$user->uid,$item);
+					QQLoginService::isertQQInfo($dbContext,$user->uid,$item,$context);
 		
 					$relation = new UserRelationTask();
 					$relation->uid = $auth;
@@ -310,7 +338,7 @@ class QQLoginService extends Service{
 					$user->createTime = time();
 					$dbContext->insert($user);
 		
-					QQLoginService::isertQQInfo($dbContext,$user->uid,$item);
+					QQLoginService::isertQQInfo($dbContext,$user->uid,$item,$context);
 		
 					$relation = new UserRelationTask();
 					$relation->uid = $user->uid;
