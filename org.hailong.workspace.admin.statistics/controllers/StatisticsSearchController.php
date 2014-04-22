@@ -49,7 +49,7 @@ class StatisticsSearchController extends ViewController{
 		$sql = "SELECT target, sum(pv) as pv,count(pv) as uv,count(source) as ipv,classifyTime FROM ".DBStatisticsUniversal::tableName();
 		
 		if($target){
-			$sql .=" WHERE target=".$dbContext->parseValue($target);
+			$sql .=" WHERE target LIKE ".$dbContext->parseValue($target.'%');
 		}
 		
 		$sql .= " GROUP BY classifyTime,target ORDER BY classifyTime DESC ";
