@@ -265,15 +265,17 @@ class QQLoginService extends Service{
 			
 			$index = 1;
 			
+			$nick = trim($user["nickname"]);
+			
 			$t = new AccountIDCheckNickTask();
-			$t->nick = trim($user["nickname"]);
+			$t->nick = $nick;
 			$t->uid = null;
 			
 			$context->handle("AccountIDCheckNickTask",$t);
 			
 			while($t->uid !== null){
 				
-				$t->nick = $t->nick."_".($index ++);
+				$t->nick = $nick."_".($index ++);
 				$t->uid = null;
 					
 				$context->handle("AccountIDCheckNickTask",$t);
