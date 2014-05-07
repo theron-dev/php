@@ -7,12 +7,23 @@ class AppDeviceSearchController extends ViewController{
 	private $pageSize = 50;
 	private $rowCountLabel;
 	
+	private $didText;
+	private $versionText;
+	private $buildText;
+	private $searchButton;
+	
 	public function __construct($context,$isPostback=false){
 		parent::__construct($context,$isPostback);
 		
 		$this->searchTable = new TableView("search_table");
 		$this->searchPageListView = new ListView("search_page");
 		$this->rowCountLabel = new Label("rowCount");
+		
+		$this->didText = new TextView("didText");
+		$this->versionText = new TextView("versionText");
+		$this->buildText = new TextView("buildText");
+		
+		$this->searchButton = new Button("searchButton");
 		
 		$task = new AuthorityEntityValidateTask("workspace/admin/app");
 		
@@ -27,11 +38,16 @@ class AppDeviceSearchController extends ViewController{
 		if(!$isPostback){
 			$this->searchPageListView->setSelectedChangeAction(new Action($this,"SearchPageAction"));
 			$this->searchTable->setClickAction(new Action($this,"TableAction"));
+			$this->searchButton->setClickAction(new Action($this,"SearchAction"));
 			$this->loadContent();
 		}
 	}
 	
 	public function onSearchPageAction(){
+		$this->loadContent();
+	}
+	
+	public function doSearchAction(){
 		$this->loadContent();
 	}
 	
@@ -46,6 +62,24 @@ class AppDeviceSearchController extends ViewController{
 		
 		if($appid){
 			$sql .= " AND appid=".intval($appid);
+		}
+		
+		$did = trim($this->didText->getText());
+		
+		if($did){
+			$sql .= " AND did=".intval($did);
+		}
+		
+		$version = trim($this->versionText->getText());
+		
+		if($version){
+			$version .= " AND version=".$dbContext->parseValue( $version);
+		}
+		
+		$build = trim($this->buildText->getText());
+		
+		if($build){
+			$build .= " AND build=".$dbContext->parseValue( $build);
 		}
 		
 		$rowCount = $dbContext->countForEntity("DBAppDevice",$sql);
