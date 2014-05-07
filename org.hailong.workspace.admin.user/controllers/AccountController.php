@@ -88,8 +88,8 @@ class AccountController extends ViewController{
 				
 				$context->handle("AccountInfoGetTask",$t);
 				
-				if(isset($t->infos[AccountInfoKeyNick])){
-					$item["nick"] = $t->infos[AccountInfoKeyNick];
+				if(isset($t->infos[AccountInfoKeyNick]["value"])){
+					$item["nick"] = $t->infos[AccountInfoKeyNick]["value"];
 				}
 				
 				$items[] = $item;
