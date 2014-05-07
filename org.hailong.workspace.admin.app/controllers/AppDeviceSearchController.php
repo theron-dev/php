@@ -6,6 +6,7 @@ class AppDeviceSearchController extends ViewController{
 	private $searchPageListView;
 	private $pageSize = 50;
 	private $rowCountLabel;
+	private $rowPushCountLabel;
 	
 	private $didText;
 	private $versionText;
@@ -18,6 +19,7 @@ class AppDeviceSearchController extends ViewController{
 		$this->searchTable = new TableView("search_table");
 		$this->searchPageListView = new ListView("search_page");
 		$this->rowCountLabel = new Label("rowCount");
+		$this->rowPushCountLabel = new Label("rowPushCount");
 		
 		$this->didText = new TextView("didText");
 		$this->versionText = new TextView("versionText");
@@ -85,6 +87,10 @@ class AppDeviceSearchController extends ViewController{
 		$rowCount = $dbContext->countForEntity("DBAppDevice",$sql);
 	
 		$this->rowCountLabel->setText("总设备数: ".$rowCount);
+		
+		$rowPushCount = $dbContext->countForEntity("DBAppDevice",$sql." AND NOT ISNULL(token)");
+		
+		$this->rowPushCountLabel->setText("可推送设备数: ".$rowPushCount);
 		
 		$pageIndex = $this->searchPageListView->getSelectedValue();
 		if(!$pageIndex){
