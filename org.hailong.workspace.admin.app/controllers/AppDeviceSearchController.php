@@ -47,7 +47,7 @@ class AppDeviceSearchController extends ViewController{
 		$this->loadContent();
 	}
 	
-	public function doSearchAction(){
+	public function onSearchAction(){
 		$this->loadContent();
 	}
 	
