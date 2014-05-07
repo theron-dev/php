@@ -73,13 +73,13 @@ class AppDeviceSearchController extends ViewController{
 		$version = trim($this->versionText->getText());
 		
 		if($version){
-			$version .= " AND version=".$dbContext->parseValue( $version);
+			$sql .= " AND version=".$dbContext->parseValue( $version);
 		}
 		
 		$build = trim($this->buildText->getText());
 		
 		if($build){
-			$build .= " AND build=".$dbContext->parseValue( $build);
+			$sql .= " AND build=".$dbContext->parseValue( $build);
 		}
 		
 		$rowCount = $dbContext->countForEntity("DBAppDevice",$sql);
