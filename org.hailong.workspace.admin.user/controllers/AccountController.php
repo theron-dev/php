@@ -80,6 +80,18 @@ class AccountController extends ViewController{
 				$item["createTime"] = date("Y-m-d H:i:s",$account->createTime);
 				$item["command"] = "<input type='button' value='角色' action='role' key='{$account->uid}'>"
 					."<input type='button' value='实体' action='entity' key='{$account->uid}'>";
+				
+				$t = new AccountInfoGetTask();
+				
+				$t->keys = array(AccountInfoKeyNick);
+				$t->uid = $account->uid;
+				
+				$context->handle("AccountInfoGetTask",$t);
+				
+				if(isset($t->infos[AccountInfoKeyNick])){
+					$item["nick"] = $t->infos[AccountInfoKeyNick];
+				}
+				
 				$items[] = $item;
 			}
 			$dbContext->free($rs);

@@ -59,6 +59,12 @@ function config(){
 				"tasks" => array(
 					"UserViewStateSaveTask","UserViewStateLoadTask","UserViewStateClearTask"
 				),
+			),			
+			array(
+				"class" => "AccountInfoService",
+				"tasks" => array(
+					"AccountInfoGetTask"
+				),
 			),
 			array(
 				"class" => "AuthorityValidateService",
