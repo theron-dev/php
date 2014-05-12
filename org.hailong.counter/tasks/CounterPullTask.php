@@ -4,7 +4,7 @@ class CounterPullTask extends CounterAuthTask{
 
 	/**
 	 * 目标
-	 * @var String
+	 * @var array
 	 */
 	public $targets;
 	

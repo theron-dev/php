@@ -42,14 +42,7 @@ class CounterService extends Service{
 
 			$targets = $task->targets;
 			
-			if($targets){
-				
-				$targets = str_replace("，", ",", $targets);
-				$targets = str_replace("；", ",", $targets);
-				$targets = str_replace(" ", ",", $targets);
-				$targets = str_replace("。", ",", $targets);
-				$targets = str_replace(".", ",", $targets);
-				$targets = preg_split("/[,]/s", $targets);
+			if($targets && is_array($targets) && count($targets)){
 				
 				if($task->lastId){
 				
