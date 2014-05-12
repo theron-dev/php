@@ -42,6 +42,8 @@ class CounterService extends Service{
 
 			$targets = $task->targets;
 			
+			$context->setOutputDataValue("t",$task);
+			
 			if($targets && is_array($targets) && count($targets)){
 				
 				if($task->lastId){
