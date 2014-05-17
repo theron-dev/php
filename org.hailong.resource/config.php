@@ -102,6 +102,8 @@ function makethumb($srcfile,$dstfile,$thumbwidth,$thumbheight,$maxthumbwidth=0,$
 			}
 		}
 	}
+	var_dump($data);
+	var_dump($im);
 	if(!$im) return '';
 
 	$srcw = ($src_w ? $src_w : imagesx($im));
