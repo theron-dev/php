@@ -16,7 +16,7 @@ UI.Form = $.extend({},UI.View,{
 						if(tagName == "INPUT"){
 							var type = field.attr("type");
 							if(type == "radio"){
-								field[0].checked = v;
+								field[0].checked = (v == field.val());
 							}
 							else if(type == "checkbox"){
 								
