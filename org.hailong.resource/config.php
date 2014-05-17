@@ -55,7 +55,7 @@ function buildThumbs($image){
 			$thumbDir = dirname($thumbFile);
 			mkdirs($thumbDir);
 			$file  = dirname(__FILE__)."/".$image;
-			var_dump($thumbFile);
+			
 			if(!file_exists($thumbFile)){
 				$Iheight= ceil($s * $imageSize[1]/$imageSize[0]);
 				makethumb($file,$thumbFile,$s,$Iheight);
@@ -102,8 +102,6 @@ function makethumb($srcfile,$dstfile,$thumbwidth,$thumbheight,$maxthumbwidth=0,$
 			}
 		}
 	}
-	var_dump($data);
-	var_dump($im);
 	if(!$im) return '';
 
 	$srcw = ($src_w ? $src_w : imagesx($im));
