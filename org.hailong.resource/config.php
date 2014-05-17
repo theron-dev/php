@@ -5,7 +5,7 @@ global $library;
 
 $library = "..";
 
-$thumbSizes = array(16,32,64,80,120,160,300,600,800,1024);
+$thumbSizes = array(80,160,300,600,800,1024);
 
 require_once "$library/org.hailong.functions/functions.php";
 
