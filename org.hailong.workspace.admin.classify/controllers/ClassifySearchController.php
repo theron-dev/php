@@ -45,7 +45,16 @@ class ClassifySearchController extends ViewController{
 
 		$target = intval($this->targetSelect->getSelectedValue());
 		
-		$this->targetSelect->setItems(DBClassify::targets());
+		global $library;
+		
+		$cfg = require_once "$library/org.hailong.configs/classify.php";
+		
+		if(isset($cfg["targets"])){
+			$this->targetSelect->setItems($cfg["targets"]);
+		}
+		else {
+			$this->targetSelect->setItems(DBClassify::targets());
+		}
 		
 		$pcid = trim($this->pcidText->getText());
 
