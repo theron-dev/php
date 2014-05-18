@@ -6,7 +6,7 @@ class RoleController extends ViewController{
 
 	private $roleTable;
 	
-	private $pageSize = 30;
+	private $pageSize = 20;
 	
 	private $rolePageListView;
 	

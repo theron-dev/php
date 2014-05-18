@@ -7,7 +7,7 @@ class EntityController extends ViewController{
 	
 	private $entityTable;
 	
-	private $pageSize = 30;
+	private $pageSize = 20;
 	
 	private $entityPageListView;
 

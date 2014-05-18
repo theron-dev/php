@@ -6,7 +6,7 @@ class AccountController extends ViewController{
 	
 	private $userTable;
 	
-	private $pageSize = 30;
+	private $pageSize = 20;
 	
 	private $userPageListView;
 
