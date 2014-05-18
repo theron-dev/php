@@ -222,6 +222,7 @@ table .page select{
 	margin-top: 80px;
 	background-color:#ffffff;
 	padding: 6px;
+	overflow: auto;
 }
 
 .overflow .dialog label{
