@@ -65,7 +65,7 @@ class O2ODBTradeOrder extends DBEntity{
 			return "BIGINT NULL";
 		}
 		if($field == "status"){
-			return "INT 0";
+			return "INT NULL";
 		}
 		if($field == "updateTime"){
 			return "INT(11) NULL";

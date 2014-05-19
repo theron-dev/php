@@ -65,7 +65,7 @@ class O2ODBTradeOrderStatus extends DBEntity{
 			return "BIGINT NULL";
 		}
 		if($field == "status"){
-			return "INT 0";
+			return "INT NULL";
 		}
 		if($field == "remark"){
 			return "VARCHAR(256) NULL";;

@@ -49,7 +49,7 @@ class O2ODBTradeEntity extends DBEntity{
 			return "BIGINT NOT NULL";
 		}
 		if($field == "removed"){
-			return "INT(2) 0";
+			return "INT(2) NULL";
 		}
 		if($field == "createTime"){
 			return "INT NULL";
