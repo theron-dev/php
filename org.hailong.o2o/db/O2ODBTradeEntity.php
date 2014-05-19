@@ -45,8 +45,11 @@ class O2ODBTradeEntity extends DBEntity{
 	}
 	
 	public static function tableFieldType($field){
-		if($field == "pid"){
+		if($field == "eid"){
 			return "BIGINT NOT NULL";
+		}
+		if($field == "pid"){
+			return "BIGINT NULL";
 		}
 		if($field == "removed"){
 			return "INT(2) NULL";
