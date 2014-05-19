@@ -105,6 +105,7 @@ class O2OService extends Service{
 			$task->results = $item;
 			
 			var_dump($item);
+			var_dump($dbContext->getLastSql());
 			
 			return false;
 		}
