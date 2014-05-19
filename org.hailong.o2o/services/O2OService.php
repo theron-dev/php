@@ -31,6 +31,8 @@ class O2OService extends Service{
 				
 			}
 			
+			var_dump($item);
+			
 			$dbContext->insert($item);
 			
 			$task->results = $item;
