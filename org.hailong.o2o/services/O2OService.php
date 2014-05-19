@@ -88,6 +88,7 @@ class O2OService extends Service{
 			
 			$item->uid = $context->getInternalDataValue("auth");
 			$item->eid = $task->eid;
+			$item->status = 0;
 			$item->updateTime = $item->createTime = time();
 			
 			if($task->propertys){
