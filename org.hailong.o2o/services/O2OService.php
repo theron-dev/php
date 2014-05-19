@@ -104,6 +104,8 @@ class O2OService extends Service{
 			
 			$task->results = $item;
 			
+			var_dump($item);
+			
 			return false;
 		}
 		
