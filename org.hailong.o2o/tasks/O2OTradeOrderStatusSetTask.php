@@ -14,6 +14,12 @@ class O2OTradeOrderStatusSetTask extends AuthTask{
 	public $oid;
 	
 	/**
+	 * 
+	 * @var O2ODBTradeOrder
+	 */
+	public $order;
+	
+	/**
 	 * 状态
 	 * @var int
 	 */
@@ -24,11 +30,6 @@ class O2OTradeOrderStatusSetTask extends AuthTask{
 	 */
 	public $remark;
 
-	/**
-	 *
-	 * @var O2ODBTradeOrder
-	 */
-	public $results;
 }
 
 ?>

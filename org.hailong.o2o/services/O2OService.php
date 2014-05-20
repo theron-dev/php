@@ -114,9 +114,13 @@ class O2OService extends Service{
 				
 			$dbContext = $this->dbContext();
 			
-			$tradeOrderClass = $this->tradeOrderClass();
+			$item = $task->order;
 			
-			$item = $dbContext->get($tradeOrderClass,array("oid"=>$task->oid));
+			if($item === null){
+				$tradeOrderClass = $this->tradeOrderClass();
+					
+				$item = $dbContext->get($tradeOrderClass,array("oid"=>$task->oid));
+			}
 			
 			if($item){
 				
@@ -135,7 +139,7 @@ class O2OService extends Service{
 				
 				$dbContext->insert($status);
 				
-				$task->results = $item;
+				$task->order = $item;
 			}
 			
 			return false;

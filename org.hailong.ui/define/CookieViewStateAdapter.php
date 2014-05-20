@@ -11,7 +11,7 @@ class CookieViewStateAdapter implements IViewStateAdapter{
 	public function saveViewState($data){
 		$vs = isset($_COOKIE["VS"]) ? unserialize( gzuncompress(base64_decode($_COOKIE["VS"]))): array();
 		$vs[$this->alias] = $data;
-		setcookie("VS", base64_encode(gzcompress( serialize($vs) ,9) ));
+		setcookie("VS", base64_encode(gzcompress( serialize($vs) ,9) ),null);
 	}
 	
 	public function loadViewState(){
