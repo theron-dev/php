@@ -17,6 +17,8 @@ class AppAuthService extends Service{
 			$context = $this->getContext();
 			$dbContext = $context->dbContext();
 			
+			$context->setOutputDataValue("t", $task);
+			
 			$dbTask = new DBContextTask();
 			$dbTask->key = DB_APP;
 			
