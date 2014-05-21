@@ -17,8 +17,6 @@ class AppAuthService extends Service{
 			$context = $this->getContext();
 			$dbContext = $context->dbContext();
 			
-			$context->setOutputDataValue("t", $task);
-			
 			$dbTask = new DBContextTask();
 			$dbTask->key = DB_APP;
 			
@@ -115,6 +113,8 @@ class AppAuthService extends Service{
 				if($auth && $did){
 					$appAuth = $dbContext->querySingleEntity("DBAppAuth","appid={$task->appid} and uid={$task->uid} and did=$did");
 					
+					$context->setOutputDataValue("t", $appAuth);
+						
 					$token = $task->token;
 					
 					if($token == null && isset($_COOKIE["auth-token"])){
