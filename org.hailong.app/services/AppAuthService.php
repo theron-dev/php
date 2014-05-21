@@ -112,8 +112,6 @@ class AppAuthService extends Service{
 				
 				if($auth && $did){
 					$appAuth = $dbContext->querySingleEntity("DBAppAuth","appid={$task->appid} and uid={$task->uid} and did=$did");
-					
-					$context->setOutputDataValue("t", $appAuth);
 						
 					$token = $task->token;
 					
