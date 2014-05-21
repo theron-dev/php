@@ -130,7 +130,7 @@ class AccountService extends Service{
 							$async->taskType = "SMSSendTask";
 							$async->taskClass = "SMSSendTask";
 							$data = array();
-							$data["sms-tel"] = $task->email;
+							$data["sms-tel"] = $task->tel;
 							$data["sms-body"] = $body;
 							$async->data = $data;
 							$context->handle("AsyncActiveTask",$async);

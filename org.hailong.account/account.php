@@ -5,17 +5,10 @@
  */
 if($library){
 	
-	define("USER_REGISTER_EMAIL_TITLE","辣妈汇: 激活你的帐号");
-	define("USER_REGISTER_EMAIL_BODY","你的验证码 : {verify}  <a href='http://account.lamahui.cn/active.php?verify={verify}'>激活</a>");
-	
-	define("USER_RESET_PWD_EMAIL_TITLE","辣妈汇: 你的帐号密码已经重置");
-	define("USER_RESET_PWD_EMAIL_BODY","你的密码 : {password}  <a href='http://account.lamahui.cn/login.php'>登录</a>");
-	
-	define("USER_AUTO_REGISTER_SMS","欢迎您加入\"辣妈汇\"系统，您的的初始密码是: {password},请访问 http://account.lamahui.org/active.php?tel={tel} 激活您的账号");
-	define("USER_AUTO_REGISTER_EMAIL","欢迎您加入\"辣妈汇\"系统，您的的初始密码是: {password},请访问 http://account.lamahui.org/active.php?email={email}  激活您的账号");
-	
+
 	define("DB_ACCOUNT","account");
 	
+	require_once "$library/org.hailong.configs/account_cfg.php";
 	require_once "$library/org.hailong.configs/error_code.php";
 	require_once "$library/org.hailong.service/service.php";
 	require_once "$library/org.hailong.ui/ui.php";
