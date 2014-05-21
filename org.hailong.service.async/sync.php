@@ -14,6 +14,9 @@ if($argc > 1){
 	$rank = $argv[1];
 }
 
+global $async_lock;
+global $sync_php;
+
 $lock = $async_lock.".".$rank.".async";
 
 echo $lock."\n<br />";
