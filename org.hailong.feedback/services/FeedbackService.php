@@ -37,8 +37,6 @@ class FeedbackService extends Service{
 				$dbContext->insert($item);
 			}
 			
-			$context->setOutputDataValue("t", $task);
-			
 			return false;
 		}
 	
