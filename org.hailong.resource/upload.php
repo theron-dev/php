@@ -33,10 +33,18 @@ if($_FILES){
 				mkdirs($dir);
 			}
 			
+			if($isImage){
+				
+				$imageSize = getimagesize($file["tmp_name"]);
+				
+				$rs[$name.'_i'] = $imageSize;
+				
+			}
+			
 			move_uploaded_file($file["tmp_name"], $dir.$value);
 			
 			$rs[$name] = "res:///".$dir.$value;
-			
+
 			if($isImage){
 				buildThumbs($dir.$value);
 			}
