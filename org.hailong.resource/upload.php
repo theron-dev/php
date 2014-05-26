@@ -37,7 +37,7 @@ if($_FILES){
 				
 				$imageSize = getimagesize($file["tmp_name"]);
 				
-				$rs[$name.'_i'] = $imageSize;
+				$rs['i_'.$name] = $imageSize;
 				
 			}
 			
