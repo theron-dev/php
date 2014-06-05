@@ -15,7 +15,7 @@ UI.Template = $.extend({},UI.View,{
 			if(value && value.length !== undefined){
 				
 				var fn = function(element,data){
-					var dataBind = element.attr("dataBind");
+					var dataBind = element.attr("databind");
 					if(dataBind){
 						
 						var binds = dataBind.split(";");
