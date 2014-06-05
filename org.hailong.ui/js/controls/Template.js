@@ -63,6 +63,10 @@ UI.Template = $.extend({},UI.View,{
 							}
 						}
 					}
+					var childs = element.children();
+					for(var i=0;i<childs.length;i++){
+						fn($(childs[i]),data);
+					}
 				};
 				
 				for(var i=0;i<value.length;i++){
