@@ -112,7 +112,7 @@ class ClassifySearchController extends ViewController{
 				$item = array();
 				$item["key"] = "<a href='javascript:;' action='pcid' key='{$row["cid"]}'>{$row["cid"]}</a>";
 				$item["title"] = $row["title"];
-				$item["logo"] = "<img width='32px' src='".RESURL($row["logo"])."' /><input type='button' value='设置' action='logo' key='{$row["cid"]}' />";
+				$item["logo"] = "<img width='32px' src='".RESURL($row["logo"],160)."' /><input type='button' value='设置' action='logo' key='{$row["cid"]}' />";
 				$item["keyword"] = $row["keyword"];
 				$item["command"] = "<input type='button' value='删除' action='remove' key='{$row["cid"]}'></input>"
 					."<input type='button' value='修改' class='edit' key='{$row["cid"]}'></input>";
