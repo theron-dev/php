@@ -176,3 +176,91 @@ table .page select{
 .overflow .dialog table{
 	table-layout: auto;
 }
+
+.overflow{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	display: none;
+}
+
+.overflow .background{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: #333333;
+	-moz-opacity:0.7;  
+    opacity:0.7; 
+    filter:alpha(opacity=70);
+}
+
+.overflow .content{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+.overflow .dialog{
+	width: 600px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 80px;
+	background-color:#ffffff;
+	padding: 6px;
+}
+
+.overflow .dialog label{
+	font-style:bold;
+	font-size:12pt;
+}
+
+.overflow .dialog table{
+	table-layout: auto;
+}
+
+
+form {
+	padding: 10px;
+}
+
+form input{
+	min-width: 220px;
+	margin: 6px;
+}
+
+form textarea {
+	min-width: 220px;
+	margin: 6px;
+}
+
+form input.button{
+	min-width: auto;
+}
+
+form ul {
+	padding: 0px;
+}
+
+form li {
+	list-style: none;
+}
+
+form label {
+	margin: 4px;
+	font-size: 16px;
+}
+
+.note {
+	color: #666666;
+	font-size: 12px;
+}
+
