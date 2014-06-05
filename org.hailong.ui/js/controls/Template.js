@@ -52,7 +52,7 @@ UI.Template = $.extend({},UI.View,{
 						
 						for(var i=0;i<binds.length;i++){
 							var bind = binds[i];
-							var kv = bind.splite(":");
+							var kv = bind.split(":");
 							if(kv.length >=2){
 								if(kv[0] == "text"){
 									element.html(eval(kv[1]));
