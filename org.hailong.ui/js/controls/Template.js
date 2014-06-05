@@ -23,7 +23,7 @@ UI.Template = $.extend({},UI.View,{
 							
 							var keys;
 							
-							if(key instanceof String){
+							if(typeof key == "string"){
 								keys = key.split(".");
 							}
 							else {
