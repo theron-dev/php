@@ -7,6 +7,10 @@ class ClassifySearchController extends ViewController{
 	private $pcidText;
 	private $targetSelect;
 	
+	private $dialog;
+	private $editForm;
+	private $cancelButton;
+	
 	public function __construct($context,$isPostback=false){
 		parent::__construct($context,$isPostback);
 		
@@ -14,6 +18,10 @@ class ClassifySearchController extends ViewController{
 		$this->actionView = new ActionView("actionView");
 		$this->pcidText = new TextView("pcidText");
 		$this->targetSelect = new ListView("targetSelect");
+		
+		$this->dialog = new View("dialog");
+		$this->editForm = new Form("editForm");
+		$this->cancelButton = new Button("cancelButton");
 		
 		$task = new AuthorityEntityValidateTask("workspace/admin/classify");
 		
@@ -29,6 +37,9 @@ class ClassifySearchController extends ViewController{
 			$this->actionView->setClickAction(new Action($this,"Action"));
 			$this->searchTable->setClickAction(new Action($this,"TableAction"));
 			$this->targetSelect->setSelectedChangeAction(new Action($this,"TargetAction"));
+			$this->editForm->setSubmitAction(new Action($this,"SubmitAction"));
+			$this->cancelButton->setClickAction(new Action($this,"CancelAction"));
+			
 			$this->loadContent();
 			$this->targetSelect->setSelectedValue("0");
 		}
@@ -36,6 +47,14 @@ class ClassifySearchController extends ViewController{
 	
 	public function onSearchPageAction(){
 		$this->loadContent();
+	}
+	
+	public function onSubmitAction(){
+		
+	}
+	
+	public function onCancelAction(){
+		$this->dialog->setHidden(true);
 	}
 	
 	public function loadContent(){
@@ -75,7 +94,7 @@ class ClassifySearchController extends ViewController{
 				$item = array();
 				$item["key"] = "<a href='javascript:;' action='pcid' key='{$row["cid"]}'>{$row["cid"]}</a>";
 				$item["title"] = $row["title"];
-				$item["logo"] = "<img width='32px' src='{$row["logo"]}' />";
+				$item["logo"] = "<img width='32px' src='{$row["logo"]}' /><input type='button' value='设置' action='logo' key='{$row["cid"]}' />";
 				$item["keyword"] = $row["keyword"];
 				$item["command"] = "<input type='button' value='删除' action='remove' key='{$row["cid"]}'></input>"
 					."<input type='button' value='修改' class='edit' key='{$row["cid"]}'></input>";
@@ -166,6 +185,11 @@ class ClassifySearchController extends ViewController{
 				getCurrentViewContext()->pushFunction("window.alert",$ex->getMessage());
 				return ;
 			}
+		}
+		else if($action == "logo"){
+			
+			$this->editForm->setFields(array("cid"=>$key));
+			$this->dialog->setHidden(false);
 		}
 
 	}

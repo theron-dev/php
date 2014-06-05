@@ -20,6 +20,7 @@
 				<th field='key'>ID</th>
 				<th field='title' editable='editable'>标题</th>
 				<th field='keyword' editable='editable'>关键词</th>
+				<th field='logo' >图片</th>
 				<th field='command' ></th>
 			</tr>
 		</thead>
@@ -29,11 +30,12 @@
 				<td></td>
 				<td></td>
 				<td></td>
+				<td></td>
 			</tr>
 		</tbody>
 		<tfoot>
 			<tr>
-				<td colspan='4' class='page'>
+				<td colspan='5' class='page'>
 					<input type='button' class='add' value='添加' />
 					<select id='search_page' view="UI.Select">
 						<option value="1">1</option>
@@ -42,7 +44,27 @@
 			</tr>
 		</tfoot>
 	</table>
-
+	<div class='overflow' id="dialog" view="UI.View">
+		<div class='background'></div>
+		<div class='content'>
+			<form method="post" action="?" enctype="multipart/form-data" id="editForm" view="UI.Form" accept-charset="utf8">
+				<h2>分类</h2>
+			<input type="hidden" name="cid"></input>
+	
+		
+			<label>图片</label><br />
+			<input type="file" name="logo"></input><br />
+			<input type="hidden" name="logoUrl"></input><br />
+			<img id="logoView" view="UI.View" width="180px" style="display:none;"></img>
+			<br/>
+			
+			<div>
+				<input class='button' type='button' value='取消' view="UI.Button" id="cancelButton" ></input>
+				<input class='button' type='submit' value='提交' ></input>
+			</div>
+			</form>
+		</div>
+	</div>
 </div>
 </body>
 </html>
