@@ -14,5 +14,6 @@ if($library){
 	require_once "$library/org.hailong.functions/client.php";
 	require_once "$library/org.hailong.functions/xml.php";
 	require_once "$library/org.hailong.functions/xslt.php";
+	require_once "$library/org.hailong.functions/resource.php";
 }
 ?>

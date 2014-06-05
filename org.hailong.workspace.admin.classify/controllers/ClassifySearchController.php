@@ -51,6 +51,24 @@ class ClassifySearchController extends ViewController{
 	
 	public function onSubmitAction(){
 		
+		$context = $this->getContext();
+		$fields = $this->editForm->getFields();
+		
+		$cid = isset($fields["cid"]) ? intval($fields["cid"]) : null;
+		$logo = $context->getInputDataValue("logo");
+		
+		if($cid !== null && $logo !== null){
+			
+			$t = new ClassifyUpdateTask();
+			$t->cid = $cid;
+			$t->logo = $logo;
+			
+			$context->handle("ClassifyUpdateTask",$t);
+			
+		}
+		
+		$this->loadContent();
+		$this->dialog->setHidden(true);
 	}
 	
 	public function onCancelAction(){
@@ -94,7 +112,7 @@ class ClassifySearchController extends ViewController{
 				$item = array();
 				$item["key"] = "<a href='javascript:;' action='pcid' key='{$row["cid"]}'>{$row["cid"]}</a>";
 				$item["title"] = $row["title"];
-				$item["logo"] = "<img width='32px' src='{$row["logo"]}' /><input type='button' value='设置' action='logo' key='{$row["cid"]}' />";
+				$item["logo"] = "<img width='32px' src='".RESURL($row["logo"])."' /><input type='button' value='设置' action='logo' key='{$row["cid"]}' />";
 				$item["keyword"] = $row["keyword"];
 				$item["command"] = "<input type='button' value='删除' action='remove' key='{$row["cid"]}'></input>"
 					."<input type='button' value='修改' class='edit' key='{$row["cid"]}'></input>";
