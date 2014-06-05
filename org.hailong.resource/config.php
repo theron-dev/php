@@ -48,17 +48,25 @@ function buildThumbs($image){
 	$width = $imageSize[0];
 	$c = count($thumbSizes);
 	for($i=0;$i<$c;$i++){
+		
 		$s = $thumbSizes[$i];
+		
+		$thumbDir = dirname(__FILE__)."/thumb/".$s."/";
+		$thumbFile = $thumbDir.$image;
+		$thumbDir = dirname($thumbFile);
+		mkdirs($thumbDir);
+		$file  = dirname(__FILE__)."/".$image;
+			
 		if($s <= $width){
-			$thumbDir = dirname(__FILE__)."/thumb/".$s."/";
-			$thumbFile = $thumbDir.$image;
-			$thumbDir = dirname($thumbFile);
-			mkdirs($thumbDir);
-			$file  = dirname(__FILE__)."/".$image;
 			
 			if(!file_exists($thumbFile)){
 				$Iheight= ceil($s * $imageSize[1]/$imageSize[0]);
 				makethumb($file,$thumbFile,$s,$Iheight);
+			}
+		}
+		else {
+			if(!file_exists($thumbFile)){
+				copy($file, $thumbFile);
 			}
 		}
 	}
