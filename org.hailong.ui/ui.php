@@ -33,5 +33,6 @@ if($library){
 	require_once "$library/org.hailong.ui/define/controls/Link.php";
 	require_once "$library/org.hailong.ui/define/controls/ActionView.php";
 	require_once "$library/org.hailong.ui/define/controls/Html.php";
+	require_once "$library/org.hailong.ui/define/controls/Template.php";
 }
 ?>
