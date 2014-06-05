@@ -73,6 +73,9 @@ UI.Template = $.extend({},UI.View,{
 					var item = value[i];
 					var element = el.clone();
 					
+					element.attr("id","");
+					element.attr("view","");
+					
 					fn(element,item);
 					
 					element.show();
