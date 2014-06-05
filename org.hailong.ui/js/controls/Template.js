@@ -5,7 +5,7 @@ UI.Template = $.extend({},UI.View,{
 		if(name == "items"){
 			
 			var p = el.parent();
-			var childs = el.children();
+			var childs = p.children();
 			for(var i=0;i< childs.length;i++){
 				if(childs[i] != el[0]){
 					$(childs[i]).remove();
