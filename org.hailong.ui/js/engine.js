@@ -233,7 +233,7 @@ function viewAction(action,callback,loading){
 		loadingView.show();
 	},300);
 	
-	var fn = function(results) {
+	var fn = function(result) {
 		
 		if(loadingTimeout){
 		   window.clearTimeout(loadingTimeout);
