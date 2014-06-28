@@ -325,7 +325,7 @@ function encodeJson(data){
 		}
 	}
 	if(typeof data == "string"){
-		return "\""+escape(str).toLocaleLowerCase().replace(/%u/gi, '\\u') + "\"";
+		return "\""+escape(data).toLocaleLowerCase().replace(/%u/gi, '\\u') + "\"";
 	}
 	else{
 		return "" + data;
