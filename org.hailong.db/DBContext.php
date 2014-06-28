@@ -163,21 +163,8 @@ class DBContext{
 		}
 		
 		if(is_string($value)){
-			$len = strlen($value);
-			$v = "'";
-			for($i=0;$i<$len;$i++){
-				$c = substr($value,$i,1);
-				if($c == "'"){
-					$v .= "''";
-				}
-				elseif ($c == "\\"){
-					$v .= "\\\\";
-				}
-				else{
-					$v .= $c;
-				}
-			}
-			$v .= "'";
+			$v = str_replace("'", "''", $value);
+			$v = str_replace("\\", "\\\\", $v);
 			return $v;
 		}
 		else if($value === true){
