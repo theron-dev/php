@@ -325,32 +325,7 @@ function encodeJson(data){
 		}
 	}
 	if(typeof data == "string"){
-		var rs = [];
-		for(var i=0;i<data.length;i++){
-			var c = data.charAt(i);
-			if(c == '"'){
-				rs.push('\\"');
-			}
-			else if(c == '\\'){
-				rs.push('\\\\');
-			}
-			else if(c == "'"){
-				rs.push("\\'");
-			}
-			else if(c == "\t"){
-				rs.push("\\t");
-			}
-			else if(c == "\n"){
-				rs.push("\\n");
-			}
-			else if(c == "\r"){
-				rs.push("\\r");
-			}
-			else{
-				rs.push(c);
-			}
-		}
-		return '"' + rs.join("")+'"';
+		return "\""+escape(str).toLocaleLowerCase().replace(/%u/gi, '\\u') + "\"";
 	}
 	else{
 		return "" + data;
