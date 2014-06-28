@@ -233,33 +233,43 @@ function viewAction(action,callback,loading){
 		loadingView.show();
 	},300);
 	
-	$.post(window.location.href,data,function(result){
-		   if(loadingTimeout){
-			   window.clearTimeout(loadingTimeout);
-			   loadingTimeout = null;
-		   }
-		   loadingView.hide();
-		   if(result){
-			   if(result["error-code"]){
-				   alert(result["error"]);
-				   window.location.reload();
+	var fn = function(results) {
+		
+		if(loadingTimeout){
+		   window.clearTimeout(loadingTimeout);
+		   loadingTimeout = null;
+	   }
+	   loadingView.hide();
+	   if(result){
+		   if(result["error-code"]){
+		   alert(result["error"]);
+		   window.location.reload();
+	   }
+	   else{
+		   ViewStateVersion = result["version"];
+		   viewUpdateAttributes(result["data"]);
+		   viewPushAttributes(result["push-data"]);
+		   viewPushFunctions(result["push-functions"]);
+		   ViewStateUpdated = {};
+		   if(callback && typeof callback == 'function'){
+				   callback.call(action);
 			   }
-			   else{
-				   ViewStateVersion = result["version"];
-				   viewUpdateAttributes(result["data"]);
-				   viewPushAttributes(result["push-data"]);
-				   viewPushFunctions(result["push-functions"]);
-				   ViewStateUpdated = {};
-				   if(callback && typeof callback == 'function'){
-					   callback.call(action);
-				   }
-			   }
 		   }
-		   else{
-			   alert("server error");
-			   window.location.reload();
-		   }
-	  },"json");
+	   }
+	   else{
+		   alert("server error");
+		   window.location.reload();
+	   }
+	};
+	
+	$.ajax({
+		  url:window.location.href,
+		  type:"POST",
+		  data:data,
+		  contentType:"application/x-www-form-urlencoded; charset=utf-8",
+		  dataType:"json",
+		  success: fn
+		})
 }
 
 function viewValidateClear(element){
