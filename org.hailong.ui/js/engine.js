@@ -325,7 +325,7 @@ function encodeJson(data){
 		}
 	}
 	if(typeof data == "string"){
-		var v = data.replace("\\","\\\\").replace("\"","\\\"");
+		var v = data.replace(/\\/g,"\\\\").replace(/\"/g,"\\\"");
 		return "\""+v + "\"";
 	}
 	else{
