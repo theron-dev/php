@@ -80,9 +80,9 @@ class MYSQLAdapter extends DBAdapter{
 			
 			if($this->conn){
 				
-// 				if($this->charset){
-// 					mysql_set_charset($this->charset,$this->conn);
-// 				}
+				if($this->charset){
+					mysql_set_charset($this->charset,$this->conn);
+				}
 				
 				if(!mysql_select_db($this->database,$this->conn)){
 					return false;
