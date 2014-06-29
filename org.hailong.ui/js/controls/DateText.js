@@ -12,6 +12,10 @@ UI.DateText = $.extend({},UI.TextView,{
 	
 	bindElement:function(el){
 		UI.TextView.bindElement(el);
-		el.datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
+		var dateFormat = el.attr("dateFormat");
+		if(!dateFormat){
+			dateFormat = "yy-mm-dd";
+		}
+		el.datepicker().datepicker("option", "dateFormat", dateFormat);
 	}
 });

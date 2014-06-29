@@ -104,6 +104,10 @@ class AppAuthService extends Service{
 					$auth =  $context->getInternalDataValue("auth");
 				}
 				
+				if($auth === null && isset($_SESSION["auth"])){
+					$auth = $_SESSION["auth"];
+				}
+				
 				$did = $task->did;
 
 				if($did === null){
