@@ -15,11 +15,12 @@ class DBAdapter{
 	protected $isConnected = false;
 	protected $charset="utf8";
 	
-	public function DBAdapter($servername,$database,$username,$password){
+	public function DBAdapter($servername,$database,$username,$password,$charset="utf8"){
 		$this->servername = $servername;
 		$this->database = $database;
 		$this->username = $username;
 		$this->password = $password;
+		$this->charset = $charset;
 	}
 	
 	public function connect(){
@@ -68,17 +69,25 @@ class DBAdapter{
 }
 
 class MYSQLAdapter extends DBAdapter{
-	public function MYSQLAdapter($servername,$database,$username,$password){
-		$this->DBAdapter($servername,$database,$username,$password);
+	public function MYSQLAdapter($servername,$database,$username,$password,$charset="utf8"){
+		$this->DBAdapter($servername,$database,$username,$password,$charset);
 	}
 	
 	public function connect(){
 		if(!$this->isConnected){
+			
 			$this->conn = mysql_connect($this->servername,$this->username,$this->password,true) or die("数据库错误!!");
+			
 			if($this->conn){
+				
+// 				if($this->charset){
+// 					mysql_set_charset($this->charset,$this->conn);
+// 				}
+				
 				if(!mysql_select_db($this->database,$this->conn)){
 					return false;
 				}
+				
 				$this->isConnected = true;
 				
 			}
@@ -133,8 +142,8 @@ class MYSQLAdapter extends DBAdapter{
 }
 
 class MSSQLAdapter extends DBAdapter{
-	public function MSSQLAdapter($servername,$database,$username,$password){
-		$this->DBAdapter($servername,$database,$username,$password);
+	public function MSSQLAdapter($servername,$database,$username,$password,$charset="utf8"){
+		$this->DBAdapter($servername,$database,$username,$password,$charset);
 	}
 	
 	public function connect(){
@@ -179,17 +188,17 @@ class MSSQLAdapter extends DBAdapter{
 	}
 }
 
-function newDBAdapter($type,$servername,$database,$username,$password){
+function newDBAdapter($type,$servername,$database,$username,$password,$charset="utf8"){
 	if($type == DB_MYSQL){
-		return new MYSQLAdapter($servername,$database,$username,$password);
+		return new MYSQLAdapter($servername,$database,$username,$password,$charset);
 	}
 	if($type == DB_MSSQL){
-		return new MSSQLAdapter($servername,$database,$username,$password);
+		return new MSSQLAdapter($servername,$database,$username,$password,$charset);
 	}
 }
 
-function defaultDBAdapter($type,$servername,$database,$username,$password){
-	$result = newDBAdapter($type,$servername,$database,$username,$password);
+function defaultDBAdapter($type,$servername,$database,$username,$password,$charset="utf8"){
+	$result = newDBAdapter($type,$servername,$database,$username,$password,$charset);
 	$result->connect();
 	$GLOBALS["_defaultDBAdapter"] = $result;
 	return $result;
