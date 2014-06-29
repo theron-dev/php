@@ -84,9 +84,7 @@ class Shell{
 		}
 		
 		$context = new ServiceContext($inputData,$config);
-		
-		$context->setDbContext(getDefaultDBContext());
-		
+	
 		$viewContext = new RootViewContext();
 		
 		$viewLoaded = false;
