@@ -555,6 +555,10 @@ class DBContext{
 	public function unlock(){
 		$this->dbAdapter->query("UNLOCK TABLES;");
 	}
+	
+	public function getInsertId(){
+		return $this->dbAdapter->getInsertId();
+	}
 }
 
 function defaultDBContext($dbContext){
