@@ -308,8 +308,8 @@ function encodeJson(data){
 	if(data == null){
 		return "null";
 	}
-	if(typeof data == "object"){
-		if(data.length !== undefined){
+	if(data instanceof Object){
+		if(data instanceof Array){
 			var rs = [];
 			for(var i=0;i<data.length;i++){
 				rs.push(encodeJson(data[i]));
