@@ -155,7 +155,7 @@ UI.TableView = $.extend({},UI.View,{
 							if(value !== undefined && value !== null){
 								input.value = value;
 							}
-							input.value = cell.html();
+							input.value = cell.text();
 							input.setAttribute("cv",cell.html());
 							cell.html("");
 							cell.append(input);
