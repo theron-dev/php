@@ -1,11 +1,11 @@
 <?php
 
-class GatherTask implements ITask{
+class UnionTask implements ITask{
 	
 	public $tasks;
 	
 	public function prefix(){
-		return "gather";
+		return "union";
 	}
 	
 }

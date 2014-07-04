@@ -1,11 +1,11 @@
 <?php
 
-class GatherService extends Service{
+class UnionService extends Service{
 	
 	
 	public function handle($taskType,$task){
 	
-		if($task instanceof GatherTask){
+		if($task instanceof UnionTask){
 			
 			$context = $this->getContext();
 			
