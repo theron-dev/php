@@ -41,7 +41,7 @@ function upload($files=null,$url=null){
 	
 }
 
-function upload_from_url($fromUrl,$name,$url =null){
+function upload_from_url($fromUrl,$name,$url =null,$referer = null){
 		
 	$fileName = $fromUrl;
 	$index = strpos($fileName, "?");
@@ -68,7 +68,11 @@ function upload_from_url($fromUrl,$name,$url =null){
 	curl_setopt($ch, CURLOPT_FILE, $file);
 	curl_setopt($ch, CURLOPT_HEADER, 0);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-		
+
+	if($referer){
+		curl_setopt($ch, CURLOPT_REFERER, $referer);
+	}
+	
 	curl_exec($ch);
 
 	curl_close($ch);
