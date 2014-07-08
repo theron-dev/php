@@ -116,15 +116,7 @@ class MYSQLAdapter extends DBAdapter{
 	}
 	
 	public function getInsertId(){
-		$rs = $this->query("SELECT LAST_INSERT_ID()");
-		$id = 0;
-		if($rs ){
-			if($row = $this->next($rs)){
-				$id = $row[0];
-			}
-			$this->free($rs);
-		}
-		return $id;
+		return mysql_insert_id($this->conn);
 	}
 	
 	public function count($result){
