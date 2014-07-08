@@ -165,6 +165,9 @@ class DBContext{
 		if(is_string($value)){
 			$v = str_replace("'", "''", $value);
 			$v = str_replace("\\", "\\\\", $v);
+			$v = str_replace("\r", "\\r", $v);
+			$v = str_replace("\n", "\\n", $v);
+			$v = str_replace("\t", "\\t", $v);
 			return "'".$v."'";
 		}
 		else if($value === true){
