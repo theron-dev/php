@@ -65,6 +65,14 @@ class DBAdapter{
 	public function count($result){
 		
 	}
+	
+	public function errno(){
+	
+	}
+	
+	public function errmsg(){
+		
+	}
 }
 
 class MYSQLAdapter extends DBAdapter{
@@ -122,6 +130,14 @@ class MYSQLAdapter extends DBAdapter{
 	public function count($result){
 		return mysql_num_rows($result);
 	}
+	
+	public function errno(){
+		return mysql_errno($this->conn);
+	}
+	
+	public function errmsg(){
+		return mysql_error($this->conn);
+	}
 }
 
 class MSSQLAdapter extends DBAdapter{
@@ -168,6 +184,10 @@ class MSSQLAdapter extends DBAdapter{
 	
 	public function count($result){
 		return mssql_num_rows($result);
+	}
+	
+	public function errmsg(){
+		return mssql_get_last_message($this->conn);
 	}
 }
 
