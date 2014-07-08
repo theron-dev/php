@@ -180,7 +180,7 @@ class DBContext{
 			return "0";
 		}
 		else{
-			return "".$value;
+			return $this->parseValue(''.$value);
 		}
 	}
 	
