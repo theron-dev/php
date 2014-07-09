@@ -69,6 +69,7 @@ class StatisticsService extends Service{
 						$item->source = $task->source;
 						$item->classifyTime = $task->classifyTime;
 						$item->uid = $uid;
+						$item->sessionId = isset($_SESSION) ? session_id() : '';
 						$item->updateTime = time();
 						$item->createTime = time();
 						$item->$key = $task->count + $value;

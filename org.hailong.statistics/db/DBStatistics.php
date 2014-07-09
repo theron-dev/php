@@ -23,6 +23,11 @@ class DBStatistics extends DBEntity{
 	 */
 	public $source;
 	/**
+	 * 会话ID
+	 * @var String
+	 */
+	public $sessionId;
+	/**
 	 * 统计目标
 	 * @var String
 	 */
@@ -68,6 +73,9 @@ class DBStatistics extends DBEntity{
 		}
 		if($field == "source"){
 			return "VARCHAR(64) NULL";
+		}
+		if($field == "session"){
+			return "VARCHAR(128) NULL";
 		}
 		if($field == "target"){
 			return "VARCHAR(64) NULL";
