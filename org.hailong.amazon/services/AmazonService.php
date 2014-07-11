@@ -46,7 +46,13 @@ class AmazonService extends Service{
 			$search->setCategory($task->category);
 			$search->setKeywords($task->keyword);
 			$search->setPage($task->page);
-			$search->setResponseGroup(array('Large', 'Small'));
+			
+			if($task->responseGroup){
+				$search->setResponseGroup($task->responseGroup);
+			}
+			else {
+				$search->setResponseGroup(array( 'Small'));
+			}
 			
 			$task->results = $apaiIO->runOperation($search);
 			
@@ -60,7 +66,14 @@ class AmazonService extends Service{
 			$lookup = new Lookup();
 			
 			$lookup->setItemId($task->itemId);
-			$lookup->setResponseGroup(array('Large', 'Small'));
+		
+			if($task->responseGroup){
+				$lookup->setResponseGroup($task->responseGroup);
+			}
+			else {
+				$lookup->setResponseGroup(array( 'Large'));
+			}
+				
 			
 			if($task->itemIdType == 'isbn'){
 				$lookup->setIdType(Lookup::TYPE_ISBN);
