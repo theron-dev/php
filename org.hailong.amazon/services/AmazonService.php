@@ -60,6 +60,7 @@ class AmazonService extends Service{
 			$lookup = new Lookup();
 			
 			$lookup->setItemId($task->itemId);
+			$lookup->setResponseGroup(array('Large', 'Small'));
 			
 			if($task->itemIdType == 'isbn'){
 				$lookup->setIdType(Lookup::TYPE_ISBN);
