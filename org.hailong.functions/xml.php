@@ -44,12 +44,12 @@ function xml_object_ouptut($data,$output = 'php://output',$root='root'){
 	else if(is_array($data)){
 		foreach($data as $value){
 			$xml->startElement("item");
-			xml_object_ouptut($data,$xml,false);
+			xml_object_ouptut($value,$xml,false);
 			$xml->endElement("item");
 		}
 	}
 	else if(is_bool($data)){
-		$xml->text($data ? "true":"fales");
+		$xml->text($data ? "true":"false");
 	}
 	else {
 		$xml->text(''.$data);
