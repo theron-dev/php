@@ -27,7 +27,7 @@ class AmazonService extends Service{
 			->setCountry($cfg["country"])
 			->setAccessKey($cfg["api-key"])
 			->setSecretKey($cfg["secret-key"])
-			->setAssociateTag($cfg["asscoiate-tag"])
+			->setAssociateTag($cfg["associate-tag"])
 			->setResponseTransformer('\ApaiIO\ResponseTransformer\XmlToSimpleXmlObject');
 		
 			$this->apaiIO = new ApaiIO($conf);
