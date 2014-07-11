@@ -33,6 +33,7 @@ function output($data,$inputData=null){
 		
 		global $library;
 		global $XSLTLibrary;
+		global $XSLTFunctionKeys;
 		
 		$xslt = isset($inputData["xslt"]) ? $inputData["xslt"] : "default.xsl";
 		
@@ -72,14 +73,14 @@ function output($data,$inputData=null){
 				break;
 			}
 		}
-	
 		
 		header("Content-Type: text/html;charset=utf8");
+		
 		echo "<!DOCTYPE html>";
 		
-		$rs = xslt_parse(xml_object_encode($data, "root"),$xslt) ;
+		$rs = xslt_parse(xml_object_encode($data, "root"),$xslt,$XSLTFunctionKeys) ;
 		
-		header("Content-Type: text/html;charset=utf8");
+		header("Content-Type: text/html; charset=utf-8");
 		if($rs === false){
 			echo "<html><head><title>XSLT ERROR</title></head><body></body></html>";
 		}

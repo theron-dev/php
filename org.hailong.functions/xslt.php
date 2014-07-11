@@ -5,7 +5,7 @@
  * @param String $xml xml 数据源
  * @param String $xslt XSLT 文件
  */
-function xslt_parse($xml,$xslt,$config = null){
+function xslt_parse($xml,$xslt,$config = null,$functionKeys=null){
 	
 	$doc = new DOMDocument();
 	
@@ -24,6 +24,10 @@ function xslt_parse($xml,$xslt,$config = null){
 	}
 	
 	$proc = new XSLTProcessor();
+	
+	if($functionKeys){
+		$proc->registerPHPFunctions($functionKeys);
+	}
 	
 	$xsl = new DOMDocument();
 	
