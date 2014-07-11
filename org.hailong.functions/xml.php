@@ -45,7 +45,7 @@ function xml_object_ouptut($data,$output = 'php://output',$root='root'){
 		foreach($data as $value){
 			$xml->startElement("item");
 			xml_object_ouptut($value,$xml,false);
-			$xml->endElement("item");
+			$xml->endElement();
 		}
 	}
 	else if(is_bool($data)){
