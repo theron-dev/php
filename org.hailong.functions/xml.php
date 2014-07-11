@@ -51,6 +51,7 @@ function xml_object_ouptut($data,$output = 'php://output',$root='root'){
 	}
 	else {
 		$xml->text(''.$data);
+		echo ''.$data;
 	}
 	
 	if($root){
