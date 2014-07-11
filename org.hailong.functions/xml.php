@@ -30,7 +30,7 @@ function xml_object_ouptut($data,$output = 'php://output',$root='root'){
 	}
 	
 	if($root){
-		$xml->startDocument();
+		$xml->startDocument('1.0','utf-8');
 		$xml->startElement($root);
 	}
 	
