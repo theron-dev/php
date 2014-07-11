@@ -1,57 +1,75 @@
 <?php
 
-function xml_object_encode($data,$tag){
-	
-	$isArray = true;
-	
-	if(is_array($data)){
-	    foreach ($data as $key=>$value){
-            if("".$key != "".intval($key)){
-                 $isArray = false;
-                 break;
-            }
-        }
+function xml_is_object($data){
+	if(is_object($data)){
+		return true;
 	}
-	else{
-		$isArray = false;
-	}
-	
-	if($isArray && count($data) >0){
-		$rs = "<$tag>";
-		foreach($data as $value){
-			$rs .= xml_object_encode($value,"item");
-		}
-		return $rs."</$tag>";
-	}
-	else if(!is_array($data) && !is_object($data)){
-		return "<$tag>".$data."</$tag>";
-	}
-	else{
-		$rs = "<$tag";
-		
-		$childs = array();
-		
+	else if(is_array($data)){
+		$isobject = false;
 		foreach ($data as $key=>$value){
-			if($value !== null){
-				if(is_array($value) || is_object($value)){
-					$childs[$key] = $value;
-				}
-				else{
-					$rs .= " $key=\"".htmlspecialchars($value)."\"";
-				}
+			if(! is_int($key)){
+				$isobject = true;
+				break;
 			}
 		}
-		
-		$rs .= ">";
-		
-		foreach($childs as $key=>$value){
-			$rs .= xml_object_encode($value,$key);
-		}
-		
-		$rs .= "</$tag>";
-		
-		return $rs;
+		return $isobject;
 	}
+	return false;
+}
+
+function xml_object_ouptut($data,$output = 'php://output',$root='root'){
+	
+	$xml = null;
+	
+	if($output instanceof XMLWriter){
+		$xml = $output;
+	}
+	else {
+		$xml = new XMLWriter();
+		$xml->openUri($output);
+	}
+	
+	if($root){
+		$xml->startDocument();
+		$xml->startElement($root);
+	}
+	
+
+	if(xml_is_object($data)){
+		foreach($data as $key=>$value){
+			$xml->startElement($key);
+			xml_object_ouptut($value,$xml,false);
+			$xml->endElement();
+		}
+	}
+	else if(is_array($data)){
+		foreach($data as $value){
+			$xml->startElement("item");
+			xml_object_ouptut($data,$xml,false);
+			$xml->endElement("item");
+		}
+	}
+	else {
+		$xml->text(''.$data);
+	}
+	
+	if($root){
+		$xml->endElement();
+		$xml->endDocument();
+	}
+	
+	return $xml;
+}
+
+function xml_object_encode($data,$tag){
+	
+	$xml = new XMLWriter();
+	
+	$xml->openMemory();
+
+	xml_object_ouptut($data,$xml);
+	
+	return $xml->flush();
 }
 
 ?>

@@ -13,7 +13,7 @@ function output($data,$inputData=null){
 	}
 	else if($format == "xml"){
 		header("Content-Type: text/xml;charset=UTF-8");
-		echo xmlrpc_encode($data);
+		xml_object_ouptut($data);
 	}
 	else if($format == "mcrypt"){
 		header("Content-Type: mcrypt");
