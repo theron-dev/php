@@ -34,7 +34,6 @@ function xml_object_ouptut($data,$output = 'php://output',$root='root'){
 		$xml->startElement($root);
 	}
 	
-
 	if(xml_is_object($data)){
 		foreach($data as $key=>$value){
 			$xml->startElement($key);
@@ -50,8 +49,8 @@ function xml_object_ouptut($data,$output = 'php://output',$root='root'){
 		}
 	}
 	else {
-		$xml->text(''.$data);
-		echo ''.$data;
+		$xml->text('a'.$data);
+		echo 'a'.$data;
 	}
 	
 	if($root){
