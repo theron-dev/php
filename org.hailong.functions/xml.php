@@ -48,9 +48,11 @@ function xml_object_ouptut($data,$output = 'php://output',$root='root'){
 			$xml->endElement("item");
 		}
 	}
+	else if(is_bool($data)){
+		$xml->text($data ? "true":"fales");
+	}
 	else {
-		$xml->text('a'.$data);
-		echo 'a'.$data;
+		$xml->text(''.$data);
 	}
 	
 	if($root){

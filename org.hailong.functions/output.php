@@ -26,8 +26,6 @@ function output($data,$inputData=null){
 		$key = substr(MCRYPT_KEY, 0, 24);
 		
 		$d =  mcrypt_encrypt(MCRYPT_3DES, $key, $d, MCRYPT_MODE_ECB);
-		
-
 
 		echo $d;
 	}
