@@ -19,8 +19,8 @@ class DBService extends Service{
 			global $CFG_RUNTIME;
 			
 			if(!$CFG_RUNTIME){
-				if(isset($config["entitys"])){
-					foreach($config["entitys"] as $entity){
+				if(isset($db["entitys"])){
+					foreach($db["entitys"] as $entity){
 						$dbContext->registerEntity($entity);
 					}
 				}
