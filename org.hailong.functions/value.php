@@ -73,7 +73,7 @@ function IntValue($object,$key,$defaultValue=0){
 	return intval($v);
 }
 
-function DoubleValue($object,$keys,$defaultValue=0){
+function DoubleValueForKeys($object,$keys,$defaultValue=0){
 	$v = ValueForKeys($object,$keys,null);
 	if($v=== null){
 		return $defaultValue;
