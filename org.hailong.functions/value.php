@@ -2,11 +2,11 @@
 
 function Value($object,$key,$defaultValue=null){
 	
-	if(isset($object->$key)){
+	if(is_object($object) && isset($object->$key)){
 		return $object->$key;
 	}
 	
-	if(isset($object[$key])){
+	if(is_array($object) && isset($object[$key])){
 		return $object[$key];
 	}
 	
