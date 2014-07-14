@@ -562,6 +562,14 @@ class DBContext{
 	public function getInsertId(){
 		return $this->dbAdapter->getInsertId();
 	}
+	
+	public function errno(){
+		return $this->dbAdapter->errno();
+	}
+	
+	public function errmsg(){
+		return $this->dbAdapter->errmsg();
+	}
 }
 
 function defaultDBContext($dbContext){
