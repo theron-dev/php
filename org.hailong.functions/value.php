@@ -12,8 +12,6 @@ function ValueForKeys($object,$keys,$defaultValue=null){
 	
 	while($index < $c){
 		
-		var_dump($keys[$index]);
-		
 		$v = Value($v,$keys[$index],null);
 		
 		if($v === null){
