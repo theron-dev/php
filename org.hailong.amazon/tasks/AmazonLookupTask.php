@@ -14,6 +14,7 @@ class AmazonLookupTask extends AmazonTask{
 	 */
 	public $itemIdType;
 	
+	public $category;
 	/**
 	 * 'Large', 'Small'
 	 * @var array

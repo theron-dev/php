@@ -66,6 +66,7 @@ class AmazonService extends Service{
 			$lookup = new Lookup();
 			
 			$lookup->setItemId($task->itemId);
+			$lookup->setSearchIndex($task->category);
 		
 			if($task->responseGroup){
 				$lookup->setResponseGroup($task->responseGroup);
