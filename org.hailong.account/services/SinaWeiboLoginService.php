@@ -33,6 +33,13 @@ class SinaWeiboLoginService extends Service{
 				$task->appSecret = $cfg["appSecret"];
 			}
 			
+			if(!$task->appKey || !$task->appSecret){
+				global $library;
+				$cfg = require "$library/org.hailong.configs/sina_weibo.php";
+				$task->appKey = $cfg["appkey"];
+				$task->appSecret = $cfg["appsecret"];
+			}
+			
 			$c = new SaeTClientV2( $task->appKey , $task->appSecret , $task->etoken );
 			
 			$rs = $c->get_uid();
