@@ -9,7 +9,7 @@ class AmazonLookupTask extends AmazonTask{
 	public $itemId;
 	
 	/**
-	 * 'asin' default,'isbn'
+	 * 'asin' default,'isbn','upc','ean'
 	 * @var String
 	 */
 	public $itemIdType;
