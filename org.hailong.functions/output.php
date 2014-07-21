@@ -73,11 +73,7 @@ function output($data,$inputData=null){
 				break;
 			}
 		}
-		
-		header("Content-Type: text/html;charset=utf8");
-		
-		echo "<!DOCTYPE html>";
-		
+			
 		$rs = xslt_parse(xml_object_encode($data, "root"),$xslt,$XSLTFunctionKeys) ;
 		
 		header("Content-Type: text/html; charset=utf-8");

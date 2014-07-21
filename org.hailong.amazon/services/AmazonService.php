@@ -79,6 +79,12 @@ class AmazonService extends Service{
 			if($task->itemIdType == 'isbn'){
 				$lookup->setIdType(Lookup::TYPE_ISBN);
 			}
+			else if($task->itemIdType == 'upc'){
+				$lookup->setIdType(Lookup::TYPE_UPC);
+			}
+			else if($task->itemIdType == 'ean'){
+				$lookup->setIdType(Lookup::TYPE_EAN);
+			}
 			else {
 				$lookup->setIdType(Lookup::TYPE_ASIN);
 			}

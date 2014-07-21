@@ -33,6 +33,13 @@ class QQLoginService extends Service{
 				$task->appSecret = $cfg["appSecret"];
 			}
 			
+			if(!$task->appKey || !$task->appSecret){
+				global $library;
+				$cfg = require "$library/org.hailong.configs/qq.php";
+				$task->appKey = $cfg["appkey"];
+				$task->appSecret = $cfg["appsecret"];
+			}
+			
 			$openid = $this->get_openid($task->etoken);
 			
 			$user = $dbContext->querySingleEntity("DBAccount","qq_uid='{$openid}' and account='#QQ_{$openid}'");
