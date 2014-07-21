@@ -90,6 +90,8 @@ class DoubanService extends Service{
 			
 			$task->results = $this->get($uri);
 			
+			$this->getContext()->setOutputDataValue("douban", $task->results);
+			
 			return false;
 		}
 		
@@ -106,6 +108,8 @@ class DoubanService extends Service{
 			
 			$task->results = $this->get($uri);
 				
+			$this->getContext()->setOutputDataValue("douban", $task->results);
+			
 			return false;
 		}
 		
